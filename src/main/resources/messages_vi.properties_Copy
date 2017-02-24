@@ -1,0 +1,1445 @@
+
+AAAATest = Qu\u1EA3n l\u00FD chi\u1EBFn d\u1ECBch
+
+Actions = Ho\u1EA1t \u0111\u1ED9ng
+
+Add = Th\u00EAm m\u1EDBi
+
+AddAll = Th\u00EAm m\u1EDBi t\u1EA5t c\u1EA3
+
+Admin = User
+
+Administration = Administration
+
+Administrators = Administrators
+
+Assign = Ph\u00E2n quy\u1EC1n
+
+ButtonCancel = button_abbrechen.gif
+
+CampaignStats = Th\u1ED1ng k\u00EA l\u01B0u tr\u1EEF
+
+Campaigns = L\u01B0u tr\u1EEF
+
+Charsets = B\u1EA3ng m\u00E3
+
+Company_mng = Qu\u1EA3n l\u00FD c\u00F4ng ty
+
+Company_mngEdit = Thay \u0111\u1ED5i
+
+Company_mngSub = Company_mngSub
+
+ContentManagement = Qu\u1EA3n l\u00ED n\u1ED9i dung
+
+ContentManagementSystem = Qu\u1EA3n l\u00FD h\u1EC7 th\u1ED1ng
+
+DefaultTable = M\u1EB7c \u0111\u1ECBnh
+
+Department_mng = Qu\u1EA3n l\u00FD ph\u00F2ng ban
+
+Department_mngEdit = Department_mngEdit
+
+Department_mngSub = Department_mngSub
+
+Description = M\u00F4 t\u1EA3
+
+Field = Tr\u01B0\u1EDDng
+
+Form = Form
+
+Forms = Forms
+
+General = Chung
+
+Heatmap = Heatmap
+
+Heatmap.description = (Values contain clicks of admin and test recipients.)
+Heatmap.max         = t\u1ED1i \u0111a.
+
+Ignore = B\u1ECF qua
+
+Import = Nh\u1EADp
+
+ImportProfile = Nh\u1EADp th\u00F4ng tin
+
+Last = cu\u1ED1i
+
+LayoutID = LAYOUT_ID
+
+Mailing = Mailing
+
+MailingId = Mailing ID
+
+MailingSendNow.deleted_target_groups = Kh\u00F4ng th\u1EC3 g\u1EEDi th\u01B0.<br> Th\u01B0 g\u1EEDi c\u00F3 s\u1EED d\u1EE5ng nh\u00F3m \u0111\u00E3 b\u1ECB x\u00F3a
+
+MailingTestAdmin.deleted_target_groups = Kh\u00F4ng th\u1EC3 g\u1EEDi th\u1EED \u0111\u1EBFn qu\u1EA3n tr\u1ECB.<br> Th\u01B0 g\u1EEDi c\u00F3 s\u1EED d\u1EE5ng nh\u00F3m \u0111\u00E3 b\u1ECB x\u00F3a!
+
+MailingTestDistrib.deleted_target_groups = Kh\u00F4ng th\u1EC3 g\u1EEDi th\u1EED \u0111\u1EBFn ng\u01B0\u1EDDi nh\u1EADn.<br> Th\u01B0 g\u1EEDi c\u00F3 s\u1EED d\u1EE5ng nh\u00F3m \u0111\u00E3 b\u1ECB x\u00F3a!
+
+Mailinglist = Nh\u00F3m ng\u01B0\u1EDDi nh\u1EADn
+
+MailinglistID = M\u00E3
+
+Mailinglists = T\u00EAn nh\u00F3m
+
+Mailings = Qu\u1EA3n l\u00FD chi\u1EBFn d\u1ECBch
+
+ManageColumns = Qu\u1EA3n l\u00FD c\u1ED9t
+
+NewCMCategory = Lo\u1EA1i m\u1EDBi
+
+NewCMtemplate = M\u1EABu qu\u1EA3n l\u00FD m\u1EDBi
+
+NewContentModule = N\u1ED9i dung modul m\u1EDBi
+
+NewContentModuleType = Lo\u1EA1i n\u1ED9i dung modul m\u1EDBi
+
+NewDepartment = NewDepartment
+
+NewImportProfile = Nh\u1EADp th\u00F4ng tin m\u1EDBi
+
+Next = ti\u1EBFp
+
+NormalVIP = Normal VIP recipient
+
+ProfileAdministration = Th\u00F4ng tin admin
+
+Profile_Database = Th\u00F4ng tin c\u01A1 s\u1EDF d\u1EEF li\u1EC7u
+
+PureMailing = Pure mailing
+
+Recipient = Ng\u01B0\u1EDDi nh\u1EADn
+
+RecipientType = Lo\u1EA1i ng\u01B0\u1EDDi nh\u1EADn
+
+Recipients = Qu\u1EA3n l\u00FD ng\u01B0\u1EDDi nh\u1EADn
+
+Remove = X\u00F3a
+
+RemoveAll = X\u00F3a t\u1EA5t c\u1EA3
+
+ResetSoftbounceScoring = Reset mail l\u1ED7i
+
+ResultMsg = K\u1EBFt qu\u1EA3
+
+Salutation = Salutation
+
+Select = L\u1EF1a ch\u1ECDn
+
+Sequence = Tr\u00ECnh t\u1EF1
+
+Settings = C\u00E0i \u0111\u1EB7t
+
+SiteActions = Sites & Actions
+
+Statistics = Th\u1ED1ng k\u00EA
+
+Subscribe = Theo d\u00F5i
+
+Subscriber-Editor = S\u1EEDa info ng\u01B0\u1EDDi nh\u1EADn email
+
+Suspend = T\u1EA1m d\u1EEBng
+
+Target-Groups = Kh\u00E1ch h\u00E0ng m\u1EE5c ti\u00EAu
+
+Targetgroups = Kh\u00E1ch h\u00E0ng m\u1EE5c ti\u00EAu
+
+Targets = M\u1EE5c ti\u00EAu
+
+Template = Email m\u1EABu 
+
+Templates = Email m\u1EABu
+
+TrackableLink.edit.all = Thi\u1EBFt l\u1EADp li\u00EAn k\u1EBFt chung
+
+Upload = Upload
+
+UserActivitylog.Action.Blacklist         = Blacklist
+UserActivitylog.Action.Create            = T\u1EA1o m\u1EDBi
+UserActivitylog.Action.Delete            = X\u00F3a
+UserActivitylog.Action.Do                = H\u00E0nh \u0111\u1ED9ng
+UserActivitylog.Action.Edit              = S\u1EEDa \u0111\u1ED5i
+UserActivitylog.Action.Send              = G\u1EEDi
+UserActivitylog.All_Users                = T\u1EA5t c\u1EA3 user
+UserActivitylog.Any_Action               = T\u1EA5t c\u1EA3
+UserActivitylog.Any_Action_without_login = Everything without login/logout
+UserActivitylog.FromDate                 = T\u1EEB ng\u00E0y
+UserActivitylog.ToDate                   = \u0110\u1EBFn ng\u00E0y
+UserActivitylog.Users                    = Ng\u01B0\u1EDDi d\u00F9ng
+UserActivitylog.action                   = Ho\u1EA1t \u0111\u1ED9ng
+UserActivitylog.date                     = Ng\u00E0y
+UserActivitylog.description              = M\u00F4 t\u1EA3
+UserActivitylog.login.logout             = \u0110\u0103ng nh\u1EADp/ \u0111\u0103ng xu\u1EA5t
+UserActivitylog.username                 = T\u00E0i kho\u1EA3n
+
+UserRight.Actions.action.op.ActivateDoubleOptIn                  = Action Double-Opt-In confirmation
+UserRight.Actions.action.op.ExecuteScript                        = Action Script
+UserRight.Actions.action.op.GetArchiveList                       = Action Show archived mailing overview
+UserRight.Actions.action.op.GetArchiveMailing                    = Action Show archived mailing
+UserRight.Actions.action.op.GetCustomer                          = T\u1EA3i d\u1EEF li\u1EC7u kh\u00E1ch h\u00E0ng
+UserRight.Actions.action.op.SendMailing                          = Ho\u1EA1t \u0111\u1ED9ng g\u1EEDi email
+UserRight.Actions.action.op.ServiceMail                          = Action Send service-mail
+UserRight.Actions.action.op.SubscribeCustomer                    = Ho\u1EA1t \u0111\u1ED9ng theo d\u00F5i
+UserRight.Actions.action.op.UnsubscribeCustomer                  = Ho\u1EA1t \u0111\u1ED9ng kh\u00F4ng theo d\u00F5i
+UserRight.Actions.action.op.UpdateCustomer                       = Ho\u1EA1t \u0111\u1ED9ng thay \u0111\u1ED5i th\u00F4ng tin
+UserRight.Actions.actions.change                                 = Ho\u1EA1t \u0111\u1ED9ng ch\u1EC9nh s\u1EEDa
+UserRight.Actions.actions.delete                                 = Ho\u1EA1t \u0111\u1ED9ng x\u00F3a
+UserRight.Actions.actions.set_usage                              = Thay \u0111\u1ED5i c\u00E0i \u0111\u1EB7t cho c\u00E1c ho\u1EA1t \u0111\u1ED9ng
+UserRight.Actions.actions.show                                   = Hi\u1EC3n th\u1ECB c\u00E1c h\u00E0nh \u0111\u1ED9ng
+UserRight.Admin.admin.change                                     = \u0110\u1ED5i data ng\u01B0\u1EDDi d\u00F9ng
+UserRight.Admin.admin.delete                                     = X\u00F3a ng\u01B0\u1EDDi d\u00F9ng
+UserRight.Admin.admin.login.fails.showWarning                    = Hi\u1EC3n th\u1ECB c\u1EA3nh b\u00E1o \u0111\u0103ng nh\u1EADp l\u1ED7i c\u1EE7a l\u1EA7n tr\u01B0\u1EDBc
+UserRight.Admin.admin.new                                        = T\u1EA1o user m\u1EDBi
+UserRight.Admin.admin.setgroup                                   = Thi\u1EBFt l\u1EADp nh\u00F3m cho ng\u01B0\u1EDDi d\u00F9ng
+UserRight.Admin.admin.show                                       = Hi\u1EC3n th\u1ECB ng\u01B0\u1EDDi d\u00F9ng
+UserRight.Admin.pluginmanager.show                               = Hi\u1EC3n th\u1ECB qu\u1EA3n l\u00FD plugin
+UserRight.Campaigns.campaign.change                              = Thay \u0111\u1ED5i l\u01B0u tr\u1EEF d\u1EEF li\u1EC7u
+UserRight.Campaigns.campaign.delete                              = X\u00F3a l\u01B0u tr\u1EEF d\u1EEF li\u1EC7u
+UserRight.Campaigns.campaign.new                                 = Th\u00EAm m\u1EDBi l\u01B0u tr\u1EEF d\u1EEF li\u1EC7u
+UserRight.Campaigns.campaign.show                                = Hi\u1EC3n th\u1ECB l\u01B0u tr\u1EEF d\u1EEF li\u1EC7u
+UserRight.Campaigns.campaign.stat                                = Hi\u1EC3n th\u1ECB th\u1ED1ng k\u00EA l\u01B0u tr\u1EEF d\u1EEF li\u1EC7u
+UserRight.Charsets.charset.use.gb2312                            = Ng\u01B0\u1EDDi d\u00F9ng \u0111\u01B0\u1EE3c s\u1EED d\u1EE5ng GB2312 (chinese simplified)
+UserRight.Charsets.charset.use.iso_8859_1                        = Ng\u01B0\u1EDDi d\u00F9ng \u0111\u01B0\u1EE3c s\u1EED d\u1EE5ng ISO 8859-1 (standard)
+UserRight.Charsets.charset.use.iso_8859_15                       = Ng\u01B0\u1EDDi d\u00F9ng \u0111\u01B0\u1EE3c s\u1EED d\u1EE5ng ISO 8859-15 (standard)
+UserRight.Charsets.charset.use.utf_8                             = Ng\u01B0\u1EDDi d\u00F9ng \u0111\u01B0\u1EE3c s\u1EED d\u1EE5ng UTF-8 (Unicode)
+UserRight.ContentManagementSystem.cms.central_content_management = N\u1ED9i dung qu\u1EA3n l\u00FD chung
+UserRight.ContentManagementSystem.cms.mailing_content_management = N\u1ED9i dung qu\u1EA3n l\u00FD mailing 
+UserRight.Forms.forms.change                                     = Thay \u0111\u1ED5i/th\u00EAm m\u1EDBi forms
+UserRight.Forms.forms.delete                                     = X\u00F3a form
+UserRight.Forms.forms.view                                       = Xem Forms
+UserRight.General.adminlog.show                                  = Hi\u1EC3n th\u1ECB l\u1EA1i t\u1EA5t c\u1EA3 (Log) ho\u1EA1t \u0111\u1ED9ng c\u1EE7a User
+UserRight.General.mailloop.change                                = Thay \u0111\u1ED5i MailLoop
+UserRight.General.mailloop.delete                                = X\u00F3a MailLoop
+UserRight.General.masterlog.show                                 = Master mode for User Activity Logs
+UserRight.General.mediatype.email                                = Use mediatype "Email"
+UserRight.General.mediatype.print                                = Use mediatype "Print"
+UserRight.General.settings.open                                  = M\u1EDF t\u1EA5t c\u1EA3 c\u00E1c khung thi\u1EBFt l\u1EADp
+UserRight.General.settings.show                                  = Hi\u1EC3n th\u1ECB trang thi\u1EBFt l\u1EADp
+UserRight.General.stats.domains                                  = Hi\u1EC3n th\u1ECB th\u00F4ng k\u00EA ti\u00EAn mi\u1EC1n
+UserRight.General.stats.ip                                       = Hi\u1EC3n th\u1ECB th\u1ED1ng k\u00EA \u0111\u1ECBa ch\u1EC9 IP
+UserRight.General.update.show                                    = Hi\u1EC3n th\u1ECB c\u1EADp nh\u1EADt tr\u1EF1c tuy\u1EBFn
+UserRight.General.userlog.show                                   = Hi\u1EC3n th\u1ECB l\u1ECBch s\u1EED ho\u1EA1t \u0111\u1ED9ng
+UserRight.Import.import.mode.add                                 = Ch\u1EC9 nh\u1EADp ng\u01B0\u1EDDi nh\u1EADn m\u1EDBi
+UserRight.Import.import.mode.add_update                          = Th\u00EAm m\u1EDBi ng\u01B0\u1EDDi nh\u1EADn v\u00E0 c\u1EADp nh\u1EADt ng\u01B0\u1EDDi nh\u1EADn \u0111ang t\u1ED3n t\u1EA1i
+UserRight.Import.import.mode.blacklist                           = Th\u00EAm ng\u01B0\u1EDDi nh\u1EADn v\u00E0o blacklist
+UserRight.Import.import.mode.bounce                              = \u0110\u00E1nh d\u1EA5u ng\u01B0\u1EDDi nh\u1EADn nh\u01B0 b\u1ECB l\u1ED7i
+UserRight.Import.import.mode.doublechecking                      = Ki\u1EC3m tra c\u00E1c \u0111\u1ECBa ch\u1EC9 tr\u00F9ng l\u1EB7p
+UserRight.Import.import.mode.only_update                         = Ch\u1EC9 c\u1EADp nh\u1EADt ng\u01B0\u1EDDi nh\u1EADn \u0111ang t\u1ED3n t\u1EA1i
+UserRight.Import.import.mode.unsubscribe                         = \u0110\u00E1nh d\u1EA5u ng\u01B0\u1EDDi nh\u1EADn kh\u00F4ng c\u00F2n theo d\u00F5i (Opt-Out)
+UserRight.Mailing.mailing.attachment.personalize                 = D\u00F9ng file \u0111\u00EDnh k\u00E8m c\u00E1 nh\u1EADn
+UserRight.Mailing.mailing.attachments.show                       = Hi\u1EC3n th\u1ECB mailing \u0111\u00EDnh k\u00E8m
+UserRight.Mailing.mailing.change                                 = Thay \u0111\u1ED5i mailing \u0111\u00E3 t\u1ED3n t\u1EA1i
+UserRight.Mailing.mailing.components.change                      = Change mailing components
+UserRight.Mailing.mailing.components.show                        = View mailing components
+UserRight.Mailing.mailing.content.show                           = Allow editing of mailing content
+UserRight.Mailing.mailing.copy                                   = Nh\u00E2n b\u1EA3n mailing
+UserRight.Mailing.mailing.default_action                         = Thi\u1EBFt l\u1EADp h\u00E0nh \u0111\u1ED9ng m\u1EB7c \u0111\u1ECBnh cho li\u00EAn k\u1EBFt
+UserRight.Mailing.mailing.delete                                 = X\u00F3a mailing
+UserRight.Mailing.mailing.graphics_upload                        = T\u1EA3i h\u00ECnh \u1EA3nh \u0111\u1EC3 l\u01B0u tr\u1EEF tr\u00EAn m\u00E1y ch\u1EE7
+UserRight.Mailing.mailing.needstarget                            = Toggle if target selection is necessary
+UserRight.Mailing.mailing.new                                    = T\u1EA1o chi\u1EBFn d\u1ECBch m\u1EDBi 
+UserRight.Mailing.mailing.send.admin                             = G\u1EEDi mailing \u0111\u1EBFn admin
+UserRight.Mailing.mailing.send.admin.options                     = Show parameters for throttling of delivery speed
+UserRight.Mailing.mailing.send.show                              = View send mail page for admin, test and world-mailing
+UserRight.Mailing.mailing.send.test                              = G\u1EEDi mail \u0111\u1EBFn ng\u01B0\u1EDDi nh\u1EADn gi\u1EA3 l\u1EADp
+UserRight.Mailing.mailing.send.world                             = G\u1EEDi mail \u0111\u1EBFn t\u1EA5t c\u1EA3 ng\u01B0\u1EDDi nh\u1EADn
+UserRight.Mailing.mailing.show                                   = Hi\u1EC3n th\u1ECB mailing
+UserRight.Mailing.mailing.show.charsets                          = Cho ph\u00E9p ng\u01B0\u1EDDi d\u00F9ng thi\u1EBFt l\u1EADp ki\u1EC3u ch\u1EEF c\u1EE7a mailing
+UserRight.Mailing.mailing.show.types                             = Cho ph\u00E9p ng\u01B0\u1EDDi d\u00F9ng ch\u1ECDn ki\u1EC3u mailing (normal, rule, event)
+UserRight.Mailing.stats.clean                                    = Delete admin- & test user clicks from stats
+UserRight.Mailing.stats.mailing                                  = Hi\u1EC3n th\u1ECB th\u1ED1ng k\u00EA(mailing and profile DB)
+UserRight.Mailing.stats.rdir                                     = Xem t\u1EC9 l\u1EC7 mail \u0111\u00E3 m\u1EDF
+UserRight.Mailinglist.mailinglist.change                         = Thay \u0111\u1ED5i danh s\u00E1ch mail \u0111\u00E3 t\u1ED3n t\u1EA1i
+UserRight.Mailinglist.mailinglist.delete                         = X\u00F3a danh s\u00E1ch mailing
+UserRight.Mailinglist.mailinglist.new                            = T\u1EA1o m\u1EDBi danh s\u00E1ch mailing
+UserRight.Mailinglist.mailinglist.show                           = Hi\u1EC3n th\u1ECB danh s\u00E1ch mailing
+UserRight.Subscriber-Editor.blacklist                            = G\u00E1n ng\u01B0\u1EDDi nh\u1EADn v\u00E0o blacklist
+UserRight.Subscriber-Editor.profileField.show                    = Thay \u0111\u1ED5i th\u00F4ng tin trong DB
+UserRight.Subscriber-Editor.recipient.change                     = Thay \u0111\u1ED5i ng\u01B0\u1EDDi nh\u1EADn
+UserRight.Subscriber-Editor.recipient.column.select              = \u0110\u1ECBnh ngh\u0129a th\u00F4ng tin chugn c\u1EE7a ng\u01B0\u1EDDi nh\u1EADn
+UserRight.Subscriber-Editor.recipient.create                     = Th\u00EAm ng\u01B0\u1EDDi nh\u1EADn
+UserRight.Subscriber-Editor.recipient.delete                     = X\u00F3a ng\u01B0\u1EDDi nh\u1EADn
+UserRight.Subscriber-Editor.recipient.export.auto                = Xem th\u1EDDi gian xu\u1EA5t
+UserRight.Subscriber-Editor.recipient.import.auto                = Xem th\u1EDDi gian nh\u1EADp
+UserRight.Subscriber-Editor.recipient.list                       = Xem danh s\u00E1ch ng\u01B0\u1EDDi nh\u1EADn
+UserRight.Subscriber-Editor.recipient.view                       = Xem ng\u01B0\u1EDDi nh\u1EADn
+UserRight.Subscriber-Editor.wizard.export                        = Xu\u1EA5t d\u1EEF li\u1EC7u ng\u01B0\u1EDDi nh\u1EADn ra file CSV
+UserRight.Subscriber-Editor.wizard.import                        = T\u1EA3i th\u00F4ng tin ng\u01B0\u1EDDi nh\u1EADn t\u1EEB file CSV
+UserRight.Target-Groups.targets.advancedRules.recipients         = Use advanced target group rules
+UserRight.Target-Groups.targets.change                           = nh\u00F3m thay \u0111\u1ED5i m\u1EE5c \u0111\u00EDch
+UserRight.Target-Groups.targets.createml                         = T\u1EA1o danh s\u00E1ch g\u1EEDi th\u01B0 m\u1EDBi t\u1EEB m\u1ED9t nh\u00F3m \u0111\u1ED1i t\u01B0\u1EE3ng hi\u1EC7n c\u00F3
+UserRight.Target-Groups.targets.delete                           = X\u00F3a nh\u00F3m
+UserRight.Target-Groups.targets.show                             = Ch\u1EC9nh s\u1EEDa v\u00E0 x\u00F3a c\u00E1c nh\u00F3m m\u1EE5c ti\u00EAu
+UserRight.Template.template.change                               = Thay \u0111\u1ED5i m\u1EABu hi\u1EC7n t\u1EA1i
+UserRight.Template.template.delete                               = x\u00F3a m\u1EABu
+UserRight.Template.template.new                                  = T\u1EA1o m\u1EDBi m\u1EABu
+UserRight.Template.template.show                                 = Hi\u1EC3n th\u1ECB m\u1EABu
+
+UserRights = Quy\u1EC1n s\u1EED d\u1EE5ng
+
+Userlogs = L\u1ECBch s\u1EED ho\u1EA1t \u0111\u1ED9ng c\u1EE7a ng\u01B0\u1EDDi d\u00F9ng
+
+Welcome = Ch\u00E0o m\u1EEBng
+
+action.Action                      = Action
+action.ActionsDelete               = X\u00F3a h\u00E0nh \u0111\u1ED9ng
+action.Add_Step                    = Th\u00EAm b\u01B0\u1EDBc
+action.Delay                       = Ch\u1EADm tr\u1EC5
+action.DoubleOptInConfirm          = Double-Opt-In confirmation
+action.Edit_Action                 = S\u1EEDa h\u00E0nh \u0111\u1ED9ng
+action.Format                      = \u0110\u1ECBnh d\u1EA1ng
+action.Hours                       = Gi\u1EDD
+action.New_Action                  = h\u00E0nh \u0111\u1ED9ng m\u1EDBi
+action.No_Delay                    = kh\u00F4ng ch\u1EADm tr\u1EC5
+action.Script                      = K\u1ECBch b\u1EA3n
+action.Steps                       = B\u01B0\u1EDBc
+action.Type.all                    = Li\u00EAn k\u1EBFt v\u00E0 bi\u1EC3u m\u1EABu
+action.Type.form                   = ch\u1EC9 cho c\u00E1c h\u00ECnh th\u1EE9c
+action.Type.link                   = only for links
+action.Usage                       = Usage
+action.UseDblOptIn                 = Use double-opt-in
+action.action_link                 = used actions
+action.deleteQuestion              = Do you really want to delete this action?
+action.getcustomer.loadalways      = Load even if customer is not a active subscriber
+action.op.ActivateDOI.mailinglists = confirm on all mailing lists
+action.op.ActivateDoubleOptIn      = Double-Opt-In confirmation
+action.op.ExecuteScript            = Script action
+action.op.GetArchiveList           = Mailing archive list
+action.op.GetArchiveMailing        = Show archived mailing
+action.op.GetCustomer              = Load recipient data
+action.op.SendMailing              = Send action based mailing
+action.op.ServiceMail              = Send service email
+action.op.SubscribeCustomer        = Subscribe
+action.op.UnsubscribeCustomer      = Unsubscribe
+action.op.UpdateCustomer           = Modify profile
+action.unsubscribe                 = Unsubscribe
+action.used                        = Used by form
+
+adminMail = Admin-Mail
+
+autoExport.autoExport          = Auto Export
+autoExport.dayTime             = Day and Time of Export
+autoExport.error               = Error while executing Auto Export
+autoExport.error.noDaySelected = Please select at least one day for export.
+autoExport.error.reason        = Auto Export failed due to following error
+autoExport.new                 = New Auto Export
+
+autoImport.autoImport                        = Auto Import
+autoImport.autoResume                        = Skip faulty records
+autoImport.baseSettings                      = Base Settings
+autoImport.dayTime                           = Day and Time of Import
+autoImport.delete.question                   = Do you really want to delete this Auto Import?
+autoImport.error                             = Error while executing Auto Import
+autoImport.error.adminDoesNotExist           = Specified admin does not exist
+autoImport.error.fileReadError               = Error while reading file for import
+autoImport.error.fileTransferError           = Error while transferring import file from server
+autoImport.error.fileWasUsed                 = The file was already used by this auto import
+autoImport.error.importError                 = Error occurred during import process
+autoImport.error.importProfileDoesNotExist   = Specified import profile does not exist
+autoImport.error.keyColumnDoesntMatchMapping = Key column is not bind in column mapping
+autoImport.error.noDaySelected               = Please select at least one day for import.
+autoImport.error.noFileName                  = Please fill "File name" field.
+autoImport.error.noServerPath                = Please fill "Server path" field.
+autoImport.error.profileDoesntMatchCSV       = Import profile doesn't match csv-file
+autoImport.error.reason                      = Auto Import failed due to following error
+autoImport.error.recipientsDataError         = Import was stopped due to errors in recipient data
+autoImport.error.tooManyDaysSelected         = As you selected "Execute one time", you may not select more than one day for import.
+autoImport.executeOneTime                    = Execute one time only
+autoImport.filePath                          = File path
+autoImport.fileServer                        = File server
+autoImport.new                               = New Auto Import
+autoImport.performedAt                       = Performed at
+autoImport.status                            = Status
+autoImport.statusActive                      = active
+autoImport.statusNotActive                   = not active
+
+autoImportExport.allowUnknownHostKeys   = Allow unknown hostkeys for SSL/SFTP
+autoImportExport.checkConnection        = Check Connection
+autoImportExport.connectionStatus.notOk = Connection failed
+autoImportExport.connectionStatus.ok    = Connection successful
+
+blacklist.BlacklistDelete   = X\u00F3a blacklist 
+blacklist.add               = Nh\u1EADp email
+blacklist.mailinglists      = Please select the mailing list, for which the recipient can sign up again
+blacklist.mailinglists.hint = Note: With this selection, the receiver will not be logged in automatically!
+
+blocksize = Blocksize (emails)
+
+btnactivate = Activate
+
+btndeactivate = Deactivate
+
+bulkAction = Bulk action
+
+button.Add          = Th\u00EAm
+button.Back         = Quay l\u1EA1i
+button.Cancel       = H\u1EE7y
+button.Change       = Thay \u0111\u1ED5i
+button.Copy         = Copy
+button.Create       = T\u1EA1o m\u1EDBi
+button.Delete       = X\u00F3a
+button.Download     = T\u1EA3i v\u1EC1
+button.Edit         = S\u1EEDa
+button.Finish       = K\u1EBFt th\u00FAc
+button.Ignore       = B\u1ECF qua
+button.Import_Start = B\u1EAFt \u0111\u1EA7u nh\u1EADp
+button.New          = T\u1EA1o m\u1EDBi
+button.OK           = OK
+button.Proceed      = X\u1EED l\u00FD
+button.Remove       = X\u00F3a
+button.Save         = L\u01B0u
+button.SaveAndBack  = L\u01B0u v\u00E0 Quay l\u1EA1i
+button.Send         = G\u1EEDi
+button.Show         = Hi\u1EC3n th\u1ECB
+button.Skip         = B\u1ECF qua
+button.Start        = B\u1EAFt \u0111\u1EA7u
+button.Submit       = G\u1EEDi \u0111i
+button.Upload       = T\u1EA3i l\u00EAn
+button.check        = Ki\u1EC3m tra
+button.stop         = D\u1EEBng
+
+calendar.dayOfWeek.1 = Ch\u1EE7 nh\u1EADt
+calendar.dayOfWeek.2 = Th\u1EE9 2
+calendar.dayOfWeek.3 = Th\u1EE9 3
+calendar.dayOfWeek.4 = Th\u1EE9 4
+calendar.dayOfWeek.5 = Th\u1EE9 5
+calendar.dayOfWeek.6 = Th\u1EE9 6
+calendar.dayOfWeek.7 = Th\u1EE9 7
+
+campaign.Campaign               = Chi\u1EBFn d\u1ECBch
+campaign.DeleteCampaignQuestion = X\u00F3a chi\u1EBFn d\u1ECBch n\u00E0y?
+campaign.Edit                   = S\u1EEDa chi\u1EBFn d\u1ECBch
+campaign.NewCampaign            = Chi\u1EBFn d\u1ECBch email m\u1EDBi
+campaign.NoMailingsInCampaign   = Chi\u1EBFn d\u1ECBch n\u00E0y ch\u01B0a c\u00F3 mailing n\u00E0o
+campaign.To                     = \u0110\u1EBFn
+campaign.delete                 = X\u00F3a chi\u1EBFn d\u1ECBch
+
+changes_saved = L\u01B0u thay \u0111\u1ED5i.
+
+cms.AssignToMailing                  = Assign to mailing
+cms.Assigned                         = Assigned
+cms.AssignedToCMTemplate             = Has CM template assigned
+cms.Assignment                       = Assignment
+cms.CMCategories                     = Module Categories
+cms.CMCategory                       = Module category
+cms.CMCategory.Delete                = Delete module category
+cms.CMCategory.Edit                  = Edit module category
+cms.CMEditTemplate                   = Edit template
+cms.CMTemplate                       = CM Template
+cms.CMTemplate.Delete                = Delete CM template
+cms.CMTemplate.Edit                  = Edit CM template
+cms.CMTemplates                      = CM templates
+cms.Category                         = Category
+cms.Content                          = Content
+cms.ContentManagement                = Content manager
+cms.ContentManagementSystem          = Content management system
+cms.ContentModule                    = Content module
+cms.ContentModule.Delete             = Delete content module
+cms.ContentModule.Edit               = Edit content module
+cms.ContentModuleType                = Module type
+cms.ContentModuleType.Delete         = Delete module type
+cms.ContentModuleType.Edit           = Edit module type
+cms.ContentModuleType.TagNameMissing = Please define names for all CMS tags
+cms.ContentModuleTypes               = Module Types
+cms.ContentModules                   = Content Modules
+cms.NewCMCategory                    = New module category
+cms.NewCMtemplate                    = New CM template
+cms.NewContentModule                 = New content module
+cms.NewContentModuleType             = New module type
+cms.NoModuleTypeExists               = Please define at least one module type before creating a content module
+cms.NoTemplateAssigned               = No template assigned.
+cms.TemplateContent                  = Template content
+cms.inColumn                         = in table column
+cms.inPopup                          = in popup window
+cms.showTemplatePreview              = Show template preview
+
+company_mng.Company_mng = company_mng.Company_mng
+company_mng.Edit        = company_mng.Edit
+company_mng.NewCompany  = Th\u00EAm m\u1EDBi
+
+company_mngView = navigation.company_mngView
+
+dashboard.recipient.export = Export recipients
+
+default.A_EMM                  = Mobifone
+default.All                    = T\u1EA5t c\u1EA3
+default.CompanyID              = M\u00E3 c\u00F4ng ty
+default.Copyright              = H\u1EC7 th\u1ED1ng qu\u1EA3n tr\u1ECB email marketing c\u1EE7a MOBIFONE B\u1EA3n quy\u1EC1n thu\u1ED9c Mobifone &copy; 2016.
+default.CustomerID             = M\u00E3 kh\u00E1ch h\u00E0ng
+default.KByte                  = KByte
+default.Logout                 = \u0110\u0103ng xu\u1EA5t
+default.Name                   = Nh\u1EADp t\u00EAn
+default.No                     = No
+default.Overview               = Th\u00F4ng tin chung
+default.Preview                = Xem th\u1EED
+default.Size                   = Dung l\u01B0\u1EE3ng
+default.Size_Mail              = Dung l\u01B0\u1EE3ng trong email
+default.Time                   = Th\u1EDDi gian
+default.Type                   = Ki\u1EC3u
+default.Yes                    = Yes
+default.and                    = v\u00E0
+default.changes_saved          = L\u01B0u thay \u0111\u1ED5i.
+default.date.format.DD         = DD
+default.date.format.DD.MM.YYYY = DD.MM.YYYY
+default.date.format.MM         = MM
+default.date.format.MMDD       = MMDD
+default.date.format.YYYY       = YYYY
+default.date.format.YYYYMM     = YYYYMM
+default.date.format.YYYYMMDD   = YYYYMMDD
+default.description            = M\u00F4 t\u1EA3
+default.loading                = \u0111ang t\u1EA3i...
+default.loading.stopped        = \u0111ang t\u1EA3i ... d\u1EEBng
+default.or                     = ho\u1EB7c
+default.shortname              = T\u00EAn
+default.sysdate                = Th\u1EDDi gian hi\u1EC7n t\u1EA1i
+default.template.fromemail     = Email address
+default.url                    = URL
+
+department_mng.Department_mng = department_mng.Department_mng
+department_mng.Edit           = N\u1ED9i dung thay \u0111\u1ED5i
+department_mng.NewDepartment  = Th\u00EAm m\u1EDBi
+
+department_mngView = department_mngView
+
+ecs.ColorCoding            = M\u00E3 m\u00E0u
+ecs.Error.NoParams         = Parameters error (not enough parameters to show EmbeddedClickStat View)
+ecs.Error.NoTestRecipients = Can't show mailing content. No test recipient available.
+ecs.From                   = From
+ecs.Heatmap                = Heatmap
+ecs.Heatmap.description    = (Values include clicks of admin and test recipients.)
+ecs.Heatmap.max            = max.
+ecs.PureMailing            = Pure mailing
+ecs.ViewMode               = View mode
+
+error.NrOfMailings                                             = Please select at least two but not more than ten mailings for comparison
+error.action.illegal_directive                                 = Action contains illegal directive '{0}'.
+error.action.nameTooLong                                       = Action name must not be longer than 50 characters.
+error.admin.different_passwords                                = Passwords not matching
+error.admin.no_password                                        = Password missing
+error.admin.save                                               = Could not save user profile
+error.agntag.invalidAgnTagSlashes                              = Invalid agn-Tag with leading and trailing slash found in line {0} at position {1}
+error.agntag.invalidClosingAgnDynTag.notMatchingLastOpenedName = Invalid closing agnDYN-Tag found: Was not the latest opened agnDYN-Tag name "{0}" in line {1} at position {2}
+error.agntag.invalidClosingAgnDynTag.notOpened                 = Invalid closing agnDYN-Tag found: No agnDYN-Tag was opened before in line {0} at position {1}
+error.agntag.invalidClosingAgnTag                              = Invalid closing agn-Tag found in line {0} at position {1}
+error.agntag.invalidParameterSyntax                            = Invalid agn-Tag parameter syntax: {0} in line {1} at position {2}
+error.agntag.mailing.component                                 = AgnTag error in mailing component "{0}"<br />AgnTag text: "{1}"
+error.agntag.missingAgnTagClosingSlash                         = Missing closing slash in agn-Tag in line {0} at position {1}
+error.agntag.missingClosingAgnDynTag                           = Missing closing agnDYN-Tag for name "{0}"
+error.agntag.missingClosingBracket                             = Invalid agn-Tag found: closing bracket of tag is missing in line {0} at position {1}
+error.agntag.missingParameter                                  = Invalid agn-Tag found: parameter {0} is missing in line {1} at position {2}
+error.agntag.parameter.duplicateKey                            = Duplicate parameter key in line {0} at position {1}
+error.agntag.parameter.invalidEmptyKey                         = Invalid empty parameter name or whitespace found in line {0} at position {1}
+error.agntag.parameter.invalidQuotedKey                        = Invalid quoted data for parameter name in line {0} at position {1}
+error.agntag.parameter.invalidQuotesInValue                    = Invalid quotes in parameter value in line {0} at position {1}
+error.agntag.parameter.invalidUnquotedValue                    = Invalid unquoted data for parameter value in line {0} at position {1}
+error.agntag.parameter.invalidWhitespace                       = Invalid whitespace found in line {0} at position {1}
+error.agntag.parameter.unexpectedEndOfKey                      = Unexpected end of data after parameter name was started in line {0} at position {1}
+error.agntag.parameter.unexpectedEndOfValue                    = Unexpected end of data after quoted parameter value was started in line {0} at position {1}
+error.agntag.unknownAgnTag                                     = Unknown agn-Tag found in line {0} at position {1}
+error.agntag.unwrappedAgnDvalueTag                             = Found a agnDVALUE-Tag for name "{0}" without matching agnDYN-Tags in line {1} at position {2}
+error.attachment                                               = The attachment you want to upload exceeds the maximum file size of {0} byte
+error.backlist.recipient.unable                                = Unable to add blacklist entry '{0}'.
+error.blacklist.recipient.isalreadyblacklisted                 = blacklist entry '{0}' already exists.
+error.cant.add.cm                                              = Can not add content module, no empty place holders found.
+error.charset.component                                        = Component '{0}' contains invalid characters for given character set.
+error.charset.content                                          = Content block '{0}' contains invalid characters for given character set.
+error.charset.subject                                          = Subject contains invalid characters for given character set.
+error.cmtemplate.edit.nameadd                                  = Field name is empty.
+error.cmtemplate.filetype                                      = Wrong file type, please provide ZIP file.<br>
+error.cmtemplate.notemplatefile                                = Template file not found in ZIP archive (.html file in the root of the ZIP archive is missing).
+error.cmtemplate.upload                                        = Can not upload CM template.<br>
+error.date.format                                              = Date is invalid, please enter correct date
+error.descriptionToShort                                       = Description is too short.
+error.email.empty                                              = No e-mail address given
+error.errorneous_recipient_search                              = Your recipient search resulted in an error
+error.exception                                                = A general error occurred. Please check your input.
+error.export.already_exporting                                 = Export is in progress, please wait until it finished
+error.export.file_not_ready                                    = No file for download available.
+error.export.no_columns_selected                               = Please select at least one database column for export.
+error.externalImageUrlWrong                                    = Image URL is not valid.<br>
+error.form.illegal_directive                                   = Form contains illegal directive '{0}'.
+error.form.invalid_name                                        = Form name is invalid. Please use only characters "A" through "Z", "a" through "z", "0" through "9", "-", "_"!
+error.form.nameTooLong                                         = Form name must not be longer than 50 characters.
+error.form.name_in_use                                         = Form name already in use.
+error.global.message                                           = An unexpected error occurred. Please contact our support team.
+error.global.title                                             = Error occurred.
+error.hibernate.attachmentTooLarge                             = The attachment is too large to be processed. Please adjust MySQL parameter max_allowed_packet.
+error.import.blacklist                                         = Exception while loading blacklist
+error.import.charset                                           = Could not convert file to selected charset.
+error.import.column                                            = Import error.<br>One column could not be imported twice.
+error.import.column.dbduplicate                                = More than one file column is mapped to the same DB column:
+error.import.column.duplicate                                  = Can't add column that is already added.
+error.import.column.empty                                      = Can't add empty column.
+error.import.duplicate_profile_name                            = Import profile with the same name already exists.
+error.import.error_in_line                                     = Error in line structure!
+error.import.exception                                         = Error during import.
+error.import.gender.duplicate                                  = Can't add gender value that already added.
+error.import.gender.empty                                      = Gender value can't be empty.
+error.import.gender.number.duplicate                           = Gender value is duplicated
+error.import.keycolumn_not_imported                            = Key column should be imported.
+error.import.maxCount                                          = The maximum number of records has been reached.
+error.import.no_columns_maped                                  = At least one database column must be mapped for import.
+error.import.no_file                                           = The file was empty or not found.
+error.import.no_gender_mapping                                 = No mapping for required column "GENDER".
+error.import.no_gender_mapping.solution                        = "GENDER" will be set to 'unknown'.
+error.import.no_keycolumn_mapping                              = No mapping for key column.
+error.import.no_keycolumn_mapping_found_in_file                = No key found for mapping {0}.
+error.import.no_mailinglist                                    = Please choose a mailing list.
+error.import.no_mailtype_mapping                               = No mapping for required column "MAILTYPE".
+error.import.no_profile                                        = No import profile available in the system.
+error.import.no_profile_exists                                 = No profile exists.
+error.import.separator_or_textrecognition_is_wrong             = Separator or text recognition is wrong.
+error.import.sql_failed                                        = Could not update data.<br>Error:
+error.import.too_many_records                                  = Too many records for import, maximum is {0}.
+error.import.toolongvalue                                      = '{0}' is too long for the database field
+error.invalid.email                                            = \u0110\u1ECBa ch\u1EC9 email kh\u00F4ng h\u1EE3p l\u1EC7.
+error.invalid.link                                             = Invalid Link: {0}
+error.invalid_name                                             = Invalid name. Please use only characters "A" through "Z", "a" through "z", "0" through "9", "-", "_"!
+error.linkUrlWrong                                             = Link URL is not valid.<br>
+error.login                                                    = Wrong username/password or account temporarily locked
+error.mailing.content.agnDBTag                                 = Please check the listed agnDB-Tags, the referenced columns do not exist in the database.
+error.mailing.hosted_image_filename                            = Filename is invalid, please use only characters 'a' through 'z', 'A' through 'Z', '0' through '9', and ".", "-", "*", "_"!
+error.mailing.noMailinglist                                    = No mailing list existent, please create a mailing list first.
+error.mailing.no_html_template                                 = No HTML template present.
+error.mailing.no_html_version                                  = No HTML version available.
+error.mailing.no_subscribers                                   = Number of recipients is zero.
+error.mailing.no_text_template                                 = No text template present.
+error.mailing.no_text_version                                  = No plain-text version available.
+error.mailing.rulebased_without_target                         = You have to choose a target group.
+error.mailing.sender_adress                                    = \u0110\u1ECBa ch\u1EC9 ng\u01B0\u1EDDi g\u1EEDi kh\u00F4ng \u0111\u00FAng.
+error.mailing.subject.too_short                                = Email subject kh\u00F4ng \u0111\u1EE7 k\u00FD t\u1EF1.
+error.mailinglist.cannot_delete                                = You can't delete this mailing list.<br>There are mailings or templates depending from it.<br>Please alter mailings or templates first.
+error.mailinglist.duplicate                                    = Mailing list {0} already exists.
+error.maximum.recipient.columns                                = A maximum of eight columns can be displayed in this view
+error.nameToShort                                              = T\u00EAn ch\u01B0a \u0111\u1EE7 \u0111\u1ED9 d\u00E0i
+error.old_password_required                                    = Please enter your old password.
+error.password.mismatch                                        = Passwords don't match.
+error.password.required                                        = Please enter your password.
+error.password.tooLong                                         = Password must not be longer than 20 characters!
+error.password.tooShort                                        = Password is too short.
+error.password_general                                         = Invalid password.
+error.password_must_differ                                     = The new password must differ from the old one.
+error.password_no_digits                                       = The new password contains no digits
+error.password_no_letters                                      = The new password does not contain any letters
+error.password_no_special_chars                                = The new password contains no special characters.
+error.period.format                                            = Period of dates is invalid, please enter correct period.
+error.permissionDenied                                         = You don't have the required permissions for this action.
+error.personalization_tag                                      = Error in personalization tag, please check.
+error.personalization_tag_parameter                            = Error in personalization tag parameter, please check.
+error.pluginmanager.activate_plugin                            = Plugin could not be activated. Are all dependencies solved?
+error.pluginmanager.installer.general                          = Error installing plugin
+error.pluginmanager.installer.manifest                         = Missing or incorrect plugin manifest.
+error.pluginmanager.installer.no_plugin_file                   = No plugin file selected.
+error.pluginmanager.missing_plugin_id                          = Missing plugin ID
+error.pluginmanager.uninstall                                  = Error uninstalling plugin
+error.pluginmanager.uninstall.systemplugin                     = Systemplugins cannot be uninstalled.
+error.preview.no_recipient                                     = Unable to display, no administrator or test recipient found.
+error.profiledb.cannotDropColumn                               = Cannot drop this column: "{0}".
+error.profiledb.exists                                         = This field already exists.
+error.profiledb.fieldname                                      = Field name in DB invalid. Please use  only characters 'A' through 'Z', '0' through '9', and ".", "-", "*", "_"!
+error.profiledb.fieldname_too_short                            = Field name in DB should be at least 3 characters long.
+error.profiledb.insert_in_db_error                             = The field could not be created. Please check the values you entered.
+error.profiledb.invalidDefaultValue                            = This default value is not allowed for this field.
+error.profiledb.invalid_fieldname                              = Field name {0} is invalid.
+error.profiledb.notExists                                      = This field does not exist.
+error.profiledb.shortname_too_short                            = Field name should be at least 3 characters long.
+error.recipient.firstname.tooLong                              = First name must not be longer than 100 characters.
+error.recipient.lastname.tooLong                               = Last name must not be longer than 100 characters.
+error.recipient.title.tooLong                                  = Title must not be longer than 100 characters.
+error.reply_fullname_too_long                                  = Reply full name must not be longer than 50 characters.
+error.select_mailinglist                                       = Please select at least one mailing list!
+error.sender_fullname_too_long                                 = Sender full name must not be longer than 50 characters.
+error.shortname_too_long                                       = Shortname too long
+error.subscriber.insert_in_db_error                            = An error occured while saving the recipient.
+error.target.bracketbalance                                    = Brackets are not balanced, please check.
+error.target.delete                                            = Unable to delete target group
+error.target.in_use                                            = Target group is in use.
+error.target.norule                                            = No rule defined, please define at least one rule for target selection.
+error.target.saving                                            = Target group could not be saved. Please check rules. Reduce number of rules if necessary.
+error.target.validate.cannot_validate                          = Cannot validate this rule.
+error.target.validate.invalid_mailing                          = This rule references an invalid mailing.
+error.target.validate.not_an_interval_mailing                  = Selected mailing is not an interval mailing.
+error.targetAction                                             = Invalid action
+error.template.dyntags                                         = Error in dyn tags.
+error.template.dyntags.bshInterpreter                          = Error when checking dyn tags: BshInterpreter cannot be initialized
+error.template.dyntags.unknown                                 = Unknown dyn tag was found
+error.username.duplicate                                       = User with the same user name already exists.
+error.username.required                                        = Please enter your user name.
+error.username.tooLong                                         = User name must not be longer than 20 characters.
+error.username.tooShort                                        = User name is too short.
+error.you_choose_a_time_before_the_current_time                = You choose a time before the current time.
+
+errors.footer = </font>
+errors.header = <font color="red">
+
+export = Xu\u1EA5t
+
+export.Column_Name                 = T\u00EAn c\u1ED9t
+export.CsvMappingMsg               = Please map the columns fom the csv file with the corresponding data base columns
+export.DefSave                     = You can save this export definition<br>for further use
+export.ExportDefinition            = Export definition
+export.ExportDelete                = Delete export definition
+export.ExportEdit                  = Edit export definition
+export.ExportProfile               = Export profile
+export.No_Mailinglist              = No mailing list
+export.PleaseEnterShortnameMsg     = Please enter a name and a short description (optional)<br>for this export definition
+export.SelectExportDef             = Please choose a predefined export definition<br>or start a new export
+export.WizStep_1_of_3              = Step 1 of 3
+export.WizStep_2_of_3              = Step 2 of 3
+export.WizStep_3_of_3              = Step 3 of 3
+export.Wizard                      = Export Wizard
+export.WizardDeleteQuestion        = Do you really like to delete this export definition?
+export.add_mailinglist_information = Add status of recipients on following mailing lists
+export.columns                     = Columns for export
+export.dates.creation_date         = Creation period
+export.dates.limits                = Dates limits
+export.dates.mailinglists          = Mailing lists binding period
+export.dates.mailinglists.hint     = Select of one mailing list is necessary.
+export.dates.timestamp             = Change period
+export.delimiter.doublequote       = "
+export.delimiter.none              = None
+export.delimiter.singlequote       = '
+export.file_format                 = File format
+export.finished                    = Export finished.<br>Your file is now ready for download. You can retrieve it by clicking on the link below
+export.progress                    = Exporting
+export.selection                   = Ch\u1ECDn th\u00F4ng tin export
+
+help = Help
+
+htmled.agntagsButtonTooltip = Insert Agnitas Tag
+htmled.agntagsWindowTitle   = Special Tags - Agnitas
+htmled.align_left           = Align left
+htmled.align_right          = Align right
+htmled.background_color     = Background color
+htmled.bold                 = Bold
+htmled.bulletted_list       = Bulletted list
+htmled.cancel               = Cancel
+htmled.caption              = Caption
+htmled.cell_attributes      = Cell attributes
+htmled.center               = Center
+htmled.color                = Color
+htmled.columns              = Columns
+htmled.copy                 = Copy
+htmled.cut                  = Cut
+htmled.decrease_indent      = Decrease indent
+htmled.delete_cells         = Delete cells
+htmled.delete_columns       = Delete columns
+htmled.delete_row           = Delete row
+htmled.find                 = Find
+htmled.font_name            = Font name
+htmled.font_size            = Font size
+htmled.foreground_color     = Foreground color
+htmled.increase_indent      = Increase indent
+htmled.insert_cell          = Insert cell
+htmled.insert_column        = Insert column
+htmled.insert_image         = Insert Image
+htmled.insert_row           = Insert row
+htmled.insert_table         = Insert table
+htmled.italic               = Italic
+htmled.link                 = Link
+htmled.merge_cells          = Merge cells
+htmled.numbered_list        = Numbered list
+htmled.ok                   = OK
+htmled.paste                = Paste
+htmled.properties           = Properties
+htmled.redo                 = Redo
+htmled.rows                 = Rows
+htmled.save                 = Save
+htmled.select_color         = Select color
+htmled.split_cell           = Split cell
+htmled.table_attributes     = Table attributes
+htmled.tag                  = Tag
+htmled.title                = OpenEMM HTML editor
+htmled.underline            = Underline
+htmled.undo                 = Undo
+
+import.CsvColumn                      = csv column
+import.DbColumn                       = db column
+import.DeleteImportProfileQuestion    = Do you really want to delete this import profile?
+import.Delimiter                      = Text recognition character
+import.EditImportProfile              = Edit Import Profile
+import.ImportProfile                  = Import profile
+import.ManageColumns                  = Manage Columns
+import.NewImportProfile               = New Import Profile
+import.NoMapping                      = --do not import column
+import.ProfileAdministration          = Profile Administration
+import.RecipientsAllreadyinDB         = Recipients from CSV file already in DB
+import.Separator                      = Separator
+import.SubscribeLists                 = Subscribe/unsubscribe to following mailing lists
+import.SubscriberImport               = Recipient import
+import.UploadSubscribers              = Import recipients
+import.WizStep_1_of_7                 = Step 1 of 7
+import.WizStep_2_of_7                 = Step 2 of 7
+import.WizStep_3_fields_of_7          = Step 3 of 7 missing fields
+import.WizStep_3_of_7                 = Step 3 of 7
+import.WizStep_4_of_7                 = Step 4 of 7
+import.WizStep_5_of_7                 = Step 5 of 7
+import.WizStep_6_of_7                 = Step 6 of 7
+import.WizStep_7_of_7                 = Step 7 of 7
+import.Wizard                         = Import Wizard
+import.blacklist.read                 = Could not read blacklist, please contact support.
+import.csv.file                       = Recipients import file
+import.csv_analysis                   = Analysis of CSV-file
+import.csv_completed                  = Finished successfully
+import.csv_delete_double_email        = Deleting double records
+import.csv_errors_blacklist           = Addresses on blacklist
+import.csv_errors_date                = Errors in date fields
+import.csv_errors_double              = Double records in the CSV file
+import.csv_errors_email               = Errors in email addresses
+import.csv_errors_gender              = Errors in gender values
+import.csv_errors_linestructure       = Errors in line structure ({0})
+import.csv_errors_mailtype            = Errors in mail-type values
+import.csv_errors_numeric             = Errors in numeric values
+import.csv_importing_data             = Importing data
+import.csv_no_iframe                  = Please wait while data is written to the database.
+import.csv_summary                    = records ready for import to database
+import.csv_unused_column_csv          = Unused columns (CSV)
+import.csv_unused_column_db           = Unused columns (profile DB)
+import.csv_upload                     = Import
+import.csv_used_column                = Columns for import
+import.current.csv.file               = Current recipients file
+import.date.format.ddMMyyyy           = dd.MM.yyyy
+import.date.format.ddMMyyyyHHmm       = dd.MM.yyyy HH:mm
+import.date.format.ddMMyyyyHHmmss     = dd.MM.yyyy HH:mm:ss
+import.date.format.yyyyMMdd           = yyyyMMdd
+import.date.format.yyyyMMddHHmm       = yyyyMMdd HH:mm
+import.date.format.yyyyMMddHHmmss     = yyyy-MM-dd HH:mm:ss
+import.dateFormat                     = Date format
+import.dont_ignore_null_values        = Overwrite existing records with null-values
+import.doublechecking                 = Check for duplicate records
+import.doublechecking.csv             = only within new data
+import.doublechecking.full            = complete
+import.doublechecking.none            = no check
+import.extended_check                 = Extended email address check (most common mistypes)
+import.ignore_null_values             = Ignore null values in imported records
+import.keycolumn                      = Key column for duplicate check and updates
+import.mode.add                       = Only add new recipients
+import.mode.add_update                = Add new recipients and update existing recipients
+import.mode.blacklist                 = Add recipients to blacklist
+import.mode.bounce                    = Mark recipients as Bounced
+import.mode.only_update               = Only update existing recipients
+import.mode.remove_status             = Delete binding information from mailing list(s)
+import.mode.unsubscribe               = Mark recipients as Opt-Out
+import.null_value_handling            = Null values in CSV file
+import.profile.add.gender.mapping     = New gender value
+import.profile.chooseCsv              = Choose CSV file
+import.profile.column.mandatory       = mandatory
+import.profile.default                = Default
+import.profile.file.settings          = CSV file settings
+import.profile.gender.int             = Number value
+import.profile.gender.settings        = Import gender settings
+import.profile.gender.string          = Gender value
+import.profile.new.column             = New column
+import.profile.process.settings       = Import process settings
+import.profile.report.email           = Email address for reports
+import.profile.updateAllDuplicates    = Update all duplicates (not only first found)
+import.recipients.duplicate           = Recipient-duplicates
+import.recipients.fixed               = Fixed recipients
+import.recipients.invalid             = Invalid recipients
+import.recipients.report              = Recipients import report
+import.recipients.valid               = Valid recipients
+import.result.bindingsRemoved         = Mailing list bindings deleted
+import.result.datasource_id           = New subscribers imported with DATASOURCE_ID
+import.result.imported                = New recipients
+import.result.report                  = Report
+import.result.subscribersAdded        = Recipients added
+import.result.subscribersBounced      = Recipients set to status 'Bounced'
+import.result.subscribersUnsubscribed = Recipients set to status 'Opt-Out'
+import.result.updated                 = Updated recipients
+import.save_new_records               = Adding new recipients
+import.separator.comma                = ,
+import.separator.pipe                 = |
+import.separator.semicolon            = ;
+import.separator.tab                  = Tab
+import.title.error_edit               = Errors found in csv-file. You can fix them and save or ignore.
+import.title.preview                  = Import preview for first lines of file
+import.title.start                    = Select csv-file and import profile to start import
+import.update_existing_records        = Updating existing subscribers
+import.update_status                  = Updating mailing list informations
+import.wizard.selectImportProfile     = L\u1EF1a ch\u1ECDn h\u1ED3 s\u01A1 nh\u1EADp
+
+link.check         = Ki\u1EC3m tra li\u00EAn k\u1EBFt
+link.check.success = T\u1EA5t c\u1EA3 li\u00EAn k\u1EBFt \u0111ang ho\u1EA1t \u0111\u1ED9ng
+
+logon.login    = \u0110\u0103ng nh\u1EADp
+logon.password = M\u1EADt kh\u1EA9u
+logon.title    = Qu\u1EA3n tr\u1ECB email marketing Mobifone 
+logon.username = T\u00E0i kho\u1EA3n
+
+logout.relogin    = Nh\u1EA5n v\u00E0o \u0111\u00E2y \u0111\u1EC3 \u0111\u0103ng nh\u1EADp l\u1EA1i.
+logout.successful = \u0110\u0103ng xu\u1EA5t th\u00E0nh c\u00F4ng.
+
+mailing.AddTargetGroup                    = Th\u00EAm
+mailing.Attachment                        = File \u0111\u00EDnh k\u00E8m
+mailing.Attachments                       = C\u00E1c file \u0111\u00EDnh k\u00E8m
+mailing.CancelGeneration                  = Cancel generation
+mailing.Characters                        = Characters
+mailing.Charset                           = Ki\u1EC3u m\u00E3
+mailing.ClickAction                       = Click action
+mailing.ComponentLink                     = Link for component
+mailing.Content                           = N\u1ED9i dung
+mailing.CopyOf                            = Copy of
+mailing.DefaultAction                     = Default action
+mailing.Delete_Template_Question          = Do you really want to delete this template?
+mailing.Delivery                          = Delivery
+mailing.DistribStatus                     = Distribution status
+mailing.Dynamic_Content                   = Dynamic content
+mailing.E-Mail                            = Email
+mailing.E-Mails                           = Emails
+mailing.Event_Mailing                     = Chi\u1EBFn d\u1ECBch theo s\u1EF1 ki\u1EC7n
+mailing.Followup_Mailing                  = Followup mailing
+mailing.GenerateEndTime                   = Generation end time
+mailing.GenerateStartTime                 = Generation start time
+mailing.GeneratedMails                    = Generated emails
+mailing.Generation                        = Generation
+mailing.Graphics_Component                = \u1EA2nh \u0111\u00EDnh k\u00E8m
+mailing.Graphics_Component.AddDate        = Added
+mailing.Graphics_Component.Delete         = Delete picture component
+mailing.Graphics_Component.Dimensions     = K\u00EDch th\u01B0\u1EDBc
+mailing.Graphics_Component.FileFormat     = File format
+mailing.Graphics_Component.FileSize       = File size
+mailing.Graphics_Component.NoImage        = No image available
+mailing.Graphics_Component.Update         = Update picture component
+mailing.Graphics_Component.bulk.download  = Link download
+mailing.Graphics_Component.bulk.update    = components bulk update
+mailing.Graphics_Component.external       = Th\u00EAm th\u00E0nh ph\u1EA7n \u1EA3nh 
+mailing.Graphics_Components               = \u1EA2nh \u0111\u00EDnh k\u00E8m
+mailing.HTML                              = HTML
+mailing.HTML_Version                      = HTML version
+mailing.HideTemplate                      = hide template
+mailing.Keep_Unchanged                    = - Keep unchanged -
+mailing.LastDelivery                      = Last delivery
+mailing.Linefeed_After                    = S\u1ED1 k\u00FD t\u1EF1
+mailing.MailTypeMessage                   = Please choose a format for the mailing
+mailing.MailingActivate                   = Activate mailing
+mailing.MailingDeactivate                 = Deactivate mailing
+mailing.MailingDelete                     = Delete mailing
+mailing.MailingDeleteQuestion             = Do you really want to delete this mailing?
+mailing.MailingEdit                       = Edit mailing
+mailing.MailingReadyForSending            = Email \u0111\u00E3 s\u1EB5n s\u00E0ng \u0111\u1EC3 g\u1EEDi.<br>\r\nB\u1EA1n c\u00F3 th\u1EC3 g\u1EEDi th\u1EED t\u1EDBi admin hay t\u00E0i kho\u1EA3n th\u1EED ho\u1EB7c c\u00F3 th\u1EC3 g\u1EEDi t\u1EDBi ng\u01B0\u1EDDi nh\u1EADn lu\u00F4n b\u00E2y gi\u1EDD
+mailing.MailingSend                       = Send mailing
+mailing.MailingSendNow                    = Send mailing now
+mailing.MailingSendXplain                 = Your mailing is now ready to be sent. Please click on the "Send" button to confirm the delivery to all recipients of the mailing list.
+mailing.MailingSentAllready               = This mailing was already sent.<br>You can send test versions of this mailing again,<br>e.g. for archive purposes. For safety reasons,<br>another sending of this mailing to all recipients<br>is not allowed.
+mailing.MailingTestAdmin                  = Send test mails to the administrators
+mailing.MailingTestDistrib                = Send test mails to the test recipients
+mailing.MailingTypeDescAfter              = .
+mailing.MailingTypeDescBefore             = You want to create a
+mailing.MailingWizard                     = Mailing wizard
+mailing.MailingWizardReadyMsg             = Your Mailing is now ready
+mailing.Mailing_Type                      = Lo\u1EA1i chi\u1EBFn d\u1ECBch
+mailing.Mailing_date_show                 = Hi\u1EC3n th\u1ECB theo th\u1EDDi gian
+mailing.Mailing_event_show                = Hi\u1EC3n th\u1ECB theo s\u1EF1 ki\u1EC7n
+mailing.Mailing_normal_show               = Hi\u1EC3n th\u1ECB t\u1EA5t c\u1EA3
+mailing.Mailtype                          = Ki\u1EC3u \u0111\u1ECBnh d\u1EA1ng email
+mailing.MediaType.0                       = Email
+mailing.MediaType.1                       = Fax
+mailing.MediaType.2                       = Print
+mailing.MediaType.3                       = MMS
+mailing.MediaType.4                       = SMS
+mailing.MediaType.Email                   = Email
+mailing.Mime_Type                         = MIME type
+mailing.NewMailingMethod                  = T\u1EA1o chi\u1EBFn d\u1ECBch m\u1EDBi.<br>ch\u1ECDn c\u00E1ch th\u1EE9c th\u1EF1c hi\u1EC7n
+mailing.New_Attachment                    = New attachment
+mailing.New_Component                     = New component
+mailing.New_Content                       = New content
+mailing.New_Mailing                       = T\u1EA1o m\u1EDBi chi\u1EBFn d\u1ECBch
+mailing.New_Template                      = Th\u00EAm m\u1EABu m\u1EDBi
+mailing.NoCampaign                        = no archive
+mailing.NoImages                          = No images
+mailing.NoWizard                          = The data input takes place without a wizard
+mailing.No_Linefeed                       = No line feed
+mailing.No_Template                       = No template
+mailing.Normal_Mailing                    = Th\u00F4ng th\u01B0\u1EDDng
+mailing.Not_Trackable                     = not trackable
+mailing.Only_HTML_Version                 = only HTML version
+mailing.Only_Text_Version                 = only text version
+mailing.OpenAction                        = Open action
+mailing.Original_Size                     = Original size
+mailing.OutOf                             = out of
+mailing.Preview                           = Xem tr\u01B0\u1EDBc
+mailing.RecipientsRecieved                = Emails have been generated
+mailing.RecipientsXplain1                 = This mailing will be sent to the target group:
+mailing.RecipientsXplain2                 = This target group contains
+mailing.RecipientsXplain3                 = recipients, divided into:
+mailing.ReplyEmail                        = \u0110\u1ECBa ch\u1EC9 email nh\u1EADn ph\u1EA3n h\u1ED3i
+mailing.ReplyFullName                     = \u0110\u1ECBnh danh ng\u01B0\u1EDDi nh\u1EADn ph\u1EA3n h\u1ED3i
+mailing.Rulebased_Mailing                 = Chi\u1EBFn d\u1ECBch theo th\u1EDDi gian 
+mailing.SendAddressMsg                    = Please enter the sender address
+mailing.SendPreviewMessage                = Xem th\u1EED
+mailing.Send_Mailing                      = G\u1EEDi Email
+mailing.SenderEmail                       = \u0110\u1ECBa ch\u1EC9 email g\u1EEDi
+mailing.SenderFullname                    = \u0110\u1ECBnh danh ng\u01B0\u1EDDi g\u1EEDi
+mailing.Sender_Adress                     = Sender address
+mailing.SendingTime                       = Delivery time:
+mailing.SendingTimeDaily                  = Daily delivery time
+mailing.SentMails                         = Emails sent
+mailing.ShowTemplate                      = Hi\u1EC3n th\u1ECB m\u1EABu
+mailing.Subject                           = Subject
+mailing.TemplateDelete                    = X\u00F3a m\u1EABu
+mailing.TemplateEdit                      = S\u1EEDa m\u1EABu
+mailing.TestAdminDeliveryMsg              = B\u1EA1n \u0111\u00E3 c\u00F3 th\u1EC3 g\u1EEDi th\u1EED mail t\u1EDBi admin <br> ho\u1EB7c ng\u01B0\u1EDDi nh\u1EADn gi\u1EA3 \u0111\u1ECBnh
+mailing.Text                              = Text
+mailing.TextModules                       = Text modules
+mailing.Text_HTML                         = Text and HTML
+mailing.Text_HTML_OfflineHTML             = Text, HTML and Offline HTML
+mailing.Text_Module                       = Text module
+mailing.Text_Version                      = Text version
+mailing.Text_and_HTML_Version             = Text and HTML version
+mailing.Trackable                         = Trackable
+mailing.Trackable_Link                    = Trackable&nbsp;link
+mailing.Trackable_Links                   = Link \u0111\u00EDnh k\u00E8m
+mailing.URL                               = URL
+mailing.Wizard                            = C\u01A1 b\u1EA3n
+mailing.WizardDescription                 = You are guided by a wizard
+mailing.activate.deleted_target_groups    = Cannot activate mailing. It contains deleted target groups.
+mailing.activate_event_explain            = Your mailing is now ready for sending.<br>You may test it with the following<br>two links or activate it.
+mailing.activate_rule_explain             = Your mailing is now ready for sending.<br>You may test it with the following<br>two links or activate it to start daily delivery <br>of the mailing to the selected target group.
+mailing.archived                          = Hi\u1EC3n th\u1ECB trong chi\u1EBFn d\u1ECBch
+mailing.attachment.background             = PDF background file
+mailing.attachment.name                   = Attachment name
+mailing.attachment.type                   = Type of attachment
+mailing.attachment.type.normal            = Normal attachment
+mailing.attachment.type.personalized      = Personalized attachment
+mailing.content.contentblocks             = Contentblocks
+mailing.content.not.avaliable             = The content of this mailing is no longer available.
+mailing.deactivate_event_explain          = This mailing is active and can now be connected to measurable links and forms via "Actions".<br>You can send test versions of this mailing again, e.g. for archive purposes.<br>To stop the mailing please klick on "Deactivate Mailing".
+mailing.deactivate_rule_explain           = This mailing is active and will be send every day to the selected target group.<br>You can send test versions of this mailing again,<br>e.g. for archive purposes. To stop the mailing please klick on "Deactivate Mailing".
+mailing.dynamic_template                  = Update mailing when template is changed
+mailing.dynamic_template.preset           = Update mailing when template is changed (presetting)
+mailing.errors.format.error               = Invalid file format, please select another file (jpg, gif, png).
+mailing.errors.no_attachment_file         = Please specify a attachment file to upload
+mailing.errors.no_component_file          = Please specify a component file to upload
+mailing.gb2312                            = Chinese simplified (GB2312)
+mailing.generation.cancel.deny            = The generation of this mailing could not be stopped. <BR> Please contact the AGNITAS Suport.
+mailing.generation.cancel.question        = Do you really want to stop generation of this mailing?
+mailing.iso-8859-1                        = ISO 8859-1
+mailing.iso-8859-15                       = ISO 8859-15
+mailing.needsTarget                       = Mailing should only be sent with target selection
+mailing.noActionsLinked                   = No actions are used in this mailing.
+mailing.only_Text                         = only text
+mailing.openrate.bottom                   = at bottom of email
+mailing.openrate.measure                  = Measure open rate
+mailing.openrate.none                     = No
+mailing.openrate.top                      = at top of email
+mailing.send.calculating.recipient.number = The number of recipients is calculated based on the chosen target groups.
+mailing.send.confirm                      = Do you really want to send this mailing?
+mailing.send.delivery.status.A            = Admin delivery
+mailing.send.delivery.status.T            = Test delivery
+mailing.send.delivery.status.W            = World delivery
+mailing.sendStatus.ended                  = Ended
+mailing.sendStatus.started                = Started
+mailing.senddate                          = Ng\u00E0y g\u1EEDi
+mailing.settings                          = Thi\u1EBFt l\u1EADp chi\u1EBFn d\u1ECBch
+mailing.settings.collapsed                = Thu g\u1ECDn
+mailing.settings.expanded                 = m\u1EDF r\u1ED9ng
+mailing.tag                               = agn-tag
+mailing.targetmode.and                    = Subscriber has to be in all target-groups
+mailing.trackablelinks.table              = Thay \u0111\u1ED5i link c\u00E1 nh\u00E2n
+mailing.unsafe_html_tag                   = Found unsafe HTML tag: {0}
+mailing.utf-16                            = Unicode (UTF-16)
+mailing.utf-8                             = Unicode (UTF-8)
+mailing.wizard.ChooseTemplateMsg          = You can choose a predefined mailing template<br>for your mailing:
+mailing.wizard.ChooseThenPressSave        = Please choose your settings and confirm<br>by pressing the "Save" button
+mailing.wizard.ClickFinishMsg             = Please click the "Finish" button<br>to exit to the mailing page
+mailing.wizard.MailingNameDescription     = Please enter a name and a short<br>description (optional) for your mailing
+mailing.wizard.MailingSubjectMsg          = Please enter a subject line for the mailing
+mailing.wizard.MeasureLinksDescriptionMsg = You can now browse through the trackable links found in the mailing<br>and change measurability and click action settings.<br>To skip this steps, press "Skip". Otherwise,<br>please press "Proceed"
+mailing.wizard.MlistTargetMsg             = Please choose a mailing list, the target group(s) and<br>optionally a archive for your mailing:
+mailing.wizard.NameDescriptionMsg         = Please insert a Name for the new mailing
+mailing.wizard.Normal                     = C\u00E1ch 1
+mailing.wizard.NormalDescription          = D\u00E0nh cho ng\u01B0\u1EDDi quen s\u1EED d\u1EE5ng
+mailing.wizard.Step_10_of_11              = Step 10 of 11
+mailing.wizard.Step_11_of_11              = Step 11 of 11
+mailing.wizard.Step_1_of_11               = Step 1 of 11
+mailing.wizard.Step_2_of_11               = Step 2 of 11
+mailing.wizard.Step_3_of_11               = Step 3 of 11
+mailing.wizard.Step_4_of_11               = Step 4 of 11
+mailing.wizard.Step_5_of_11               = Step 5 of 11
+mailing.wizard.Step_6_of_11               = Step 6 of 11
+mailing.wizard.Step_7_of_11               = Step 7 of 11
+mailing.wizard.Step_8_of_11               = Step 8 of 11
+mailing.wizard.Step_9_of_11               = Step 9 of 11
+mailing.wizard.TextModulesMsg             = You can now browse through the text modules in your mailing<br>and enter content for them.<br>To skip this steps, press "Skip". Otherwise,<br>please press "Proceed"
+mailing.wizard.WizardDescription          = Theo t\u1EEBng b\u01B0\u1EDBc
+
+mailingContentHTMLCode = HTML Code
+
+mailingContentHTMLEditor = HTML Editor
+
+mailingContentText = Text
+
+mailinglist.delete                     = Delete mailing list
+mailinglist.delete.recipients          = Delete recipients of this mailing list
+mailinglist.delete.recipients.active   = Delete only active recipients
+mailinglist.delete.recipients.noadmin  = Do not delete admin and test recipients
+mailinglist.delete.recipients.question = Do you really want to delete recipients for this mailing list?
+mailinglist.edit                       = Edit mailing list
+mailinglist.recipients.deleted         = Recipients deleted successfully
+
+mailloop.mailloopDelete = Delete bounce filter
+mailloop.mailloopEdit   = Edit bounce filter
+
+navigation.company_mngView    = navigation.company_mngView
+navigation.department_mngView = navigation.department_mngView
+
+none = none
+
+pluginmanager.details                     = Details
+pluginmanager.install                     = Install Plugin
+pluginmanager.installer.installed         = Plugin installed
+pluginmanager.installer.select_file       = Select plugin to install
+pluginmanager.plugin.activate             = activate
+pluginmanager.plugin.activated            = activated
+pluginmanager.plugin.deactivate           = deactivate
+pluginmanager.plugin.deactivated          = not activated
+pluginmanager.plugin.depending_plugins    = Depending plugins
+pluginmanager.plugin.description          = Description
+pluginmanager.plugin.id                   = Plugin-ID
+pluginmanager.plugin.name                 = Plugin name
+pluginmanager.plugin.no_depending_plugins = No depending plugins found
+pluginmanager.plugin.status               = Status
+pluginmanager.plugin.systemplugin         = System plugin
+pluginmanager.plugin.uninstall            = uninstall
+pluginmanager.plugin.uninstalled          = Plugin has been removed
+pluginmanager.plugin.vendor               = Vendor
+pluginmanager.plugin.version              = Version
+
+previewCreatedMail = Xem tr\u01B0\u1EDBc
+
+recipient.Active                       = Ho\u1EA1t \u0111\u1ED9ng
+recipient.Administrator                = Administrator
+recipient.AdvancedSearch               = T\u00ECm n\u00E2ng cao
+recipient.Blacklist                    = Blacklist
+recipient.Bounced                      = Bounced
+recipient.DoubleOptInWait              = Ch\u1EDD x\u00E1c nh\u1EADn
+recipient.Female                       = N\u1EEF
+recipient.Firstname                    = T\u00EAn
+recipient.Lastname                     = H\u1ECD \u0111\u1EC7m
+recipient.MailingState1                = Ho\u1EA1t \u0111\u1ED9ng
+recipient.MailingState2                = Bounced
+recipient.MailingState3                = Opt-Out by admin
+recipient.MailingState4                = Opt-Out by recipient
+recipient.MailingState5                = Ch\u1EDD x\u00E1c nh\u1EADn
+recipient.MailingState6                = Blacklist
+recipient.MailingState7                = T\u1EA1m ng\u1EEBng ho\u1EA1t \u0111\u1ED9ng
+recipient.Mailinglists                 = Ch\u1ECDn nh\u00F3m
+recipient.Male                         = Nam
+recipient.More_Profile_Data            = Th\u00F4ng tin th\u00EAm
+recipient.NewRecipient                 = Th\u00EAm ng\u01B0\u1EDDi nh\u1EADn m\u1EDBi
+recipient.New_Recipient                = Th\u00EAm ng\u01B0\u1EDDi nh\u1EADn m\u1EDBi
+recipient.New_Subscriber               = Ng\u01B0\u1EDDi theo d\u00F5i m\u1EDBi
+recipient.NoSubscribersForSelection    = No recipients available for this selection.
+recipient.NormalSubscriber             = Normal recipient
+recipient.OfflineHTML                  = Offline HTML
+recipient.OptOutAdmin                  = Opt-Out by admin
+recipient.OptOutUser                   = Opt-Out by recipient
+recipient.Opt_Ins                      = Opt-Ins
+recipient.Recipient                    = Ng\u01B0\u1EDDi nh\u1EADn email
+recipient.RecipientDelete              = X\u00F3a ng\u01B0\u1EDDi nh\u1EADn
+recipient.RecipientEdit                = S\u1EEDa ng\u01B0\u1EDDi nh\u1EADn
+recipient.RecipientMailtype            = Ki\u1EC3u mail ng\u01B0\u1EDDi nh\u1EADn
+recipient.RecipientSelection           = Ch\u1ECDn ng\u01B0\u1EDDi nh\u1EADn
+recipient.RecipientStatus              = Tr\u1EA1ng th\u00E1i ng\u01B0\u1EDDi nh\u1EADn
+recipient.RecipientType                = Ki\u1EC3u ng\u01B0\u1EDDi nh\u1EADn
+recipient.Remark                       = Ch\u00FA \u00FD
+recipient.Salutation                   = Danh x\u01B0ng
+recipient.Status                       = Tr\u1EA1ng th\u00E1i
+recipient.TestSubscriber               = T\u00E0i kho\u1EA3n theo d\u00F5i (test)
+recipient.TestVIP                      = T\u00E0i kho\u1EA3n th\u1EED (VIP)
+recipient.Title                        = Ti\u00EAu \u0111\u1EC1
+recipient.Unknown                      = Kh\u00F4ng x\u00E1c \u0111\u1ECBnh
+recipient.blacklist.delete             = Th\u1EF1c s\u1EF1 x\u00F3a ng\u01B0\u1EDDi nh\u1EADn trong backlist?
+recipient.confirm_delete               = X\u00F3a t\u00E0i kho\u1EA3n ng\u01B0\u1EDDi nh\u1EADn?
+recipient.fields                       = Ch\u1ECDn
+recipient.fields.avaliable             = Ch\u1ECDn c\u1ED9t
+recipient.fields.gender.as.salutation  = Field gender is shown as salutation 
+recipient.fields.selected              = \u0110\u00E3 ch\u1ECDn (t\u1ED1i \u0111a 8) 
+recipient.gender.0.short               = Mr.
+recipient.gender.1.short               = Mrs.
+recipient.gender.2.short               = Unknown
+recipient.gender.3.short               = Miss
+recipient.gender.4.short               = Practice
+recipient.gender.5.short               = Company
+recipient.importprofile.defaultprofile = Default import profile selection
+recipient.importprofile.delete         = Delete profile
+recipient.importprofile.edit           = Edit profile
+recipient.mailingtype                  = Default mail type for recipients
+recipient.mailingtype.html             = Ki\u1EC3u HTML
+recipient.mailingtype.htmloffline      = Offline HTML
+recipient.mailingtype.text             = Ki\u1EC3u ch\u1EEF
+recipient.search                       = Search for recipient
+recipient.search.max_recipients        = The option you selected is too large to be displayed completely. Please limit your selection to reduce the amount of recipients (the limit is {0} recipients)
+recipient.select.fields                = Ch\u1ECDn c\u1ED9t hi\u1EC3n th\u1ECB
+recipient.unbound                      = On no List
+
+report.Hour           = Gi\u1EDD
+report.single_mailing = Mailing \u0111\u01A1n
+
+salutation.SalutationDelete = X\u00F3a salutation
+salutation.SalutationEdit   = Thay \u0111\u1ED5i salutation
+
+settings.Account                     = Client
+settings.AccountSettings             = Account-Settings
+settings.Admin                       = User
+settings.Admin.numberofrows          = Hi\u1EC3n th\u1ECB
+settings.AdminDeleteQuestion         = X\u00F3a t\u00E0i kho\u1EA3n n\u00E0y?
+settings.AdminID                     = Admin-ID
+settings.Admins                      = User
+settings.Chinese                     = Chinese
+settings.Company                     = Client
+settings.CompanyAdmin                = Clients
+settings.Default_Value               = Default value
+settings.DeleteProfileFieldQuestion  = Do you really want to delete this profile field?
+settings.DeleteSalutationQuestion    = Do you really want to delete this form of salutation?
+settings.Dutch                       = Dutch
+settings.EditFormOfAddress           = Edit Form of Salutation
+settings.EditMailinglist             = Edit Mailing List
+settings.EditMailloop                = Edit Bounce Filter
+settings.EditProfileDB_Field         = Edit field
+settings.Edit_Admin                  = Edit User
+settings.Edit_Form                   = Edit Form
+settings.English                     = English
+settings.FieldName                   = Field name
+settings.FieldNameDB                 = Field name in DB
+settings.FileName                    = File name
+settings.Font                        = Font
+settings.Fonts                       = Fonts
+settings.FormOfAddress               = M\u1EABu x\u01B0ng danh
+settings.FormsOfAddress              = M\u1EABu x\u01B0ng danh
+settings.French                      = French
+settings.German                      = German
+settings.Italian                     = Italian
+settings.Language                    = Language
+settings.Length                      = Length
+settings.Mailloop                    = Bounce-Filter
+settings.Mailloops                   = Bounce-Filters
+settings.MissShort                   = Miss
+settings.MissesShort                 = Mrs.
+settings.MisterShort                 = Mr.
+settings.Mode                        = Mode
+settings.NewFormOfAddress            = Th\u00EAm m\u1EDBi nh\u00F3m x\u01B0ng danh
+settings.NewMailinglist              = Th\u00EAm m\u1EDBi nh\u00F3m
+settings.NewMailloop                 = New Bounce Filter
+settings.NewProfileDB_Field          = Tr\u01B0\u1EDDng m\u1EDBi
+settings.New_Admin                   = User m\u1EDBi
+settings.New_Company                 = Kh\u00E1ch m\u1EDBi
+settings.New_Form                    = T\u1EA1o Form m\u1EDBi
+settings.No_Action                   = Kh\u00F4ng c\u00F3 h\u00E0nh \u0111\u1ED9ng n\u00E0o.
+settings.NullAllowed                 = Null-value allowed
+settings.Portuguese                  = Portuguese
+settings.ProfileFieldErrorMsg        = Profile field cannot be deleted because there are target groups depending from it. The target groups affected are:
+settings.Profile_DB                  = Edit Profile Fields
+settings.RdirLinkDecode              = M\u00E3 h\u00F3a link
+settings.Spanish                     = Spanish
+settings.Timezone                    = Timezone
+settings.Update                      = C\u1EADp nh\u1EADt
+settings.UserSettings                = User-Settings
+settings.User_Name                   = T\u00E0i kho\u1EA3n \u0111\u0103ng nh\u1EADp
+settings.Usergroup                   = Nh\u00F3m
+settings.Usergroup.none              = None
+settings.Userlogs                    = User Log
+settings.admin.Confirm               = X\u00E1c nh\u1EADn
+settings.admin.collapse_all          = Thu g\u1ECDn t\u1EA5t c\u1EA3 hi\u1EC3n th\u1ECB
+settings.admin.delete                = X\u00F3a user
+settings.admin.disable_group         = off
+settings.admin.edit                  = Thay \u0111\u1ED5i th\u00F4ng tin user
+settings.admin.enable_group          = on
+settings.admin.expand_all            = M\u1EDF r\u1ED9ng t\u1EA5t c\u1EA3 hi\u1EC3n th\u1ECB
+settings.fieldType.DATE              = Ng\u00E0y
+settings.fieldType.DOUBLE            = Ki\u1EC3u s\u1ED1 l\u1EDBn
+settings.fieldType.Date              = Ng\u00E0y
+settings.fieldType.Double            = Ki\u1EC3u s\u1ED1 l\u1EDBn
+settings.fieldType.INTEGER           = S\u1ED1 nguy\u00EAn
+settings.fieldType.String            = Ki\u1EC3u ch\u1EEF
+settings.fieldType.VARCHAR           = Ki\u1EC3u ch\u1EEF
+settings.form.delete                 = Delete Form
+settings.form.delete.question        = Do you really want to delete this form?
+settings.form.edit                   = Edit form
+settings.form.error                  = Error form
+settings.form.error_url              = Error url
+settings.form.success                = Success form
+settings.form.success_url            = Success url
+settings.insecure                    = insecure
+settings.mailinglist.delete.question = Do you really want to delete this mailing list?<br>Caution: permission information will be lost.
+settings.mailloop.ar_sender          = Email \u0111\u1EC3 g\u1EEDi
+settings.mailloop.ar_subject         = Ti\u00EAu \u0111\u1EC1
+settings.mailloop.autoresponder      = Autoresponder
+settings.mailloop.delete             = Do you really want to delete this bounce filter?
+settings.mailloop.forward            = Forward incoming emails
+settings.mailloop.forward_adr        = Address
+settings.mailloop.subscribe          = Use for subscribe address
+settings.mailloop.userform           = Form for double-opt-in mail
+settings.password                    = Password
+settings.pluginmanager               = Plugin Manager
+settings.profile.ProfileDelete       = Delete profile field
+settings.profile.ProfileEdit         = Edit profile field
+settings.profile.hint                = 0 for numeric fields means default length of 32 bit - not changeable
+settings.secure                      = secure
+
+splash.Actions                 = Create and edit actions for mail links and forms.
+splash.All_Mailings            = View information about all mailings
+splash.Campaigns               = Group mailings into mailing archive.
+splash.ContentManagement       = Create and edit CM templates, module types and modules for mailings based on content modules.
+splash.Forms                   = Create and edit forms for subscriber self-service.
+splash.Mailinglists            = Edit individual mailing lists for your mailings.
+splash.Mailings                = Create and send out new mailings and analyze mailings already sent.
+splash.Recipients              = Edit subscribers of your mailings or newsletters and make changes in the profile database.
+splash.Settings                = C\u00E0i \u0111\u1EB7t c\u00E1c ph\u1EA7n c\u1EA7n thi\u1EBFt cho OpenEMM .
+splash.Statistics              = Xem, ph\u00E2n t\u00EDch v\u00E0 dowwnload th\u1ED1ng k\u00EA c\u00E1c mailing \u0111ang l\u01B0u.
+splash.Targets                 = Th\u00EAm nh\u00F3m \u0111\u1EC3 g\u1EEDi mailing theo n\u1ED9i dung c\u1EE7a kh\u00E1ch h\u00E0ng
+splash.Templates               = Thay \u0111\u1ED5i form m\u1EABu cho mailings.
+splash.cms.CMCategories        = Manage module categories to sort content modules into folders.
+splash.cms.CMTemplates         = Upload and assign CM templates for module types and content modules.
+splash.cms.ContentModuleTypes  = Create and edit module types for content modules.
+splash.cms.ContentModules      = Create, edit and assign content modules.
+splash.default.Overview        = T\u00ECm v\u00E0 thay \u0111\u1ED5i th\u00F4ng tin chi ti\u1EBFt c\u1EE7a kh\u00E1ch h\u00E0ng.
+splash.export                  = Xu\u1EA5t c\u00E1c kh\u00E1ch h\u00E0ng ra file CSV.
+splash.import.csv_upload       = Th\u00EAm nhi\u1EC1u kh\u00E1ch h\u00E0ng t\u1EEB file CSV.
+splash.recipient.Blacklist     = Th\u00EAm ho\u1EB7c x\u00F3a c\u00E1c kh\u00E1ch h\u00E0ng trong danh s\u00E1ch c\u1EA5m.
+splash.recipient.New_Recipient = Th\u00EAm m\u1EDBi th\u00F4ng tin m\u1ED9t kh\u00E1ch h\u00E0ng m\u1EDBi.
+splash.settings.Admins         = T\u1EA1o m\u1EDBi user OpenEMM ho\u1EB7c x\u00F3a user OpenEMM \u0111ang t\u1ED3n t\u1EA1i.
+splash.settings.CompanyAdmin   = T\u1EA1o m\u1EDBi clients ho\u1EB7c x\u00F3a clients \u0111ang t\u1ED3n t\u1EA1i.
+splash.settings.Fonts          = Th\u00EAm fonts ch\u1EEF d\u00F9ng cho mailings.
+splash.settings.FormsOfAddress = Set up the form in which recipients are addressed.
+splash.settings.Mailloops      = T\u1EA1o v\u00E0 qu\u1EA3n l\u00FD c\u00E1c mail theo chu k\u1EF3
+splash.settings.Profile_DB     = Th\u00EAm h\u01A1\u1EB7c x\u00F3a c\u00E1c tr\u01B0\u1EDDng th\u00F4ng tin c\u1EE7a database.
+splash.settings.Update         = C\u1EADp nh\u1EADt phi\u00EAn b\u1EA3n OpenEMM
+splash.settings.Userlogs       = Xem ho\u1EA1t \u0111\u1ED9ng c\u1EE7a c\u00E1c user
+splash.statistic.AboStat       = Hi\u1EC3n th\u1ECB s\u1ED1 l\u01B0\u1EE3ng kh\u00E1ch h\u00E0ng.
+splash.statistic.IPStats       = Ph\u00E2n t\u00EDch \u0111\u1ECBa ch\u1EC9 IP c\u1EE7a kh\u00E1ch h\u00E0ng
+splash.statistic.MailStat      = Xem chi ti\u1EBFt c\u1EE7a m\u1ED9t mailing.
+splash.statistic.MonthlyStat   = Xem s\u1ED1 mailing c\u1EE7a b\u1EA1n trong m\u1ED7i th\u00E1ng.
+splash.statistic.comparison    = Th\u1ED1ng k\u00EA so s\u00E1nh th\u00F4ng tin c\u1EE7a hay hay nhi\u1EC1u mailings.
+splash.statistic.domains       = Ph\u00E2n t\u00EDch t\u00EAn mi\u00EAn c\u1EE7a ng\u01B0\u1EDDi nh\u1EADn
+
+statistic.AboStat                 = Th\u1ED1ng k\u00EA ng\u01B0\u1EDDi nh\u1EADn
+statistic.AbostatSelectInvitation = Ch\u1ECDn c\u00E1c th\u00F4ng s\u1ED1 mong mu\u1ED1n <br> v\u00E0 b\u1EA5m v\u00E0o "Submit".
+statistic.All_Mailinglists        = T\u1EA5t c\u1EA3 Mailing
+statistic.All_Subscribers         = T\u1EA5t c\u1EA3 ng\u01B0\u1EDDi \u0111\u0103ng k\u00FD
+statistic.Amount                  = S\u1ED1 l\u01B0\u1EE3ng
+statistic.AreYouSure              = Are you sure?
+statistic.BounceDownload          = download hardbounces
+statistic.Bounces                 = Kh\u00F4ng th\u00E0nh c\u00F4ng
+statistic.Clicks                  = Clicks
+statistic.ClicksBruttoNetto       = Clicks gross (net)
+statistic.Date                    = Ng\u00E0y
+statistic.Day                     = Ng\u00E0y
+statistic.Days                    = Ng\u00E0y
+statistic.DeleteAdminClicks       = X\u00F3a c\u00E1c h\u00E0nh \u0111\u1ED9ng c\u1EE7a t\u00E0i kho\u1EA3n admin v\u00E0 t\u00E0i kho\u1EA3n test
+statistic.DeliveryStatus.0        = Email n\u00E0y ch\u01B0a \u0111\u01B0\u1EE3c g\u1EEDi th\u00E0nh c\u00F4ng.
+statistic.DeliveryStatus.1        = G\u1EEDi theo l\u1ECBch
+statistic.DeliveryStatus.2        = Th\u01B0 n\u00E0y m\u1EDBi \u0111\u01B0\u1EE3c t\u1EA1o xong.
+statistic.DeliveryStatus.3        = Th\u01B0 n\u00E0y \u0111\u00E3 \u0111\u01B0\u1EE3c t\u1EA1o. G\u1EEDi theo l\u1ECBch.
+statistic.DeliveryStatus.4        = Th\u01B0 n\u00E0y \u0111\u01B0\u1EE3c g\u1EEDi ngay b\u00E2y gi\u1EDD.
+statistic.DeliveryStatus.5        = Th\u01B0 n\u00E0y \u0111\u00E3 \u0111\u01B0\u1EE3c g\u1EEDi r\u1ED3i.
+statistic.DeliveryType.A          = G\u1EEDi \u0111\u1EBFn admin
+statistic.DeliveryType.D          = G\u1EEDi \u0111\u1EBFn t\u1EA5t c\u1EA3 m\u1ECDi ng\u01B0\u1EDDi
+statistic.DeliveryType.T          = G\u1EEDi \u0111\u1EBFn ng\u01B0\u1EDDi d\u00F9ng th\u1EED
+statistic.DeliveryType.W          = G\u1EEDi \u0111\u1EBFn t\u1EA5t c\u1EA3 m\u1ECDi ng\u01B0\u1EDDi
+statistic.Delivery_Statistic      = Th\u1ED1ng k\u00EA g\u1EEDi th\u00E0nh c\u00F4ng
+statistic.Detail_Analysis         = Chi ti\u1EBFt ph\u00E2n t\u00EDch
+statistic.FeedbAnalys             = Ph\u00E2n t\u00EDch ph\u1EA3n h\u1ED3i
+statistic.ForURL                  = URL
+statistic.GrossClicks             = Gross clicks
+statistic.IPAddress               = \u0110\u1ECBa ch\u1EC9 IP
+statistic.IPStats                 = Th\u1ED1ng k\u00EA IP
+statistic.KlickForDay             = (click on a particular date for the daily overview)
+statistic.KlickStats              = Th\u00F4ng k\u00EA chi ti\u1EBFt
+statistic.MailStat                = Th\u1ED1ng k\u00EA th\u01B0 g\u1EEDi
+statistic.MonthlyStat             = Monthly overview
+statistic.NetClicks               = Net clicks
+statistic.OpenTime                = T\u1EC9 l\u1EC7 m\u1EDF
+statistic.Opened_Mails            = Th\u01B0 \u0111\u00E3 m\u1EDF
+statistic.Opt_Outs                = Opt-Outs
+statistic.Other                   = Kh\u00E1c
+statistic.OtherLinks              = Li\u00EAn k\u1EBFt kh\u00E1c
+statistic.Recipient               = Th\u1ED1ng k\u00EA ng\u01B0\u1EDDi nh\u1EADn
+statistic.ScheduledGenerateTime   = Scheduled generation time
+statistic.ScheduledSendTime       = Scheduled send time
+statistic.SendEndTime             = Delivery end time
+statistic.SendStartTime           = Delivery start time
+statistic.StatSplashMessage       = Your statistic page is being generated. This could take a few minutes.
+statistic.Total                   = T\u1ED5ng s\u1ED1
+statistic.TotalClickSubscribers   = S\u1ED1 l\u1EA7n nh\u1EA5n theo d\u00F5i
+statistic.TotalClicks             = S\u1ED1 l\u1EA7n nh\u1EA5n
+statistic.TotalMails              = T\u1ED5ng s\u1ED1 th\u01B0
+statistic.Unique_Clicks           = Nh\u1EA5n m\u1ED9t l\u1EA7n
+statistic.Unsubscribes            = B\u1ECF theo d\u00F5i
+statistic.alphanumeric            = Ch\u1EEF k\u00FD t\u1EF1
+statistic.bounces.deaktivated     = Subscribers set to status 'Bounced'
+statistic.bounces.detail.400      = Other soft bounces
+statistic.bounces.detail.420      = Problems with mailbox
+statistic.bounces.detail.430      = Problems with mail server
+statistic.bounces.detail.500      = Irregular bounces
+statistic.bounces.detail.510      = Other hard bounces
+statistic.bounces.detail.511      = Kh\u00F4ng hi\u1EC3u \u0111\u1ECBa ch\u1EC9
+statistic.bounces.detail.512      = Kh\u00F4ng hi\u1EC3u t\u00EAn mi\u1EC1n
+statistic.bounces.disclaimer      = The number of subscribers set to status 'Bounced' consists of the number of hard bounces plus soft bounces which triggered the internal bounce score of the subscriber to 'Hardbounce'
+statistic.bounces.hardbounces     = Hard bounces
+statistic.bounces.softbounces     = Soft bounces
+statistic.compare                 = So s\u00E1nh
+statistic.comparison              = So s\u00E1nh
+statistic.domain                  = T\u00EAn mi\u1EC1n
+statistic.domains                 = T\u00EAn mi\u1EC1n
+statistic.multiple                = Multi-metering possible
+statistic.numeric                 = S\u1ED1
+statistic.opened                  = \u0110\u00E3 m\u1EDF
+
+stepping = B\u01B0\u1EDBc ti\u1EBFp theo
+
+target.ChangeDate                       = Ng\u00E0y thay \u0111\u1ED5i
+target.CreationDate                     = Ng\u00E0y t\u1EA1o
+target.Delete                           = X\u00F3a nh\u00F3m
+target.Deleted                          = X\u00F3a
+target.Edit                             = S\u1EEDa nh\u00F3m
+target.MailingListFromTargetQuestion    = T\u1EA1o m\u1ED9t danh s\u00E1ch th\u01B0 m\u1EDBi t\u1EEB nh\u00F3m n\u00E0y?
+target.NewRule                          = Quy t\u1EAFc m\u1EDBi
+target.NewTarget                        = Nh\u00F3m m\u1EDBi
+target.Target                           = Nh\u00F3m
+target.TargetDefinition                 = \u0110\u1ECBnh ngh\u0129a nh\u00F3m
+target.Targets                          = Nh\u00F3m
+target.createMList                      = T\u1EA1o m\u1EDBi danh s\u00E1ch th\u01B0 cho nh\u00F3m.
+target.delete.question                  = X\u00F3a nh\u00F3m?
+target.delete.recipients                = X\u00F3a t\u1EA5t c\u1EA3 th\u00E0nh vi\u00EAn c\u1EE7a nh\u00F3m
+target.delete.recipients.question.first = x\u00F3a th\u1EF1c s\u1EF1?
+target.delete.recipients.question.last  = Ng\u01B0\u1EDDi nh\u1EADn?
+target.operator.eq                      = =
+target.operator.geq                     = >=
+target.operator.gt                      = >
+target.operator.is                      = IS
+target.operator.leq                     = <=
+target.operator.like                    = LIKE
+target.operator.lt                      = <
+target.operator.mod                     = MOD
+target.operator.neq                     = <>
+target.operator.no                      = no
+target.operator.not_like                = NOT LIKE
+target.operator.yes                     = yes
+target.rule.mailingClicked              = In mailing clicked
+target.rule.mailingOpened               = Th\u01B0 \u0111\u00E3 xem
+target.rule.mailingReceived             = Th\u01B0 \u0111\u00E3 nh\u1EADn
+
+targetView = targetView
+
+testMail = G\u1EEDi t\u1EDBi t\u00E0i kho\u1EA3n th\u1EED
+
+update.error    = C\u1EADp nh\u1EADt kh\u00F4ng th\u00E0nh c\u00F4ng.
+update.question = S\u1EB5n s\u00E0ng c\u1EADp nh\u1EADt?
+update.success  = C\u1EADp nh\u1EADt th\u00E0nh c\u00F4ng
+
+userdata.changed = Your userdata was changed.<BR>Please click the "Proceed" - button.
+
+version.available.security = <a href="#" target="_blank"><font color="red">C\u00F3 th\u1EC3 c\u1EADp nh\u1EADt b\u1EA3o m\u1EADt</font></a>
+version.available.update   = <a href="#" target="_blank"><font color="red">C\u00F3 th\u1EC3 c\u1EADp nh\u1EADt</font></a>
+
+warning.failed_login.date           = Ng\u00E0y \u0111\u0103ng nh\u1EADp
+warning.failed_login.ip             = \u0110\u1ECBa ch\u1EC9 IP
+warning.failed_login.status         = Tr\u1EA1ng th\u00E1i
+warning.failed_login.status.blocked = Kh\u00F3a
+warning.failed_login.status.failed  = L\u1ED7i \u0111\u0103ng nh\u1EADp
+warning.failed_login.status.success = Th\u00E0nh c\u00F4ng
+warning.failed_logins.1             = You have 1 failed login.
+warning.failed_logins.more          = You have {0} failed logins.
+warning.failed_logins.show          = Show logins
+warning.import.maxCount             = The maximum number of records will soon be reached.
