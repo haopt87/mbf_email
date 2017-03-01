@@ -33,8 +33,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.agnitas.beans.impl.DepartmentImpl;
 import org.agnitas.beans.impl.MbfCompanyImpl;
 import org.agnitas.dao.DepartmentDao;
+import org.agnitas.dao.MbfCompanyDao;
 import org.agnitas.emm.core.commons.util.ConfigService;
 import org.agnitas.util.AgnUtils;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -54,6 +56,7 @@ public class DepartmentlistAction extends StrutsActionBase {
 
 	protected ConfigService configService;
 	private DepartmentDao departmentDao;
+	private MbfCompanyDao mbfCompanyDao;
 
 	@Required
 	public void setConfigService(ConfigService configService) {
@@ -69,7 +72,8 @@ public class DepartmentlistAction extends StrutsActionBase {
 		DepartmentlistForm aForm=null;
         ActionForward destination=null;
         ActionMessages errors = new ActionMessages();
-
+        ActionMessages messages = new ActionMessages();
+        
         if (!AgnUtils.isUserLoggedIn(req)) {
             return mapping.findForward("logon");
         }
@@ -87,16 +91,40 @@ public class DepartmentlistAction extends StrutsActionBase {
 //		}
         
         try {
+        	List<MbfCompanyImpl> companies = null;
+        	
+
+			List<DepartmentImpl> departments = null;
+			List<DepartmentlistForm> departmentsList = null;
+        	
 			switch (aForm.getAction()) {
 			case DepartmentlistAction.ACTION_LIST:
 
 				List<DepartmentImpl> lists = this.departmentDao.getDepartments();
-				req.setAttribute("department_mngObjectList", lists);
+//				req.setAttribute("department_mngObjectList", lists);
+				
+				departments = this.departmentDao.getDepartments();
+				departmentsList = new ArrayList<DepartmentlistForm>();
+				for (DepartmentImpl item : departments) {
+					DepartmentlistForm obj = new DepartmentlistForm();
+					BeanUtils.copyProperties(obj, item);
+					obj.setCompany(this.mbfCompanyDao.getMbfCompany(obj.getCompanyId()));
+					departmentsList.add(obj);
+				}
+				req.setAttribute("department_mngObjectList", departmentsList);
+				
 				aForm.clearAllData();
 				destination = mapping.findForward("list");
 				break;
 
 			case DepartmentlistAction.ACTION_VIEW:
+				companies = this.mbfCompanyDao.getMbfCompanys();
+				if (companies != null) {
+					req.setAttribute("companies", companies);
+				} else {
+					req.setAttribute("companies", new ArrayList<MbfCompanyImpl>());
+				}
+				
 				if (aForm.getId() != 0) {
 					aForm.setAction(MbfCompanyAction.ACTION_SAVE);
 					loadDepartment(aForm, req);
@@ -109,24 +137,49 @@ public class DepartmentlistAction extends StrutsActionBase {
 				
 				DepartmentImpl entity = this.departmentDao.getDepartment(aForm.getId());
 				if (entity == null) {
-					entity = new DepartmentImpl();
-					entity.setId(0);
-					entity.setDepartmentName(aForm.getDepartmentName());
-					entity.setDescription(aForm.getDescription());
-					entity.setDeleted(0);
+					if (!departmentChangedToExisting(aForm)) {
+						entity = new DepartmentImpl();
+						entity.setId(0);
+						entity.setDepartmentName(aForm.getDepartmentName());
+						entity.setDescription(aForm.getDescription());
+						entity.setCompanyId(aForm.getCompanyId());
+						entity.setDeleted(0);
+						this.departmentDao.saveDepartment(entity);
+		                messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("default.changes_saved"));
+					}else {
+	                    errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("error.mailinglist.duplicate", aForm.getDepartmentName()));
+	                }
 				} else {
 					entity.setId(aForm.getId());
 					entity.setDepartmentName(aForm.getDepartmentName());
 					entity.setDescription(aForm.getDescription());
+					entity.setCompanyId(aForm.getCompanyId());
 					entity.setDeleted(0);
+					this.departmentDao.saveDepartment(entity);
+	                messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("default.changes_saved"));
+				}
+							
+				departments = this.departmentDao.getDepartments();
+				departmentsList = new ArrayList<DepartmentlistForm>();
+				for (DepartmentImpl item : departments) {
+					DepartmentlistForm obj = new DepartmentlistForm();
+					BeanUtils.copyProperties(obj, item);
+					obj.setCompany(this.mbfCompanyDao.getMbfCompany(obj.getCompanyId()));
+					departmentsList.add(obj);
 				}
 				
-				this.departmentDao.saveDepartment(entity);
-
-				req.setAttribute("department_mngObjectList", this.departmentDao.getDepartments());
-				aForm.clearAllData();
 				
-				destination = mapping.findForward("list");
+				req.setAttribute("department_mngObjectList", departmentsList);
+
+                aForm.setAction(DepartmentlistAction.ACTION_SAVE);
+                
+				companies = this.mbfCompanyDao.getMbfCompanys();
+				if (companies != null) {
+					req.setAttribute("companies", companies);
+				} else {
+					req.setAttribute("companies", new ArrayList<MbfCompanyImpl>());
+				}
+				destination = mapping.findForward("view");
 				break;
 			case ACTION_DELETE:
 					this.departmentDao.deleteDepartment(aForm.getId());
@@ -145,6 +198,15 @@ public class DepartmentlistAction extends StrutsActionBase {
 			errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("error.exception",
 					configService.getValue(ConfigService.Value.SupportEmergencyUrl)));
 		}
+
+        if (!errors.isEmpty()) {
+            saveErrors(req, errors);
+        }
+        
+        // Report any message (non-errors) we have discovered
+        if(!messages.isEmpty()) {
+        	saveMessages(req, messages);
+        }
         
         return destination;
     }
@@ -162,6 +224,18 @@ public class DepartmentlistAction extends StrutsActionBase {
 		aForm.setDescription(obj.getDescription());
 	}
 
+	private boolean departmentChangedToExisting(DepartmentlistForm aForm) {
+		int id = aForm.getId();
+        if (id != 0) {
+        	DepartmentImpl entity = this.departmentDao.getDepartment(id);
+            if (entity != null && entity.getDepartmentName().equals(aForm.getDepartmentName())){
+                return false;
+            }
+        }
+        boolean result = this.departmentDao.departmentExists(aForm.getDepartmentName(), aForm.getCompanyId()); 
+        return result;
+	}
+	
 	/**
 	 * @return the departmentDao
 	 */
@@ -174,6 +248,20 @@ public class DepartmentlistAction extends StrutsActionBase {
 	 */
 	public void setDepartmentDao(DepartmentDao departmentDao) {
 		this.departmentDao = departmentDao;
+	}
+
+	/**
+	 * @return the mbfCompanyDao
+	 */
+	public MbfCompanyDao getMbfCompanyDao() {
+		return mbfCompanyDao;
+	}
+
+	/**
+	 * @param mbfCompanyDao the mbfCompanyDao to set
+	 */
+	public void setMbfCompanyDao(MbfCompanyDao mbfCompanyDao) {
+		this.mbfCompanyDao = mbfCompanyDao;
 	}
 
 }

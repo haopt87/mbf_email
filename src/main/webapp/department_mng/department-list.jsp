@@ -42,6 +42,8 @@
             <display:column class="email" headerClass="" sortable="true" property="id" titleKey="department_mng.id" style="width: 150px;"></display:column>
             <display:column class="email" headerClass="" sortable="true" property="departmentName" titleKey="department_mng.departmentName" style="width: 150px;"></display:column>
             <display:column class="email" headerClass="" sortable="true" property="description" titleKey="department_mng.description" style="width: 150px;"></display:column>
+            <display:column class="email" headerClass="" sortable="true" property="company.companyName" titleKey="department_mng.company.companyName" style="width: 150px;"></display:column>
+            
 <%--             <display:column headerClass="senddate" class="senddate" property="deleted" sortable="true" style="width: 220px;"></display:column> --%>
 			<display:column class="edit" >
                 	<html:link styleClass="mailing_edit" 

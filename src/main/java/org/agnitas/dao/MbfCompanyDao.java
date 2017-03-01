@@ -39,5 +39,7 @@ public interface MbfCompanyDao {
 	void deleteMbfCompany(int id);
 	
 	List<MbfCompanyImpl> getMbfCompanys();
+	
+	boolean mailinglistExists(String companyName);
 
 }

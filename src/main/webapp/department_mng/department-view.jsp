@@ -45,6 +45,24 @@
         
         <div class="grey_box_bottom"></div>
     </div>
+    
+    <div class="grey_box_container">
+        <div class="grey_box_top"></div>
+        <div class="grey_box_content">
+	        <div class="grey_box_left_column">
+	             <label for="mailing_name">Chọn công ty:</label>
+	             <html:select styleId="companyId" property="companyId" size="1">
+		            <c:forEach var="item" items="${companies}">
+		                <html:option value="${item.id}">
+		                	${item.companyName}
+		                </html:option>
+		            </c:forEach>
+		        </html:select>
+	         </div>	            
+	        <div class="grey_box_right_column"></div>        
+     	</div>
+     	<div class="grey_box_bottom"></div>
+	</div>
 
 
     <div class="button_container">

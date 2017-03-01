@@ -7,11 +7,9 @@ public class DepartmentImpl implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private int id;
-
+	private int companyId;
 	private String departmentName;
-
 	private String description;
-
 	private int deleted;
 
 	public DepartmentImpl() {
@@ -81,6 +79,20 @@ public class DepartmentImpl implements Serializable {
 	 */
 	public void setDeleted(int deleted) {
 		this.deleted = deleted;
+	}
+
+	/**
+	 * @return the companyId
+	 */
+	public int getCompanyId() {
+		return companyId;
+	}
+
+	/**
+	 * @param companyId the companyId to set
+	 */
+	public void setCompanyId(int companyId) {
+		this.companyId = companyId;
 	}
 
 }

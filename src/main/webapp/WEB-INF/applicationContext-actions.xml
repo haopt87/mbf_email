@@ -280,7 +280,7 @@
 		<property name="configService" ref="ConfigService" />
 		<property name="userActivityLogService" ref="UserActivityLogService" />
 		<property name="departmentDao" ref="DepartmentDao" />
-		
+		<property name="mbfCompanyDao" ref="MbfCompanyDao" />
 	</bean>
 	
 	

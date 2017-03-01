@@ -9,7 +9,7 @@
 <script src="<%=request.getContextPath()%>/js/lib/tablecolumnresize.js" type="text/javascript"></script>
 <script type="text/javascript">
 	var prevX = -1;
-    var tableID = 'company_mngCompany';
+//     var tableID = 'company_mngCompany';
     var columnindex = 0;
     var dragging = false;
 

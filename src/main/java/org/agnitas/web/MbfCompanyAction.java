@@ -29,6 +29,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.agnitas.beans.Mailinglist;
 import org.agnitas.beans.impl.MbfCompanyImpl;
 import org.agnitas.dao.MbfCompanyDao;
 import org.agnitas.dao.exception.target.TargetGroupLockedException;
@@ -65,11 +66,10 @@ public class MbfCompanyAction extends StrutsActionBase {
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest req,
 			HttpServletResponse res) throws IOException, ServletException {
 
-		System.out.println(MbfCompanyAction.class + "   xba Log");
-
 		MbfCompanyForm aForm = null;
 		ActionForward destination = null;
 		ActionMessages errors = new ActionMessages();
+        ActionMessages messages = new ActionMessages();
 
 		if (!AgnUtils.isUserLoggedIn(req)) {
 			return mapping.findForward("logon");
@@ -112,24 +112,31 @@ public class MbfCompanyAction extends StrutsActionBase {
 
 				MbfCompanyImpl entity = this.mbfCompanyDao.getMbfCompany(aForm.getId());
 				if (entity == null) {
-					entity = new MbfCompanyImpl();
-					entity.setId(0);
-					entity.setCompanyName(aForm.getCompanyName());
-					entity.setDescription(aForm.getDescription());
-					entity.setDeleted(0);
+					if (!companyChangedToExisting(aForm)) {
+						entity = new MbfCompanyImpl();
+						entity.setId(0);
+						entity.setCompanyName(aForm.getCompanyName());
+						entity.setDescription(aForm.getDescription());
+						entity.setDeleted(0);
+						this.mbfCompanyDao.saveMbfCompany(entity);
+		                messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("default.changes_saved"));
+					}else {
+                        errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("error.mailinglist.duplicate", aForm.getCompanyName()));
+                    }
 				} else {
 					entity.setId(aForm.getId());
 					entity.setCompanyName(aForm.getCompanyName());
 					entity.setDescription(aForm.getDescription());
 					entity.setDeleted(0);
+					this.mbfCompanyDao.saveMbfCompany(entity);
+	                messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("default.changes_saved"));
 				}
-				
-				this.mbfCompanyDao.saveMbfCompany(entity);
 
-				req.setAttribute("company_mngCompanyList", this.mbfCompanyDao.getMbfCompanys());
-				aForm.clearAllData();
+				req.setAttribute("company_mngCompanyList", this.mbfCompanyDao.getMbfCompanys());				
+				// Always go back to overview
+                aForm.setAction(MbfCompanyAction.ACTION_SAVE);
 				
-				destination = mapping.findForward("list");
+				destination = mapping.findForward("view");
 				break;
 			case ACTION_DELETE:
 					this.mbfCompanyDao.deleteMbfCompany(aForm.getId());
@@ -149,7 +156,27 @@ public class MbfCompanyAction extends StrutsActionBase {
 					configService.getValue(ConfigService.Value.SupportEmergencyUrl)));
 		}
 
+        if (!errors.isEmpty()) {
+            saveErrors(req, errors);
+        }
+        
+        // Report any message (non-errors) we have discovered
+        if(!messages.isEmpty()) {
+        	saveMessages(req, messages);
+        }
+
 		return destination;
+	}
+
+	private boolean companyChangedToExisting(MbfCompanyForm aForm) {
+		int copanyID = aForm.getId();
+        if (copanyID != 0) {
+        	MbfCompanyImpl mbfCompanyImpl = this.mbfCompanyDao.getMbfCompany(copanyID);
+            if (mbfCompanyImpl != null && mbfCompanyImpl.getCompanyName().equals(aForm.getCompanyName())){
+                return false;
+            }
+        }
+        return this.mbfCompanyDao.mailinglistExists(aForm.getCompanyName());
 	}
 
 	private void loadCompany(MbfCompanyForm aForm, HttpServletRequest req) {

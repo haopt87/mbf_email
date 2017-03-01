@@ -47,7 +47,7 @@ public class DepartmentDaoImpl extends BaseDaoImpl implements DepartmentDao {
 	public DepartmentImpl getDepartment(int id) {
 
 		return selectObjectDefaultNull(logger,
-				"SELECT id, department_name, description, deleted FROM mbf_department_tbl WHERE id = ? ",
+				"SELECT id, company_id, department_name, description, deleted FROM mbf_department_tbl WHERE id = ? ",
 				new Department_RowMapper(), id);
 	}
 
@@ -57,6 +57,7 @@ public class DepartmentDaoImpl extends BaseDaoImpl implements DepartmentDao {
 			try {
 				DepartmentImpl readTarget = new DepartmentImpl();
 				readTarget.setId(resultSet.getInt("id"));
+				readTarget.setCompanyId(resultSet.getInt("company_id"));
 				readTarget.setDepartmentName(resultSet.getString("department_name"));
 				readTarget.setDescription(resultSet.getString("description"));
 				readTarget.setDeleted(resultSet.getInt("deleted"));
@@ -73,24 +74,25 @@ public class DepartmentDaoImpl extends BaseDaoImpl implements DepartmentDao {
 
 		if (entity.getId() == 0) {
 			SqlUpdate sqlUpdate = new SqlUpdate(getDataSource(),
-					"INSERT INTO mbf_department_tbl (department_name, description, deleted) VALUES (?, ?, ?)",
-					new int[] { Types.VARCHAR, Types.VARCHAR, Types.INTEGER });
+					"INSERT INTO mbf_department_tbl (company_id, department_name, description, deleted) VALUES (?, ?, ?, ?)",
+					new int[] { Types.INTEGER, Types.VARCHAR, Types.VARCHAR, Types.INTEGER });
 
 			sqlUpdate.setReturnGeneratedKeys(true);
 			sqlUpdate.setGeneratedKeysColumnNames(new String[] { "id" });
 			sqlUpdate.compile();
 			GeneratedKeyHolder key = new GeneratedKeyHolder();
 
-			Object[] paramsWithNext = new Object[3];
-			paramsWithNext[0] = entity.getDepartmentName();
-			paramsWithNext[1] = entity.getDescription();
-			paramsWithNext[2] = entity.getDeleted();
+			Object[] paramsWithNext = new Object[4];
+			paramsWithNext[0] = entity.getCompanyId();
+			paramsWithNext[1] = entity.getDepartmentName();
+			paramsWithNext[2] = entity.getDescription();
+			paramsWithNext[3] = entity.getDeleted();
 
 			sqlUpdate.update(paramsWithNext, key);
 		} else {
 
-			update(logger, "UPDATE mbf_department_tbl SET department_name = ?, description = ? WHERE id = ?",
-					entity.getDepartmentName(), entity.getDescription(), entity.getId());
+			update(logger, "UPDATE mbf_department_tbl SET department_name = ?, description = ?, company_id=? WHERE id = ?",
+					entity.getDepartmentName(), entity.getDescription(), entity.getCompanyId(), entity.getId());
 		}
 
 	}
@@ -104,9 +106,14 @@ public class DepartmentDaoImpl extends BaseDaoImpl implements DepartmentDao {
 	public List<DepartmentImpl> getDepartments() {
 
 		List<DepartmentImpl> departmentImpls = select(logger,
-				"SELECT id, department_name, description, deleted FROM mbf_department_tbl WHERE deleted = 0",
+				"SELECT id, company_id, department_name, description, deleted FROM mbf_department_tbl WHERE deleted = 0",
 				new Department_RowMapper());
 		return departmentImpls;
+	}
+
+	@Override
+	public boolean departmentExists(String departmentName, Integer company_id) {
+		return selectInt(logger, "SELECT COUNT(*) FROM mbf_department_tbl WHERE deleted=0 AND department_name = ? AND company_id = ?", departmentName, company_id) > 0;
 	}
 
 }

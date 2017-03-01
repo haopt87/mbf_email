@@ -41,6 +41,9 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -64,6 +67,10 @@ import org.agnitas.util.SafeString;
 import org.agnitas.web.forms.ExportWizardForm;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -242,11 +249,11 @@ public class ExportWizardAction extends StrutsActionBase {
                 case ExportWizardAction.ACTION_DOWNLOAD:
                     byte bytes[] = new byte[16384];
                     int len = 0;
-                    File exportedFile = checkTempRecipientExportFile(AgnUtils.getCompanyID(req), aForm.getExportedFile(), errors);
-
+                    //File exportedFile = checkTempRecipientExportFile(AgnUtils.getCompanyID(req), aForm.getExportedFile(), errors);
+                    File exportedFile = new File (aForm.getExportedFile());
                     if(exportedFile != null && aForm.tryCollectingData()) {
-                        String filename = getExportFilename(req) + ".zip";
-                        aForm.setDownloadName(filename);
+                        //String filename = getExportFilename(req) + ".zip";
+                        aForm.setDownloadName(exportedFile.getName());
                         
                         sendExportNotify(req, aForm);
 
@@ -255,7 +262,7 @@ public class ExportWizardAction extends StrutsActionBase {
                         try {
 							instream = new FileInputStream(exportedFile);
 							res.setContentType("application/zip");
-							res.setHeader("Content-Disposition", "attachment; filename=\"" + filename +"\";");
+							res.setHeader("Content-Disposition", "attachment; filename=\"" + exportedFile.getName() +"\";");
 							res.setContentLength((int)exportedFile.length());
 							ServletOutputStream ostream = res.getOutputStream();
 							while((len = instream.read(bytes))!=-1) {
@@ -340,7 +347,8 @@ public class ExportWizardAction extends StrutsActionBase {
 	 * @return
 	 */
 	protected String getExportFilename(HttpServletRequest req) {
-		return AgnUtils.getCompany(req).getShortname() + "_" + DateUtilities.YYYYMD.format(new Date());
+//		return AgnUtils.getCompany(req).getShortname() + "Export_Data" + DateUtilities.YYYYMD.format(new Date());
+		return "Export_Data" + DateUtilities.YYYYMD.format(new Date());
 	}
 
 	protected void sendExportNotify(HttpServletRequest req, ExportWizardForm aForm) {
@@ -607,53 +615,122 @@ public class ExportWizardAction extends StrutsActionBase {
 
 			preparedStatement = con.prepareStatement(customerTableSql.toString());
 			rset = preparedStatement.executeQuery();
-			String filename = getExportFilename(req) + ".csv";
+			//String filename = getExportFilename(req) + ".csv";
+			String filename = getExportFilename(req) + ".xlsx";
+			
+			
 			aZip.putNextEntry(new ZipEntry(filename));
-			Locale.setDefault(new Locale("en"));
-			out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(aZip, charset)));
+			Locale.setDefault(new Locale("vi"));
+			out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(aZip, "UTF-8")));
 
 			ResultSetMetaData mData = rset.getMetaData();
 			int columnCount = mData.getColumnCount();
 
-			// Write CSV-Header line
-			for (int i = 2; i <= columnCount; i++) {
-				if (i > 2) {
-					out.print(aForm.getSeparator());
-				}
-				String columnName = mData.getColumnName(i);
-				out.print(aForm.getDelimiter() + escapeChars(columnName, aForm.getDelimiter()) + aForm.getDelimiter());
-			}
-			out.print("\n");
+			//==================================================
 
+			
+			//Blank workbook
+			XSSFWorkbook workbook = new XSSFWorkbook(); 
+			
+			//Create a blank sheet
+			XSSFSheet sheet = workbook.createSheet("Employee Data");
+			Map<String, Object[]> data = new TreeMap<String, Object[]>();
+			Object[] head = new Object[columnCount + 1];
+			
+			for (int i = 1; i < columnCount; i++) {
+				String columnName = mData.getColumnName(i);
+				head[i] = columnName;
+			}
+			data.put("1", head);
+			
 			// Write data lines
+			int count = 1;
 			while (rset.next()) {
-				for (int i = 2; i <= columnCount; i++) {
-					if (i > 2) {
-						out.print(aForm.getSeparator());
-					}
-					
+				count++;
+				Object[] headTemp = new Object[columnCount + 1];
+				for (int i = 1; i < columnCount; i++) {
 					String aValue;
 					try {
 						aValue = rset.getString(i);
+						headTemp[i] = aValue;
 					} catch (Exception ex) {
 						aValue = null;
-						// Exceptions should not break the export, but should be logged
 						logger.error("Exception in export:collectContent:", ex);
 					}
-					
-					if (aValue == null) {
-						// null values should be displayed as empty string
-						aValue = "";
-					} else {
-						aValue = escapeChars(aValue, aForm.getDelimiter());
-						aValue = aForm.getDelimiter() + aValue + aForm.getDelimiter();
-					}
-					out.print(aValue);
 				}
-				out.print("\n");
-				aForm.setLinesOK(aForm.getLinesOK() + 1);
+				data.put("" + count, headTemp);				
 			}
-			aForm.setExportedFile(outFile.getName());
+			//Iterate over data and write to sheet
+			Set<String> keyset = data.keySet();
+			int rownum = 0;
+			for (String key : keyset) {
+			    Row row = sheet.createRow(rownum++);
+			    Object [] objArr = data.get(key);
+			    int cellnum = 0;
+			    for (Object obj : objArr)
+			    {
+			       Cell cell = row.createCell(cellnum++);
+			       if(obj instanceof String)
+			            cell.setCellValue((String)obj);
+			        else if(obj instanceof Integer)
+			            cell.setCellValue((Integer)obj);
+			    }
+			} try {
+				//Write the workbook in file system
+				File fileOutput = new File(EXPORT_FILE_DIRECTORY + File.separator + "ExportData_" + System.currentTimeMillis() + ".xlsx");
+				System.out.println(fileOutput.getAbsolutePath());
+			    FileOutputStream out1 = new FileOutputStream(fileOutput);
+			    workbook.write(out1);
+			    out1.close();
+
+				aForm.setExportedFile(fileOutput.getAbsolutePath());
+			    System.out.println("howtodoinjava_demo.xlsx written successfully on disk.");
+			     
+			} catch (Exception e) {
+			    e.printStackTrace();
+			}
+			
+			
+			//==================================================
+			// Write CSV-Header line
+//			for (int i = 2; i <= columnCount; i++) {
+//				if (i > 2) {
+//					out.print(aForm.getSeparator());
+//				}
+//				String columnName = mData.getColumnName(i);
+//				out.print(aForm.getDelimiter() + escapeChars(columnName, aForm.getDelimiter()) + aForm.getDelimiter());
+//			}
+//			out.print("\n");
+//
+//			// Write data lines
+//			while (rset.next()) {
+//				for (int i = 2; i <= columnCount; i++) {
+//					if (i > 2) {
+//						out.print(aForm.getSeparator());
+//					}
+//					
+//					String aValue;
+//					try {
+//						aValue = rset.getString(i);
+//					} catch (Exception ex) {
+//						aValue = null;
+//						// Exceptions should not break the export, but should be logged
+//						logger.error("Exception in export:collectContent:", ex);
+//					}
+//					
+//					if (aValue == null) {
+//						// null values should be displayed as empty string
+//						aValue = "";
+//					} else {
+//						aValue = escapeChars(aValue, aForm.getDelimiter());
+//						aValue = aForm.getDelimiter() + aValue + aForm.getDelimiter();
+//					}
+//				}
+//				out.print("\n");
+//				aForm.setLinesOK(aForm.getLinesOK() + 1);
+//			}
+//			String strOutFile = outFile.getName();
+//			aForm.setExportedFile(strOutFile);
 		} catch (Exception e) {
 			logger.error("collectContent: " + e, e);
 		} finally {
@@ -710,6 +787,16 @@ public class ExportWizardAction extends StrutsActionBase {
                         ", recipient type: " + recipientType +
                         ", recipient status: " + recipientStatus +
                         ", number of selected columns: " + numberOfColumns);
+        
+//        writeUserActivityLog(admin, "do export",
+//                "Export started at: " + startCollect + ". " +
+//                        "Number of profiles: " + aForm.getLinesOK() + ". " +
+//                        "Export parameters:" +
+//                        " mailing list: " + mailingList +
+//                        ", target group: " + targetGroup +
+//                        ", recipient type: " + recipientType +
+//                        ", recipient status: " + recipientStatus +
+//                        ", number of selected columns: " + numberOfColumns);
 
     }
 

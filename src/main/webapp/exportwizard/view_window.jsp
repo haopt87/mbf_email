@@ -74,8 +74,11 @@
             <br><br>
 
             <div class="target_view_link_container" >
-                <html:link styleClass="blue_link target_dualbox_list_container"
-                           page='<%= new String("/exportwizard.do?action=" + ExportWizardAction.ACTION_DOWNLOAD) %>'><%= aForm.getDownloadName() %>&nbsp;<img src="${emmLayoutBase.imagesURL}/icon_save.gif" border="0"></html:link>
+<%--                 <html:link styleClass="blue_link target_dualbox_list_container" --%>
+<%--                            page='<%= new String("/exportwizard.do?action=" + ExportWizardAction.ACTION_DOWNLOAD) %>'> --%>
+<%--                            <%= aForm.getDownloadName() %>&nbsp; --%>
+<%--                            <img src="${emmLayoutBase.imagesURL}/icon_save.gif" border="0"> --%>
+<%--                            </html:link> --%>
                 <div class="action_button download_button"><html:link
                         page='<%= new String("/exportwizard.do?action=" + ExportWizardAction.ACTION_DOWNLOAD) %>'><span><bean:message
                         key="button.Download"/></span></html:link>

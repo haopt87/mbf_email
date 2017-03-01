@@ -22,6 +22,7 @@
 
 package org.agnitas.web;
 
+import org.agnitas.beans.impl.MbfCompanyImpl;
 import org.agnitas.web.forms.StrutsFormBase;
 import org.apache.log4j.Logger;
 
@@ -37,11 +38,15 @@ public class DepartmentlistForm extends StrutsFormBase {
 	private static final long serialVersionUID = 0L;
 
 	private int id;
+	private int companyId;
 	private String departmentName;
 	private String description;
 	private int deleted;
+	
 	private int action;
 	private int previousAction;
+	private MbfCompanyImpl company;
+	
 
 	public void clearAllData() {
 		this.id = 0;
@@ -138,6 +143,34 @@ public class DepartmentlistForm extends StrutsFormBase {
 	 */
 	public void setDepartmentName(String departmentName) {
 		this.departmentName = departmentName;
+	}
+
+	/**
+	 * @return the companyId
+	 */
+	public int getCompanyId() {
+		return companyId;
+	}
+
+	/**
+	 * @param companyId the companyId to set
+	 */
+	public void setCompanyId(int companyId) {
+		this.companyId = companyId;
+	}
+
+	/**
+	 * @return the company
+	 */
+	public MbfCompanyImpl getCompany() {
+		return company;
+	}
+
+	/**
+	 * @param company the company to set
+	 */
+	public void setCompany(MbfCompanyImpl company) {
+		this.company = company;
 	}
 
 }

@@ -324,11 +324,12 @@ public class LogonAction extends StrutsActionBase {
 	}
 
 	private void checkForUpdate(HttpServletRequest request) {
+		System.out.println("-------Check latest version have disable");
 		try{
-			StringBuffer referrer = request.getRequestURL();
-			VersionObject latestVersion = versionControlService.getLatestVersion( AgnUtils.getCurrentVersion(), referrer != null ? referrer.toString() : "" );
-
-			request.setAttribute( "latestVersion", latestVersion );
+//			StringBuffer referrer = request.getRequestURL();
+//			VersionObject latestVersion = versionControlService.getLatestVersion( AgnUtils.getCurrentVersion(), referrer != null ? referrer.toString() : "" );
+//
+//			request.setAttribute( "latestVersion", latestVersion );
 		}
 		catch ( Exception ex ) {
 			logger.error( "Error while retrieving latest version", ex );

@@ -108,4 +108,9 @@ public class MbfCompanyDaoImpl extends BaseDaoImpl implements MbfCompanyDao {
 				new MbfCompany_RowMapper());
 		return lists;
 	}
+
+	@Override
+	public boolean mailinglistExists(String companyName) {
+		return selectInt(logger, "SELECT COUNT(*) FROM mbf_company_tbl WHERE deleted=0 AND company_name = ?", companyName) > 0;
+	}
 }
