@@ -61,6 +61,12 @@ public class AdminForm extends StrutsFormBase {
     private String language;
     private Locale adminLocale;
     private String passwordConfirm;
+    
+    /**
+     * this properties add for function manage department 
+     */
+    private int comId = 0;
+    private int departmentId = 0;
    
     /** 
      * Holds value of property userRights. 
@@ -492,4 +498,32 @@ public class AdminForm extends StrutsFormBase {
     public void setMessages(ActionMessages messages) {
         this.messages = messages;
     }
+
+	/**
+	 * @return the comId
+	 */
+	public int getComId() {
+		return comId;
+	}
+
+	/**
+	 * @param comId the comId to set
+	 */
+	public void setComId(int comId) {
+		this.comId = comId;
+	}
+
+	/**
+	 * @return the departmentId
+	 */
+	public int getDepartmentId() {
+		return departmentId;
+	}
+
+	/**
+	 * @param departmentId the departmentId to set
+	 */
+	public void setDepartmentId(int departmentId) {
+		this.departmentId = departmentId;
+	}
 }

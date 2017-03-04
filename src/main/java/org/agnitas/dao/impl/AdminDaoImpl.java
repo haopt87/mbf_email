@@ -91,6 +91,7 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public Admin getAdmin(int adminID, @VelocityCheck int companyID) {
 		if(adminID==0) {
@@ -98,11 +99,12 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
 		}
         Admin admin = null;
         String query = "select admin_id, username, company_id, fullname, admin_country, admin_lang, " +
-                "admin_lang_variant, admin_timezone, layout_id, creation_date, pwd_change, admin_group_id, pwd_hash, default_import_profile_id " +
+                "admin_lang_variant, admin_timezone, layout_id, creation_date, pwd_change, admin_group_id, pwd_hash, default_import_profile_id, com_id, department_id " +
                 "from admin_tbl where admin_id="+ adminID +" AND (company_id="+ companyID +" OR company_id IN (SELECT company_id FROM company_tbl comp WHERE creator_company_id="+ companyID +"))";
         try {
 			admin = getSimpleJdbcTemplate().queryForObject(query, new Admin_RowMapper());
 		} catch (DataAccessException e) {
+			e.printStackTrace();
 			// No User found
 			return null;
 		}
@@ -110,6 +112,7 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
         return admin;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public Admin getAdminByLogin(String name, String password) {
 		byte[] pwdHash=null;
@@ -124,17 +127,19 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
 
         Admin admin = null;
         String query = "select admin_id, username, company_id, fullname, admin_country, admin_lang, " +
-                "admin_lang_variant, admin_timezone, layout_id, creation_date, pwd_change, admin_group_id, pwd_hash, default_import_profile_id " +
+                "admin_lang_variant, admin_timezone, layout_id, creation_date, pwd_change, admin_group_id, pwd_hash, default_import_profile_id, com_id, department_id " +
                 "from admin_tbl where username = ? and pwd_hash = ?";
          try {
 			admin = getSimpleJdbcTemplate().queryForObject(query, new Admin_RowMapper(), new Object[] {name, pwdHash});
 		} catch (DataAccessException e) {
+			e.printStackTrace();
 			// No User found
 			return null;
 		}
 		return admin;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void	save(Admin admin) {
         SimpleJdbcTemplate template = getSimpleJdbcTemplate();
@@ -144,26 +149,30 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
             int newID = 0;
             if(AgnUtils.isOracleDB()) {
                 newID = template.queryForInt("select admin_tbl_seq.nextval from dual");
-                sql = "insert into admin_tbl values(" + newID + ",?,?,?,sysdate,?,?,?,?,?,?,?,?,?,?)";
+                sql = "insert into admin_tbl values(" + newID + ",?,?,?,sysdate,?,?,?,?,?,?,?,?,?,?,?,?)";
             } else {
                 newID = template.queryForInt("select ifnull(max(admin_id),0) + 1 from admin_tbl");
-                sql = "insert into admin_tbl values(" + newID + ",?,?,?,now(),?,?,?,?,?,?,?,?,?,?)";
+                sql = "insert into admin_tbl values(" + newID + ",?,?,?,now(),?,?,?,?,?,?,?,?,?,?,?,?)";
             }
             admin.setAdminID(newID);
 
         } else {
             sql = "update admin_tbl set username = ?, company_id = ?, fullname = ?, admin_country = ?, admin_lang = ?, " +
                     "admin_lang_variant = ?, admin_timezone = ?, layout_id = ?, creation_date = ?, pwd_change = ?, admin_group_id = ?, pwd_hash = ?, " +
-                    "default_import_profile_id = ? where admin_id = " + admin.getAdminID();
+                    "default_import_profile_id = ?, com_id = ?, department_id = ? where admin_id = " + admin.getAdminID();
         }
+        
+        System.out.println(admin.getComId() +":" + admin.getDepartmentId());
+        
         template.update(sql, new Object[] {admin.getUsername(), admin.getCompanyID(), admin.getFullname(), admin.getAdminCountry(), admin.getAdminLang(),
                     admin.getAdminLangVariant(), admin.getAdminTimezone(), admin.getLayoutID(), admin.getCreationDate(), admin.getLastPasswordChange(),
-                    admin.getGroup().getGroupID(), admin.getPasswordHash(), admin.getDefaultImportProfileID()});
+                    admin.getGroup().getGroupID(), admin.getPasswordHash(), admin.getDefaultImportProfileID(), admin.getComId(), admin.getDepartmentId() });
         if (admin.getAdminPermissions() != null && !admin.getAdminPermissions().isEmpty()){
             saveAdminRights(admin.getAdminID(), admin.getAdminPermissions());
         }
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean delete(Admin admin) {
 		  SimpleJdbcTemplate tmpl =  getSimpleJdbcTemplate();
@@ -174,6 +183,7 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
 	      return true;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
     public List<AdminEntry> getAllAdminsByCompanyId( @VelocityCheck int companyID) {
         SimpleJdbcTemplate tmpl =  getSimpleJdbcTemplate();
@@ -184,6 +194,7 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
 
     }
 
+	@SuppressWarnings("deprecation")
 	@Override
     public List<AdminEntry> getAllAdmins() {
         SimpleJdbcTemplate tmpl =  getSimpleJdbcTemplate();
@@ -193,6 +204,7 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
         return list;
     }
 
+	@SuppressWarnings("deprecation")
 	@Override
     public List<AdminEntry> getAllWsAdminsByCompanyId( @VelocityCheck int companyID) {
         SimpleJdbcTemplate tmpl =  getSimpleJdbcTemplate();
@@ -203,6 +215,7 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
 
     }
 
+	@SuppressWarnings("deprecation")
 	@Override
     public List<AdminEntry> getAllWsAdmins() {
         SimpleJdbcTemplate tmpl =  getSimpleJdbcTemplate();
@@ -212,6 +225,7 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
         return list;
     }
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean adminExists(@VelocityCheck int companyId, String username) {
 		String sql = "select admin_id from admin_tbl where company_id=? and username=?";
@@ -219,6 +233,7 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
 		return list != null && list.size() > 0;
 	}
 
+	@SuppressWarnings("deprecation")
     @Override
     public void saveAdminRights(int adminID, Set<String> userRights) {
         SimpleJdbcTemplate template = getSimpleJdbcTemplate();
@@ -230,6 +245,7 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
         template.batchUpdate("INSERT INTO admin_permission_tbl (admin_id, security_token) VALUES (?, ?)", parameterList);
     }
 
+	@SuppressWarnings("deprecation")
     @Override
     public PaginatedListImpl<AdminEntry> getAdminListByCompanyId( @VelocityCheck int companyID, String sort, String direction, int page, int rownums) {
 
@@ -299,6 +315,8 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
     }
 
     protected class Admin_RowMapper implements ParameterizedRowMapper<Admin> {
+
+    	@SuppressWarnings("deprecation")
 		@Override
 		public Admin mapRow(ResultSet resultSet, int row) throws SQLException {
 			Admin admin = new AdminImpl();
@@ -316,6 +334,14 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
 			admin.setAdminTimezone(resultSet.getString("admin_timezone"));
 			admin.setLayoutID(resultSet.getInt("layout_id"));
 			admin.setDefaultImportProfileID(resultSet.getInt("default_import_profile_id"));
+			int com_id = resultSet.getInt("com_id");
+			int department_id = resultSet.getInt("department_id");
+
+			
+			admin.setComId(com_id);
+			admin.setDepartmentId(department_id);
+			
+			
 
 			// Read additional data
 

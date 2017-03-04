@@ -35,6 +35,16 @@ import java.util.Set;
  * @author Martin Helff
  */
 public interface Admin extends Serializable {
+	
+
+	public int getDepartmentId();
+
+	public void setDepartmentId(int departmentId);
+
+	public int getComId();
+
+	public void setComId(int comId);
+	
 
     /**
      * Getter for property adminCountry.

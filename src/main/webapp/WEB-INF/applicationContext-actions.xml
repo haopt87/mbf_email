@@ -177,6 +177,8 @@
 		<property name="configService" ref="ConfigService" />
 		<property name="adminGroupDao" ref="AdminGroupDao" />
         <property name="adminPreferencesDao" ref="AdminPreferencesDao" />
+        	<property name="departmentDao" ref="DepartmentDao" />
+		<property name="mbfCompanyDao" ref="MbfCompanyDao" />
 		<property name="companyDao" ref="CompanyDao" />
 		<property name="futureHolder" ref="futureHolder" />
 		<property name="executorService" ref="workerExecutorService" />

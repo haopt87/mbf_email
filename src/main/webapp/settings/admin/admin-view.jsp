@@ -26,6 +26,46 @@
     var rank = new PasswordRanking();
 </script>
 <script type="text/javascript">
+	function changeCompany (id) {
+		
+		//Get all department
+		var departmentsFull = [
+			<c:forEach items="${departmentsFull}" var="depart" varStatus="status">  
+			    {
+			    	id: '${depart.id}',
+			    	companyId: '${depart.companyId}',
+			    	departmentName: '${depart.departmentName}'
+			    },	      
+			</c:forEach>  
+		];
+		var companySelectId = document.getElementById('comId').value;
+		
+		//get department list by companyId
+		var departmentByCompany = [];
+		var count = 0
+		for (var i = 0; i < departmentsFull.length; i++) {
+			if (departmentsFull[i].companyId == companySelectId) {
+				departmentByCompany[count] = departmentsFull[i]; 
+				count++;
+			}
+		}
+		
+		var departmentSelect = document.getElementById('departmentId');
+		var length = departmentSelect.options.length;
+		for (i = length - 1 ; i >=0 ; i--) {
+			departmentSelect.remove(i);
+		}
+		
+		var index = departmentByCompany.length;
+		for (i = 0; i < index; i++) {
+			var opt = document.createElement('option');
+		    opt.value = departmentByCompany[i].id;
+		    opt.innerHTML = departmentByCompany[i].departmentName;
+		    departmentSelect.appendChild(opt);
+		}
+		
+	}
+	
     function checkPasswordMatch() {
         var matching = rank.checkMatch('password', 'repeat');
 
@@ -214,8 +254,30 @@
                     </html:select>
                 </div>
             </agn:HideByPermission>
+            
+			<div class="admin_filed_detail_form_item">
+                <label for="language">Chọn công ty:&nbsp;</label>
+	            <html:select styleId="comId" property="comId" size="1" onchange="changeCompany(this);">
+			            <c:forEach var="item" items="${companies}">
+			                <html:option value="${item.id}">
+			                	${item.companyName}
+			                </html:option>
+			            </c:forEach>
+			        </html:select>
+            </div>
 
-
+			<div class="admin_filed_detail_form_item">
+                <label for="language">Chon phòng:&nbsp;</label>
+	            <html:select styleId="departmentId" property="departmentId" size="1">
+			            <c:forEach var="item" items="${departments}">
+			                <html:option value="${item.id}">
+			                	${item.departmentName}
+			                </html:option>
+			            </c:forEach>
+			        </html:select>
+            </div>
+            <input type="hidden" id="departmentsFull" value="${departmentsFull}">
+               
             <html:hidden property="companyID" value="1"/>
         </div>
         <div class="blue_box_bottom"></div>

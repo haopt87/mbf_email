@@ -41,4 +41,6 @@ public interface DepartmentDao {
 	List<DepartmentImpl> getDepartments();
 
 	boolean departmentExists(String departmentName, Integer company_id);
+	
+	List<DepartmentImpl> getDepartmentsByCompanyId(int companyId);
 }

@@ -27,11 +27,15 @@ import org.agnitas.beans.AdminEntry;
 import org.agnitas.beans.AdminGroup;
 import org.agnitas.beans.AdminPreferences;
 import org.agnitas.beans.impl.AdminImpl;
+import org.agnitas.beans.impl.DepartmentImpl;
+import org.agnitas.beans.impl.MbfCompanyImpl;
 import org.agnitas.beans.impl.PaginatedListImpl;
 import org.agnitas.dao.AdminDao;
 import org.agnitas.dao.AdminGroupDao;
 import org.agnitas.dao.AdminPreferencesDao;
 import org.agnitas.dao.CompanyDao;
+import org.agnitas.dao.DepartmentDao;
+import org.agnitas.dao.MbfCompanyDao;
 import org.agnitas.emm.core.commons.password.PasswordCheck;
 import org.agnitas.emm.core.commons.password.PasswordCheckHandler;
 import org.agnitas.emm.core.commons.password.StrutsPasswordCheckHandler;
@@ -93,6 +97,9 @@ public class AdminAction extends StrutsActionBase {
 
     /** DAO for accessing admin preferences data. */
     protected AdminPreferencesDao adminPreferencesDao;
+    
+	private DepartmentDao departmentDao;
+	private MbfCompanyDao mbfCompanyDao;
 	
 	/** DAO for accessing company data. */
 	protected CompanyDao companyDao;
@@ -176,6 +183,10 @@ public class AdminAction extends StrutsActionBase {
 		}
 
 		try {
+			List<MbfCompanyImpl> companies = mbfCompanyDao.getMbfCompanys();
+			List<DepartmentImpl> departments = departmentDao.getDepartmentsByCompanyId(1);
+			List<DepartmentImpl> departmentsFull = departmentDao.getDepartments(); 
+			
 			switch (aForm.getAction()) {
 			case AdminAction.ACTION_LIST:
 				if (allowed("admin.show", req)) {
@@ -186,10 +197,17 @@ public class AdminAction extends StrutsActionBase {
 				break;
 
 			case AdminAction.ACTION_VIEW:
+
+				req.setAttribute("companies", companies);
+				req.setAttribute("departments", departments);
+				req.setAttribute("departmentsFull", departmentsFull);
+				
 				if (allowed("admin.show", req)) {
 					if (aForm.getAdminID() != 0) {
 						aForm.setAction(AdminAction.ACTION_SAVE);
 						loadAdmin(aForm, req);
+						departments = departmentDao.getDepartmentsByCompanyId(aForm.getComId());
+						req.setAttribute("departments", departments);
 					} else {
 						aForm.setAction(AdminAction.ACTION_NEW);
 					}
@@ -200,6 +218,11 @@ public class AdminAction extends StrutsActionBase {
 				break;
 
 			case AdminAction.ACTION_SAVE:
+
+				req.setAttribute("companies", companies);
+				req.setAttribute("departments", departments);
+				req.setAttribute("departmentsFull", departmentsFull);
+				
 				if (allowed("admin.change", req)) {
 					if (AgnUtils.parameterNotEmpty(req, "save")) {
 						if (!adminUsernameChangedToExisting(aForm)) {
@@ -236,6 +259,11 @@ public class AdminAction extends StrutsActionBase {
 				break;
 
 			case AdminAction.ACTION_NEW:
+
+				req.setAttribute("companies", companies);
+				req.setAttribute("departments", departments);
+				req.setAttribute("departmentsFull", departmentsFull);
+				
 				if (allowed("admin.new", req)) {
 					if (AgnUtils.parameterNotEmpty(req, "save")) {
 						aForm.setAdminID(0);
@@ -321,7 +349,8 @@ public class AdminAction extends StrutsActionBase {
 		}
 
 		if (destination != null && "view".equals(destination.getName())) {
-			req.setAttribute("adminGroups", adminGroupDao.getAdminGroupsByCompanyId(AgnUtils.getAdmin(req).getCompanyID()));
+			List<AdminGroup> adGroups = adminGroupDao.getAdminGroupsByCompanyId(AgnUtils.getAdmin(req).getCompanyID());
+			req.setAttribute("adminGroups", adGroups);
 		}
 		// Report any errors we have discovered back to the original form
 		if (!errors.isEmpty()) {
@@ -400,6 +429,8 @@ public class AdminAction extends StrutsActionBase {
 			aForm.setGroupID(admin.getGroup().getGroupID());
 			aForm.setUserRights(admin.getAdminPermissions());
 			aForm.setGroupRights(admin.getGroup().getGroupPermissions());
+			aForm.setComId(admin.getComId());
+			aForm.setDepartmentId(admin.getDepartmentId());
 			aForm.setNumberOfRows(adminPreferences.getListSize());
             aForm.setMailingContentView(adminPreferences.getMailingContentView());
             aForm.setMailingSettingsView(adminPreferences.getMailingSettingsView());
@@ -463,6 +494,8 @@ public class AdminAction extends StrutsActionBase {
 		admin.setAdminLang(aForm.getAdminLocale().getLanguage());
 		admin.setAdminTimezone(aForm.getAdminTimezone());
 		admin.setGroup(group);
+		admin.setComId(aForm.getComId());
+		admin.setDepartmentId(aForm.getDepartmentId());
 
 		adminDao.save(admin);
 
@@ -959,4 +992,32 @@ public class AdminAction extends StrutsActionBase {
                 return "Unknown type";
         }
     }
+
+	/**
+	 * @return the mbfCompanyDao
+	 */
+	public MbfCompanyDao getMbfCompanyDao() {
+		return mbfCompanyDao;
+	}
+
+	/**
+	 * @param mbfCompanyDao the mbfCompanyDao to set
+	 */
+	public void setMbfCompanyDao(MbfCompanyDao mbfCompanyDao) {
+		this.mbfCompanyDao = mbfCompanyDao;
+	}
+
+	/**
+	 * @return the departmentDao
+	 */
+	public DepartmentDao getDepartmentDao() {
+		return departmentDao;
+	}
+
+	/**
+	 * @param departmentDao the departmentDao to set
+	 */
+	public void setDepartmentDao(DepartmentDao departmentDao) {
+		this.departmentDao = departmentDao;
+	}
 }

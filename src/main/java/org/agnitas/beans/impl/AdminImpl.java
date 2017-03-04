@@ -55,6 +55,9 @@ public class AdminImpl implements Admin {
 	protected int mailtracking = 0;
 	private int defaultImportProfileID;
 	protected AdminGroup group = new AdminGroupImpl();
+	
+	private int comId;
+	private int departmentId;
 
 	// * * * * *
 	// SETTER:
@@ -341,5 +344,25 @@ public class AdminImpl implements Admin {
 	@Override
 	public void setDefaultImportProfileID(int defaultImportProfileID) {
 		this.defaultImportProfileID = defaultImportProfileID;
+	}
+
+	@Override
+	public int getDepartmentId() {
+		return departmentId;
+	}
+
+	@Override
+	public void setDepartmentId(int departmentId) {
+		this.departmentId = departmentId;
+	}
+
+	@Override
+	public int getComId() {
+		return comId;
+	}
+
+	@Override
+	public void setComId(int comId) {
+		this.comId = comId;
 	}
 }

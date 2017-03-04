@@ -116,4 +116,11 @@ public class DepartmentDaoImpl extends BaseDaoImpl implements DepartmentDao {
 		return selectInt(logger, "SELECT COUNT(*) FROM mbf_department_tbl WHERE deleted=0 AND department_name = ? AND company_id = ?", departmentName, company_id) > 0;
 	}
 
+	@Override
+	public List<DepartmentImpl> getDepartmentsByCompanyId(int companyId) {
+		String strQuery = "SELECT id, company_id, department_name, description, deleted FROM mbf_department_tbl WHERE company_id = " + companyId + " AND deleted = 0"; 
+		List<DepartmentImpl> departmentImpls = select(logger,strQuery, new Department_RowMapper());
+		return departmentImpls;
+	}
+
 }
