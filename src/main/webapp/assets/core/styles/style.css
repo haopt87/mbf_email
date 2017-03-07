@@ -63,7 +63,8 @@ FORM {
 
 /* Left navigation */
 #left_navigation_container{
-	background:url(../images/left_navi_bg.gif) repeat-y left top;
+/* 	background:url(../images/left_navi_bg.gif) repeat-y left top; */
+	background:url(../images/left_navi_bg.png) repeat-y left top;
 }
 
 #top_navigation_container{
@@ -132,7 +133,8 @@ FORM {
 .left_navigation_level1_no:hover,
 .left_navigation_level1_no:active{
 	background:url(../images/left_navi_pfeil_grau.png) no-repeat 9px 15px;
-	color:#2a5682;
+/* 	color:#2a5682; */
+	color:#fff;
 	}
 .left_navigation_level1_no:hover{
 	background:url(../images/left_navi_level1_hover.png) no-repeat left top;
@@ -157,7 +159,8 @@ FORM {
 .left_navigation_level1_active_round:hover,
 .left_navigation_level1_active_round:active {
 	background:url(../images/left_navi_level1_hover_round.png) no-repeat left top;
-	color:#2a5682;
+/* 	color:#2a5682; */
+	color:#fff;
 	}
 
 .left_navigation_level2_no:link,
@@ -165,7 +168,8 @@ FORM {
 .left_navigation_level2_no:hover,
 .left_navigation_level2_no:active{
 	background:url(../images/left_navi_pfeil_klein_grau.png) no-repeat 23px 15px;
-	color:#3b3b3b;
+/* 	color:#3b3b3b; */
+	color:#fff;
 	}
 
 .left_navigation_level2_active:link,
@@ -174,7 +178,8 @@ FORM {
 .left_navigation_level2_active:active,
 .left_navigation_level2_no:hover{
 	background:url(../images/left_navi_pfeil_klein_blau.png) no-repeat 23px 14px;
-	color:#2a5682;
+/* 	color:#2a5682; */
+	color:#fff;
 	}
 
 /* News and Wissenspool */
