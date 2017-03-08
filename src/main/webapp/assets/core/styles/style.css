@@ -329,7 +329,8 @@ FORM {
 #main_container .tabs .tab_active .tab_left:active,
 #main_container .tabs .tab_right .tab_left:hover
 {
-	color:#3b3b3b;
+/* 	color:#3b3b3b; */
+	color:#fff;
 	font-size:11px;
 	text-decoration:none;
 	background:url(../images/tab_left.png) no-repeat left top;
