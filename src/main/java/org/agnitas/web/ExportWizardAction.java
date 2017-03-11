@@ -637,7 +637,7 @@ public class ExportWizardAction extends StrutsActionBase {
 			
 			for (int i = 1; i < columnCount; i++) {
 				String columnName = mData.getColumnName(i);
-				head[i] = columnName;
+				head[i-1] = columnName;
 			}
 			data.put("1", head);
 			
@@ -650,7 +650,7 @@ public class ExportWizardAction extends StrutsActionBase {
 					String aValue;
 					try {
 						aValue = rset.getString(i);
-						headTemp[i] = aValue;
+						headTemp[i-1] = aValue;
 					} catch (Exception ex) {
 						aValue = null;
 						logger.error("Exception in export:collectContent:", ex);
