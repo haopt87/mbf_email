@@ -112,6 +112,8 @@
 		<form-bean name="mbfCompanyForm"
 			type="org.agnitas.web.MbfCompanyForm" />
 			
+		<form-bean name="mbfComplainEmailForm"
+			type="org.agnitas.web.MbfComplainEmailForm" />
 		<!--MOBIFONE END-->
 		<!-- ***************************************************************** -->
 	    <!-- ***************************************************************** -->
@@ -247,8 +249,16 @@
                 scope="session" input="company_mng_view">
             <forward name="list" path="company_mng_list"/>
             <forward name="view" path="company_mng_view"/>
-            <forward name="success" path="department_mng_view"/>
+            <forward name="success" path="company_mng_view"/>
 		</action>
+		
+		<action path="/complainemail_mng"
+			type="org.springframework.web.struts.DelegatingActionProxy" name="mbfComplainEmailForm"
+                scope="session" input="complainemail_mng_view">
+            <forward name="list" path="complainemail_mng_list"/>
+            <forward name="view" path="complainemail_mng_view"/>
+            <forward name="success" path="company_mng_view"/>
+		</action>		
 		
 		<!--MOBIFONE END-->
 		<!-- ***************************************************************** -->

@@ -250,7 +250,7 @@ public class ExportWizardAction extends StrutsActionBase {
                     byte bytes[] = new byte[16384];
                     int len = 0;
                     //File exportedFile = checkTempRecipientExportFile(AgnUtils.getCompanyID(req), aForm.getExportedFile(), errors);
-                    File exportedFile = new File (aForm.getExportedFile());
+                    File exportedFile = new File(aForm.getExportedFile());
                     if(exportedFile != null && aForm.tryCollectingData()) {
                         //String filename = getExportFilename(req) + ".zip";
                         aForm.setDownloadName(exportedFile.getName());
@@ -627,13 +627,11 @@ public class ExportWizardAction extends StrutsActionBase {
 			int columnCount = mData.getColumnCount();
 
 			//==================================================
-
-			
 			//Blank workbook
 			XSSFWorkbook workbook = new XSSFWorkbook(); 
 			
 			//Create a blank sheet
-			XSSFSheet sheet = workbook.createSheet("Employee Data");
+			XSSFSheet sheet = workbook.createSheet("Sheet0");
 			Map<String, Object[]> data = new TreeMap<String, Object[]>();
 			Object[] head = new Object[columnCount + 1];
 			
@@ -675,17 +673,16 @@ public class ExportWizardAction extends StrutsActionBase {
 			        else if(obj instanceof Integer)
 			            cell.setCellValue((Integer)obj);
 			    }
-			} try {
+			} 
+			
+			try {
 				//Write the workbook in file system
 				File fileOutput = new File(EXPORT_FILE_DIRECTORY + File.separator + "ExportData_" + System.currentTimeMillis() + ".xlsx");
-				System.out.println(fileOutput.getAbsolutePath());
 			    FileOutputStream out1 = new FileOutputStream(fileOutput);
 			    workbook.write(out1);
 			    out1.close();
 
-				aForm.setExportedFile(fileOutput.getAbsolutePath());
-			    System.out.println("howtodoinjava_demo.xlsx written successfully on disk.");
-			     
+				aForm.setExportedFile(fileOutput.getAbsolutePath());     
 			} catch (Exception e) {
 			    e.printStackTrace();
 			}

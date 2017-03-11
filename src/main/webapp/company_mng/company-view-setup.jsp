@@ -1,4 +1,4 @@
-<%@ page language="java" import="org.agnitas.web.DepartmentlistAction" contentType="text/html; charset=utf-8"  errorPage="/error.jsp" %>
+<%@ page language="java" import="org.agnitas.web.MbfCompanyAction" contentType="text/html; charset=utf-8"  errorPage="/error.jsp" %>
 <%@ taglib uri="/WEB-INF/agnitas-taglib.tld" prefix="agn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -25,6 +25,6 @@
 <c:set var="agnSubtitleValue" value="${targetForm.shortname}" scope="request" />
 <%-- <c:set var="agnNavHrefAppend" value="&targetID=${targetForm.targetID}" scope="request" /> --%>
 
-<c:set var="ACTION_VIEW" value="<%= DepartmentlistAction.ACTION_VIEW %>" scope="request" />
-<c:set var="ACTION_SAVE" value="<%= DepartmentlistAction.ACTION_SAVE %>" scope="request" />
-<c:set var="ACTION_CONFIRM_DELETE" value="<%= DepartmentlistAction.ACTION_CONFIRM_DELETE %>" scope="request" />
+<c:set var="ACTION_VIEW" value="<%= MbfCompanyAction.ACTION_VIEW %>" scope="request" />
+<c:set var="ACTION_SAVE" value="<%= MbfCompanyAction.ACTION_SAVE %>" scope="request" />
+<c:set var="ACTION_CONFIRM_DELETE" value="<%= MbfCompanyAction.ACTION_CONFIRM_DELETE %>" scope="request" />

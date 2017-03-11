@@ -92,17 +92,12 @@ public class DepartmentlistAction extends StrutsActionBase {
         
         try {
         	List<MbfCompanyImpl> companies = null;
-        	
-
 			List<DepartmentImpl> departments = null;
 			List<DepartmentlistForm> departmentsList = null;
         	
 			switch (aForm.getAction()) {
 			case DepartmentlistAction.ACTION_LIST:
 
-				List<DepartmentImpl> lists = this.departmentDao.getDepartments();
-//				req.setAttribute("department_mngObjectList", lists);
-				
 				departments = this.departmentDao.getDepartments();
 				departmentsList = new ArrayList<DepartmentlistForm>();
 				for (DepartmentImpl item : departments) {

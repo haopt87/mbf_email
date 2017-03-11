@@ -878,6 +878,10 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
+	<bean id="MbfComplainEmailDao" class="org.agnitas.dao.impl.MbfComplainEmailDaoImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
 	<!--MOBIFONE END-->
 	<!-- ***************************************************************** -->
 	<!-- ***************************************************************** -->

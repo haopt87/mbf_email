@@ -73,6 +73,24 @@
 		<parameter-def id="navigation-bundle" type="string" />
 	</extension-point>
 	
+	
+	
+	<extension-point id="navigation.complainemail_mng">
+		<parameter-def id="navigation-bundle" type="string" />
+	</extension-point>
+		
+	<extension-point id="tabs.complainemail_mng.overview">
+		<parameter-def id="navigation-bundle" type="string" />
+	</extension-point>
+
+	<extension-point id="tabs.complainemail_mng.new">
+		<parameter-def id="navigation-bundle" type="string" />
+	</extension-point>
+	
+	<extension-point id="tabs.complainemail_mng.edit">
+		<parameter-def id="navigation-bundle" type="string" />
+	</extension-point>
+	
 	<!--MOBIFONE END-->
 	<!-- tabs menu -->
 

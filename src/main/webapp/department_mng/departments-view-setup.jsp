@@ -22,7 +22,7 @@
 <c:set var="agnHelpKey" value="targetGroupView" scope="request" />
 <c:set var="agnTitleKey" value="department_mng.Department_mng" scope="request" />
 <c:set var="agnSubtitleKey" value="department_mng.Department_mng" scope="request" />
-<c:set var="agnSubtitleValue" value="${targetForm.shortname}" scope="request" />
+<%-- <c:set var="agnSubtitleValue" value="${targetForm.shortname}" scope="request" /> --%>
 <%-- <c:set var="agnNavHrefAppend" value="&targetID=${targetForm.targetID}" scope="request" /> --%>
 
 <c:set var="ACTION_VIEW" value="<%= DepartmentlistAction.ACTION_VIEW %>" scope="request" />

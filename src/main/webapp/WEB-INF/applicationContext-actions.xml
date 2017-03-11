@@ -290,7 +290,12 @@
 		<property name="configService" ref="ConfigService" />
 		<property name="userActivityLogService" ref="UserActivityLogService" />
 		<property name="mbfCompanyDao" ref="MbfCompanyDao" />
-		
+	</bean>
+	
+	<bean name="/complainemail_mng" class="org.agnitas.web.MbfComplainEmailAction">
+		<property name="configService" ref="ConfigService" />
+		<property name="userActivityLogService" ref="UserActivityLogService" />
+		<property name="mbfComplainEmailDao" ref="MbfComplainEmailDao" />
 	</bean>
 	
 		<!--MOBIFONE END-->
