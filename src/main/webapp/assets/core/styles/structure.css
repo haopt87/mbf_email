@@ -815,6 +815,26 @@ A IMG{
 	margin-right:5px;
 }
 
+
+
+
+.mailing_disable_mbf{
+	display:block;
+	width:11px;
+	height:15px;
+	float:left;
+	margin-right:3px;
+}
+.mailing_disable_mbf_float_right{
+	display:block;
+	width:11px;
+	height:15px;
+	float:right;
+	margin-right:5px;
+}
+
+
+
 .picture_refresh{
 	display:block;
 	width:15px;

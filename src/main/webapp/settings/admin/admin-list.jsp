@@ -54,19 +54,27 @@
                 </span>
             </display:column>
           
-            <display:column headerClass="admin_head_desc header" class="description"
+            <display:column headerClass="admin_head_name header" class="description"
                         titleKey="default.description" sortable="false">
             <span class="ie7hack">
 			    <html:link page="/admin.do?action=${ACTION_VIEW}&adminID=${admin.id}">${admin.fullname} </html:link>
             </span>
             </display:column>
 
-            <display:column title="&nbsp;" class="edit" headerClass="admin_head_edit">
+            <display:column title="&nbsp;" class="edit" headerClass="admin_head_name">
             <html:link styleClass="mailing_edit" titleKey="settings.admin.edit"
                        page="/admin.do?action=${ACTION_VIEW}&adminID=${admin.id}"> </html:link>
             <agn:ShowByPermission token="forms.delete">
                 <html:link styleClass="mailing_delete" titleKey="settings.admin.delete"
                            page="/admin.do?action=${ACTION_CONFIRM_DELETE}&adminID=${admin.id}"> </html:link>
+                           
+<!--                            action 18 disable user -->
+				<html:link styleClass="status_error" titleKey="settings.admin.disable"
+                           page="/admin.do?action=${18}&adminID=${admin.id}"> </html:link>
+
+<!--                            action 19 ennable user -->                           
+                <html:link styleClass="status_ok" titleKey="settings.admin.ennable"
+                           page="/admin.do?action=${19}&adminID=${admin.id}"> </html:link>                                      	
             </agn:ShowByPermission>
         </display:column>
  </display:table>

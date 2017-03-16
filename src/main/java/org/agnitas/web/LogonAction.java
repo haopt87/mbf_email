@@ -324,7 +324,6 @@ public class LogonAction extends StrutsActionBase {
 	}
 
 	private void checkForUpdate(HttpServletRequest request) {
-		System.out.println("-------Check latest version have disable");
 		try{
 //			StringBuffer referrer = request.getRequestURL();
 //			VersionObject latestVersion = versionControlService.getLatestVersion( AgnUtils.getCurrentVersion(), referrer != null ? referrer.toString() : "" );
@@ -359,7 +358,7 @@ public class LogonAction extends StrutsActionBase {
 	/**
 	 * Tries to logon a user.
 	 */
-	protected boolean	logon(LogonForm aForm, HttpServletRequest req, ActionMessages errors) {
+	protected boolean logon(LogonForm aForm, HttpServletRequest req, ActionMessages errors) {
 		HttpSession session=req.getSession();
 		Admin aAdmin=adminDao.getAdminByLogin(aForm.getUsername(), aForm.getPassword());
 
@@ -372,32 +371,40 @@ public class LogonAction extends StrutsActionBase {
 
 				return false;
 			} else {
-				req.getSession().invalidate();
-				session = req.getSession();
-				try {
-					session.setAttribute( FAILED_LOGINS_ATTRIBUTE_NAME, loginTrackService.getNumFailedLoginsSinceLastSuccessful( aAdmin.getUsername(), false));	// Record for current login is written later => disable skipping of current login
-				} catch( LoginTrackServiceException e) {
-					logger.warn( "Error counting number of failed logins", e);
+				if(aAdmin.getDisabled() != 0) {
+					logger.warn("logon: login FAILED (IP " + req.getRemoteAddr() + " blocked) User: " + aForm.getUsername() + " Password-Length: " + aForm.getPassword().length());
+					errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.login"));
+					
+					loginTrackDao.trackFailedLogin(req.getRemoteAddr(), aForm.getUsername());
+					return false;
+				} else {
+					req.getSession().invalidate();
+					session = req.getSession();
+					try {
+						session.setAttribute( FAILED_LOGINS_ATTRIBUTE_NAME, loginTrackService.getNumFailedLoginsSinceLastSuccessful( aAdmin.getUsername(), false));	// Record for current login is written later => disable skipping of current login
+					} catch( LoginTrackServiceException e) {
+						logger.warn( "Error counting number of failed logins", e);
+					}
+					session.setAttribute("emm.admin", aAdmin);
+					session.setAttribute("emm.adminPreferences", adminPreferencesDao.getAdminPreferences(aAdmin.getAdminID()));
+					session.setAttribute("emmLayoutBase", emmLayoutBaseDao.getEmmLayoutBase(aForm.getCompanyID(req), aAdmin.getLayoutBaseID()));
+					session.setAttribute("emm.locale", aAdmin.getLocale());
+					session.setAttribute(org.apache.struts.Globals.LOCALE_KEY, aAdmin.getLocale());
+					String helplanguage = getHelpLanguage(req);
+				    session.setAttribute("helplanguage", helplanguage) ;
+				    writeUserActivityLog(aAdmin, UserActivityLogActions.LOGIN_LOGOUT.getLocalValue(), "Log in");
+				    loginTrackDao.trackSuccessfulLogin(req.getRemoteAddr(), aForm.getUsername());
+	                session.setAttribute("docMapping",docMappingDao.getDocMapping());
+
+	                //set admin's user name to the session and use this data from template
+	                String userName = AgnUtils.getAdmin(req).getFullname();
+	                if (StringUtils.isEmpty(userName)) {
+	                    userName = AgnUtils.getAdmin(req).getUsername();
+	                }
+	                session.setAttribute("userName", userName);
+
+					return true;
 				}
-				session.setAttribute("emm.admin", aAdmin);
-				session.setAttribute("emm.adminPreferences", adminPreferencesDao.getAdminPreferences(aAdmin.getAdminID()));
-				session.setAttribute("emmLayoutBase", emmLayoutBaseDao.getEmmLayoutBase(aForm.getCompanyID(req), aAdmin.getLayoutBaseID()));
-				session.setAttribute("emm.locale", aAdmin.getLocale());
-				session.setAttribute(org.apache.struts.Globals.LOCALE_KEY, aAdmin.getLocale());
-				String helplanguage = getHelpLanguage(req);
-			    session.setAttribute("helplanguage", helplanguage) ;
-			    writeUserActivityLog(aAdmin, UserActivityLogActions.LOGIN_LOGOUT.getLocalValue(), "Log in");
-			    loginTrackDao.trackSuccessfulLogin(req.getRemoteAddr(), aForm.getUsername());
-                session.setAttribute("docMapping",docMappingDao.getDocMapping());
-
-                //set admin's user name to the session and use this data from template
-                String userName = AgnUtils.getAdmin(req).getFullname();
-                if (StringUtils.isEmpty(userName)) {
-                    userName = AgnUtils.getAdmin(req).getUsername();
-                }
-                session.setAttribute("userName", userName);
-
-				return true;
 			}
 		} else {
 			logger.warn("logon: login FAILED User: " + aForm.getUsername() + " Password-Length: " + aForm.getPassword().length());

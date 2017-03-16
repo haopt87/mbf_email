@@ -187,6 +187,7 @@ public class MailinglistAction extends StrutsActionBase {
                 case MailinglistAction.ACTION_SAVE:
                     if (allowed("mailinglist.change", req) && AgnUtils.parameterNotEmpty(req, "save")) {
                         String targetId = req.getParameter( "targetID" );
+                        String st = req.getParameter("save");
                     	if (req.getParameter("save")!=null) {
                             if (!mailingChangedToExisting(aForm, req)) {
                                 saveMailinglist(aForm, req);

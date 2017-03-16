@@ -89,8 +89,10 @@ public class DepartmentDaoImpl extends BaseDaoImpl implements DepartmentDao {
 			paramsWithNext[3] = entity.getDeleted();
 
 			sqlUpdate.update(paramsWithNext, key);
+			
+			int newID = key.getKey().intValue();
+			entity.setId(newID);
 		} else {
-
 			update(logger, "UPDATE mbf_department_tbl SET department_name = ?, description = ?, company_id=? WHERE id = ?",
 					entity.getDepartmentName(), entity.getDescription(), entity.getCompanyId(), entity.getId());
 		}

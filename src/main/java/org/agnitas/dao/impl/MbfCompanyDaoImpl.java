@@ -87,8 +87,10 @@ public class MbfCompanyDaoImpl extends BaseDaoImpl implements MbfCompanyDao {
 			paramsWithNext[2] = entity.getDeleted();
 
 			sqlUpdate.update(paramsWithNext, key);
+			
+			int newID = key.getKey().intValue();
+			entity.setId(newID);
 		} else {
-
 			update(logger, "UPDATE mbf_company_tbl SET company_name = ?, description = ? WHERE id = ?",
 					entity.getCompanyName(), entity.getDescription(), entity.getId());
 		}

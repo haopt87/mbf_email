@@ -66,8 +66,6 @@ public class DepartmentlistAction extends StrutsActionBase {
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest req,
 			HttpServletResponse res) throws IOException, ServletException {
-
-		System.out.println(DepartmentlistAction.class + "   xba Log");
 		
 		DepartmentlistForm aForm=null;
         ActionForward destination=null;
@@ -91,21 +89,12 @@ public class DepartmentlistAction extends StrutsActionBase {
 //		}
         
         try {
-        	List<MbfCompanyImpl> companies = null;
-			List<DepartmentImpl> departments = null;
 			List<DepartmentlistForm> departmentsList = null;
         	
 			switch (aForm.getAction()) {
 			case DepartmentlistAction.ACTION_LIST:
-
-				departments = this.departmentDao.getDepartments();
-				departmentsList = new ArrayList<DepartmentlistForm>();
-				for (DepartmentImpl item : departments) {
-					DepartmentlistForm obj = new DepartmentlistForm();
-					BeanUtils.copyProperties(obj, item);
-					obj.setCompany(this.mbfCompanyDao.getMbfCompany(obj.getCompanyId()));
-					departmentsList.add(obj);
-				}
+				
+				departmentsList = loadDepartmentList(errors);
 				req.setAttribute("department_mngObjectList", departmentsList);
 				
 				aForm.clearAllData();
@@ -113,13 +102,10 @@ public class DepartmentlistAction extends StrutsActionBase {
 				break;
 
 			case DepartmentlistAction.ACTION_VIEW:
-				companies = this.mbfCompanyDao.getMbfCompanys();
-				if (companies != null) {
-					req.setAttribute("companies", companies);
-				} else {
-					req.setAttribute("companies", new ArrayList<MbfCompanyImpl>());
-				}
 				
+                //load company list
+                req.setAttribute("companies", getCompanies());
+                
 				if (aForm.getId() != 0) {
 					aForm.setAction(MbfCompanyAction.ACTION_SAVE);
 					loadDepartment(aForm, req);
@@ -140,6 +126,7 @@ public class DepartmentlistAction extends StrutsActionBase {
 						entity.setCompanyId(aForm.getCompanyId());
 						entity.setDeleted(0);
 						this.departmentDao.saveDepartment(entity);
+						aForm.setId(entity.getId());
 		                messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("default.changes_saved"));
 					}else {
 	                    errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("error.mailinglist.duplicate", aForm.getDepartmentName()));
@@ -153,34 +140,24 @@ public class DepartmentlistAction extends StrutsActionBase {
 					this.departmentDao.saveDepartment(entity);
 	                messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("default.changes_saved"));
 				}
-							
-				departments = this.departmentDao.getDepartments();
-				departmentsList = new ArrayList<DepartmentlistForm>();
-				for (DepartmentImpl item : departments) {
-					DepartmentlistForm obj = new DepartmentlistForm();
-					BeanUtils.copyProperties(obj, item);
-					obj.setCompany(this.mbfCompanyDao.getMbfCompany(obj.getCompanyId()));
-					departmentsList.add(obj);
-				}
-				
-				
-				req.setAttribute("department_mngObjectList", departmentsList);
 
+				//reload department
+				departmentsList = loadDepartmentList(errors);				
+				req.setAttribute("department_mngObjectList", departmentsList);
                 aForm.setAction(DepartmentlistAction.ACTION_SAVE);
                 
-				companies = this.mbfCompanyDao.getMbfCompanys();
-				if (companies != null) {
-					req.setAttribute("companies", companies);
-				} else {
-					req.setAttribute("companies", new ArrayList<MbfCompanyImpl>());
-				}
+                //load company list
+                req.setAttribute("companies", getCompanies());
 				destination = mapping.findForward("view");
 				break;
 			case ACTION_DELETE:
-					this.departmentDao.deleteDepartment(aForm.getId());
-					req.setAttribute("department_mngObjectList", this.departmentDao.getDepartments());
-					aForm.clearAllData();
-					destination = mapping.findForward("list");
+				//delete department
+				this.departmentDao.deleteDepartment(aForm.getId());	
+				
+				//reload department
+				departmentsList = loadDepartmentList(errors);
+				req.setAttribute("department_mngObjectList", departmentsList);				
+				destination = mapping.findForward("list");				
 				break;
 			default:
 				destination = mapping.findForward("list");
@@ -205,6 +182,36 @@ public class DepartmentlistAction extends StrutsActionBase {
         
         return destination;
     }
+	
+	private List<MbfCompanyImpl> getCompanies() {
+		List<MbfCompanyImpl> companies = this.mbfCompanyDao.getMbfCompanys();
+		if (companies == null) {
+			companies = new ArrayList<MbfCompanyImpl>();
+		}
+		return companies;
+	}
+	
+	private List<DepartmentlistForm> loadDepartmentList(ActionMessages errors) throws IOException, ServletException {
+		
+		List<DepartmentlistForm> departmentsList = new ArrayList<DepartmentlistForm>();
+		try {
+			List<DepartmentImpl> departments = this.departmentDao.getDepartments();
+			
+
+			for (DepartmentImpl item : departments) {
+				DepartmentlistForm obj = new DepartmentlistForm();
+				BeanUtils.copyProperties(obj, item);
+				obj.setCompany(this.mbfCompanyDao.getMbfCompany(item.getCompanyId()));
+				departmentsList.add(obj);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			logger.error("execute: " + e, e);
+			errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("error.exception",
+					configService.getValue(ConfigService.Value.SupportEmergencyUrl)));
+		}
+		return departmentsList;
+	}
 	
 	private void loadDepartment(DepartmentlistForm aForm, HttpServletRequest req) {
 

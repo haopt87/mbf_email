@@ -99,7 +99,7 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
 		}
         Admin admin = null;
         String query = "select admin_id, username, company_id, fullname, admin_country, admin_lang, " +
-                "admin_lang_variant, admin_timezone, layout_id, creation_date, pwd_change, admin_group_id, pwd_hash, default_import_profile_id, com_id, department_id " +
+                "admin_lang_variant, admin_timezone, layout_id, creation_date, pwd_change, admin_group_id, pwd_hash, default_import_profile_id, com_id, department_id, disabled " +
                 "from admin_tbl where admin_id="+ adminID +" AND (company_id="+ companyID +" OR company_id IN (SELECT company_id FROM company_tbl comp WHERE creator_company_id="+ companyID +"))";
         try {
 			admin = getSimpleJdbcTemplate().queryForObject(query, new Admin_RowMapper());
@@ -127,7 +127,7 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
 
         Admin admin = null;
         String query = "select admin_id, username, company_id, fullname, admin_country, admin_lang, " +
-                "admin_lang_variant, admin_timezone, layout_id, creation_date, pwd_change, admin_group_id, pwd_hash, default_import_profile_id, com_id, department_id " +
+                "admin_lang_variant, admin_timezone, layout_id, creation_date, pwd_change, admin_group_id, pwd_hash, default_import_profile_id, com_id, department_id, disabled " +
                 "from admin_tbl where username = ? and pwd_hash = ?";
          try {
 			admin = getSimpleJdbcTemplate().queryForObject(query, new Admin_RowMapper(), new Object[] {name, pwdHash});
@@ -137,6 +137,15 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
 			return null;
 		}
 		return admin;
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	public void	updateDisableStatus(int adminId, int disableValue) {		
+		SimpleJdbcTemplate template = getSimpleJdbcTemplate();
+        String sql = "";        
+		sql = "update admin_tbl set disabled = ? where admin_id = " + adminId;		
+		template.update(sql, new Object[] {disableValue});    
 	}
 
 	@SuppressWarnings("deprecation")
@@ -149,24 +158,23 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
             int newID = 0;
             if(AgnUtils.isOracleDB()) {
                 newID = template.queryForInt("select admin_tbl_seq.nextval from dual");
-                sql = "insert into admin_tbl values(" + newID + ",?,?,?,sysdate,?,?,?,?,?,?,?,?,?,?,?,?)";
+                sql = "insert into admin_tbl values(" + newID + ",?,?,?,sysdate,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             } else {
                 newID = template.queryForInt("select ifnull(max(admin_id),0) + 1 from admin_tbl");
-                sql = "insert into admin_tbl values(" + newID + ",?,?,?,now(),?,?,?,?,?,?,?,?,?,?,?,?)";
+                sql = "insert into admin_tbl values(" + newID + ",?,?,?,now(),?,?,?,?,?,?,?,?,?,?,?,?,?)";
             }
             admin.setAdminID(newID);
 
         } else {
             sql = "update admin_tbl set username = ?, company_id = ?, fullname = ?, admin_country = ?, admin_lang = ?, " +
                     "admin_lang_variant = ?, admin_timezone = ?, layout_id = ?, creation_date = ?, pwd_change = ?, admin_group_id = ?, pwd_hash = ?, " +
-                    "default_import_profile_id = ?, com_id = ?, department_id = ? where admin_id = " + admin.getAdminID();
+                    "default_import_profile_id = ?, com_id = ?, department_id = ?, disabled = ? where admin_id = " + admin.getAdminID();
         }
-        
-        System.out.println(admin.getComId() +":" + admin.getDepartmentId());
         
         template.update(sql, new Object[] {admin.getUsername(), admin.getCompanyID(), admin.getFullname(), admin.getAdminCountry(), admin.getAdminLang(),
                     admin.getAdminLangVariant(), admin.getAdminTimezone(), admin.getLayoutID(), admin.getCreationDate(), admin.getLastPasswordChange(),
-                    admin.getGroup().getGroupID(), admin.getPasswordHash(), admin.getDefaultImportProfileID(), admin.getComId(), admin.getDepartmentId() });
+                    admin.getGroup().getGroupID(), admin.getPasswordHash(), admin.getDefaultImportProfileID(), admin.getComId(), admin.getDepartmentId()
+                    , admin.getDisabled()});
         if (admin.getAdminPermissions() != null && !admin.getAdminPermissions().isEmpty()){
             saveAdminRights(admin.getAdminID(), admin.getAdminPermissions());
         }
@@ -334,17 +342,16 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
 			admin.setAdminTimezone(resultSet.getString("admin_timezone"));
 			admin.setLayoutID(resultSet.getInt("layout_id"));
 			admin.setDefaultImportProfileID(resultSet.getInt("default_import_profile_id"));
+			
 			int com_id = resultSet.getInt("com_id");
 			int department_id = resultSet.getInt("department_id");
-
-			
+			int disabled = resultSet.getInt("disabled");			
 			admin.setComId(com_id);
 			admin.setDepartmentId(department_id);
-			
+			admin.setDisabled(disabled);		
 			
 
 			// Read additional data
-
 			admin.setCompany(companyDao.getCompany(admin.getCompanyID()));
 
 			admin.setGroup(adminGroupDao.getAdminGroup(resultSet.getInt("admin_group_id")));

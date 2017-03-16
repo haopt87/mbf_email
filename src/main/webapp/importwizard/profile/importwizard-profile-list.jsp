@@ -20,7 +20,11 @@
 
 <html:form action="/importprofile">
     <div class="list_settings_container">
-        
+        <div class="filterbox_form_button">
+			<a href="#" onclick="document.importProfileForm.submit(); return false;">
+				<span><bean:message key="button.Show"/></span>
+			</a>
+		</div>
         <div class="list_settings_mainlabel"><bean:message key="settings.Admin.numberofrows"/>:</div>
         <div class="list_settings_item"><html:radio property="numberofRows" value="20"/><label
                 for="list_settings_length_0">20</label></div>
@@ -28,11 +32,7 @@
                 for="list_settings_length_1">50</label></div>
         <div class="list_settings_item"><html:radio property="numberofRows" value="100"/><label
                 for="list_settings_length_2">100</label></div>
-		<div class="filterbox_form_button">
-			<a href="#" onclick="document.importProfileForm.submit(); return false;">
-				<span><bean:message key="button.Show"/></span>
-			</a>
-		</div>
+		
     </div>
 
     <%--<ajax:displayTag id="importProfileTable" ajaxFlag="displayAjax">--%>

@@ -186,6 +186,7 @@
 
                 <html:select property="language" size="1" styleId="language">
                     <html:option value="<%= Locale.US.toString() %>"><bean:message key="settings.English"/></html:option>
+                    <html:option value="<%= Locale.US.toString() %>"><bean:message key="settings.VietNam"/></html:option>
                     <html:option value="NL_nl"><bean:message key="settings.Dutch"/></html:option>
                     <html:option value="<%= Locale.FRANCE.toString() %>"><bean:message key="settings.French"/></html:option>
                     <html:option value="<%= Locale.GERMANY.toString() %>"><bean:message key="settings.German"/></html:option>

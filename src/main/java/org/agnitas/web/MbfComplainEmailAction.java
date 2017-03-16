@@ -119,6 +119,7 @@ public class MbfComplainEmailAction extends StrutsActionBase {
 					entity.setStatus(0);
 					entity.setDeleted(0);
 					this.mbfComplainEmailDao.saveMbfComplainEmail(entity);
+					aForm.setId(entity.getId());
 					messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("default.changes_saved"));
 				} else {
 					entity.setId(aForm.getId());

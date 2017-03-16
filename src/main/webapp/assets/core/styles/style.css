@@ -593,6 +593,17 @@ a.button-disabled span, a:hover.button-disabled span {
 	background: url(../images/table_delete_icon_rollover.png) no-repeat 0px 0px;
 }
 
+
+.mailing_disable_mbf, .mailing_disable_mbf_float_right{
+	background: url(../images/disable.png) no-repeat 0px 0px;
+}
+
+.mailing_disable_mbf:hover{
+	background: url(../images/disable.png) no-repeat 0px 0px;
+}
+
+
+
 .login_ip_delete{
 	background: url(../images/table_delete_icon.png) no-repeat 0px 0px;
 }

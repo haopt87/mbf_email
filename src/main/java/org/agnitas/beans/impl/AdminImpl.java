@@ -58,6 +58,17 @@ public class AdminImpl implements Admin {
 	
 	private int comId;
 	private int departmentId;
+	private int disabled;
+
+	@Override
+	public int getDisabled() {
+		return disabled;
+	}
+
+	@Override
+	public void setDisabled(int disabled) {
+		this.disabled = disabled;
+	}
 
 	// * * * * *
 	// SETTER:

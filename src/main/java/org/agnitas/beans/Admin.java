@@ -36,6 +36,8 @@ import java.util.Set;
  */
 public interface Admin extends Serializable {
 	
+	public int getDisabled();
+	public void setDisabled(int disabled);
 
 	public int getDepartmentId();
 

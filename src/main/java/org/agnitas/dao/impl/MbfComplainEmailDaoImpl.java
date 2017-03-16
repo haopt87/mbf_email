@@ -97,6 +97,8 @@ public class MbfComplainEmailDaoImpl extends BaseDaoImpl implements MbfComplainE
 			paramsWithNext[5] = entity.getDeleted();
 
 			sqlUpdate.update(paramsWithNext, key);
+			int newID = key.getKey().intValue();
+			entity.setId(newID);
 		} else {
 			update(logger, "UPDATE mbf_complain_email_tbl SET customer_name = ?, customer_mobile = ? , "
 					+ " email_address = ? , other_information = ?, status = ? WHERE id = ?",

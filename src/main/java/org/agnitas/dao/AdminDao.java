@@ -37,6 +37,7 @@ import org.agnitas.emm.core.velocity.VelocityCheck;
  */
 public interface AdminDao {
 	
+	public void	updateDisableStatus(int adminId, int disableValue);
 	/**
 	 * Checks, if given password is current admin password.
 	 * 

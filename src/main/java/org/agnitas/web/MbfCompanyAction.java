@@ -109,34 +109,37 @@ public class MbfCompanyAction extends StrutsActionBase {
 				break;
 
 			case MbfCompanyAction.ACTION_SAVE:
-
-				MbfCompanyImpl entity = this.mbfCompanyDao.getMbfCompany(aForm.getId());
-				if (entity == null) {
-					if (!companyChangedToExisting(aForm)) {
-						entity = new MbfCompanyImpl();
-						entity.setId(0);
+				if (aForm.getCompanyName()== null || aForm.getCompanyName().equals("")) {
+                    errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("error.company.name.empty"));
+				} else {
+					MbfCompanyImpl entity = this.mbfCompanyDao.getMbfCompany(aForm.getId());
+					if (entity == null) {
+						if (!companyChangedToExisting(aForm)) {
+							entity = new MbfCompanyImpl();
+							entity.setId(0);
+							entity.setCompanyName(aForm.getCompanyName());
+							entity.setDescription(aForm.getDescription());
+							entity.setDeleted(0);
+							this.mbfCompanyDao.saveMbfCompany(entity);
+							aForm.setId(entity.getId());
+			                messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("default.changes_saved"));
+						}else {
+	                        errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("error.mailinglist.duplicate", aForm.getCompanyName()));
+	                    }
+					} else {
+						entity.setId(aForm.getId());
 						entity.setCompanyName(aForm.getCompanyName());
 						entity.setDescription(aForm.getDescription());
 						entity.setDeleted(0);
 						this.mbfCompanyDao.saveMbfCompany(entity);
 		                messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("default.changes_saved"));
-					}else {
-                        errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("error.mailinglist.duplicate", aForm.getCompanyName()));
-                    }
-				} else {
-					entity.setId(aForm.getId());
-					entity.setCompanyName(aForm.getCompanyName());
-					entity.setDescription(aForm.getDescription());
-					entity.setDeleted(0);
-					this.mbfCompanyDao.saveMbfCompany(entity);
-	                messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("default.changes_saved"));
-				}
-
-				req.setAttribute("company_mngCompanyList", this.mbfCompanyDao.getMbfCompanys());				
-				// Always go back to overview
-                aForm.setAction(MbfCompanyAction.ACTION_SAVE);
-				
+					}	
+//					req.setAttribute("company_mngCompanyList", this.mbfCompanyDao.getMbfCompanys());				
+					// Always go back to overview
+				}	
+	            aForm.setAction(MbfCompanyAction.ACTION_SAVE);				
 				destination = mapping.findForward("view");
+				
 				break;
 			case ACTION_DELETE:
 					this.mbfCompanyDao.deleteMbfCompany(aForm.getId());

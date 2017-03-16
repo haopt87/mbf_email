@@ -336,7 +336,21 @@ public class AdminAction extends StrutsActionBase {
 					errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("error.permissionDenied"));
 				}
 				break;
-
+			case 18:
+				//Case disable
+				updateDisableStatus(aForm, 1);
+				aForm.setAction(AdminAction.ACTION_LIST);
+				
+				destination = prepareList(mapping, req, errors, destination,
+						aForm);
+				break;
+			case 19:
+				//Case ennable
+				updateDisableStatus(aForm, 0);
+				aForm.setAction(AdminAction.ACTION_LIST);
+				destination = prepareList(mapping, req, errors, destination,
+						aForm);
+				break;
 			default:
 				aForm.setAction(AdminAction.ACTION_LIST);
 				destination = prepareList(mapping, req, errors, destination,
@@ -364,7 +378,7 @@ public class AdminAction extends StrutsActionBase {
 
 		return destination;
 	}
-
+        
     /**
      * Check password and return result.
      * 
@@ -668,6 +682,11 @@ public class AdminAction extends StrutsActionBase {
 		if (logger.isInfoEnabled()) logger.info("saveAdminRights: permissions changed");
 	}
 
+
+    private void updateDisableStatus(AdminForm aForm, int value) {    	
+    	adminDao.updateDisableStatus(aForm.getAdminID(), value);
+    }
+    
 	/**
 	 * Deletes an admin from the database. Also deletes all the admin permissions.
 	 * 
