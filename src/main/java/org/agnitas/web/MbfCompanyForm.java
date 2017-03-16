@@ -42,6 +42,8 @@ public class MbfCompanyForm extends StrutsFormBase {
 	private int deleted;
 	private int action;
 	private int previousAction;
+	private int disabled;
+	private String disabledTag = "";
 
 	public void clearAllData() {
 		this.id = 0;
@@ -138,6 +140,41 @@ public class MbfCompanyForm extends StrutsFormBase {
 	 */
 	public void setDeleted(int deleted) {
 		this.deleted = deleted;
+	}
+
+	/**
+	 * @return the disabledTag
+	 */
+	public String getDisabledTag() {
+		if (this.disabled == 0) {
+			disabledTag = "Đang hoạt động";
+		} else {
+			disabledTag = "Đang khóa";
+		}
+		return disabledTag;
+	}
+
+	/**
+	 * @param disabledTag
+	 *            the disabledTag to set
+	 */
+	public void setDisabledTag(String disabledTag) {
+		this.disabledTag = disabledTag;
+	}
+
+	/**
+	 * @return the disabled
+	 */
+	public int getDisabled() {
+		return disabled;
+	}
+
+	/**
+	 * @param disabled
+	 *            the disabled to set
+	 */
+	public void setDisabled(int disabled) {
+		this.disabled = disabled;
 	}
 
 }

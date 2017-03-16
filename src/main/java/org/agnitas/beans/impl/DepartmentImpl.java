@@ -11,6 +11,7 @@ public class DepartmentImpl implements Serializable {
 	private String departmentName;
 	private String description;
 	private int deleted;
+	private int disabled;
 
 	public DepartmentImpl() {
 	}
@@ -93,6 +94,20 @@ public class DepartmentImpl implements Serializable {
 	 */
 	public void setCompanyId(int companyId) {
 		this.companyId = companyId;
+	}
+
+	/**
+	 * @return the disabled
+	 */
+	public int getDisabled() {
+		return disabled;
+	}
+
+	/**
+	 * @param disabled the disabled to set
+	 */
+	public void setDisabled(int disabled) {
+		this.disabled = disabled;
 	}
 
 }

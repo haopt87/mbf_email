@@ -46,5 +46,11 @@ public interface AdminEntry {
 	public Timestamp getCreationDate();
 
 	public void setCreationDate(Timestamp creationDate);
+	
+	public int getDisabled();
+	public void setDisabled(int disabled);
+	public String getDisabledTag();
+	
+	
 
 }

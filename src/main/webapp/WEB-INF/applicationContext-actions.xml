@@ -62,6 +62,8 @@
 	</bean>
 	
 	<bean name="/logon" class="org.agnitas.web.LogonAction">
+		<property name="departmentDao" ref="DepartmentDao" />
+		<property name="mbfCompanyDao" ref="MbfCompanyDao" />
 		<property name="dataSource" ref="dataSource" />
 		<property name="adminDao" ref="AdminDao" />
 		<property name="configService" ref="ConfigService" />
@@ -283,6 +285,7 @@
 		<property name="userActivityLogService" ref="UserActivityLogService" />
 		<property name="departmentDao" ref="DepartmentDao" />
 		<property name="mbfCompanyDao" ref="MbfCompanyDao" />
+		<property name="adminDao" ref="AdminDao" />
 	</bean>
 	
 	
@@ -290,6 +293,7 @@
 		<property name="configService" ref="ConfigService" />
 		<property name="userActivityLogService" ref="UserActivityLogService" />
 		<property name="mbfCompanyDao" ref="MbfCompanyDao" />
+		<property name="departmentDao" ref="DepartmentDao" />
 	</bean>
 	
 	<bean name="/complainemail_mng" class="org.agnitas.web.MbfComplainEmailAction">

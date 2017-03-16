@@ -23,6 +23,7 @@
 package org.agnitas.web;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -30,13 +31,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.agnitas.beans.Mailinglist;
+import org.agnitas.beans.impl.DepartmentImpl;
 import org.agnitas.beans.impl.MbfCompanyImpl;
+import org.agnitas.dao.DepartmentDao;
 import org.agnitas.dao.MbfCompanyDao;
 import org.agnitas.dao.exception.target.TargetGroupLockedException;
 import org.agnitas.dao.exception.target.TargetGroupPersistenceException;
 import org.agnitas.emm.core.commons.util.ConfigService;
 import org.agnitas.emm.core.target.exception.TargetGroupIsInUseException;
 import org.agnitas.util.AgnUtils;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -56,6 +60,7 @@ public class MbfCompanyAction extends StrutsActionBase {
 
 	protected ConfigService configService;
 	private MbfCompanyDao mbfCompanyDao;
+	private DepartmentDao departmentDao;
 
 	@Required
 	public void setConfigService(ConfigService configService) {
@@ -89,11 +94,12 @@ public class MbfCompanyAction extends StrutsActionBase {
 		// }
 
 		try {
+			List<MbfCompanyForm> mbfCompanyList = null;
+			
 			switch (aForm.getAction()) {
 			case MbfCompanyAction.ACTION_LIST:
-
-				List<MbfCompanyImpl> lists = this.mbfCompanyDao.getMbfCompanys();
-				req.setAttribute("company_mngCompanyList", lists);
+				mbfCompanyList = loadDepartmentList(errors);
+				req.setAttribute("company_mngCompanyList", mbfCompanyList);
 				aForm.clearAllData();
 				destination = mapping.findForward("list");
 				break;
@@ -133,21 +139,45 @@ public class MbfCompanyAction extends StrutsActionBase {
 						entity.setDeleted(0);
 						this.mbfCompanyDao.saveMbfCompany(entity);
 		                messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("default.changes_saved"));
-					}	
-//					req.setAttribute("company_mngCompanyList", this.mbfCompanyDao.getMbfCompanys());				
-					// Always go back to overview
+					}
 				}	
 	            aForm.setAction(MbfCompanyAction.ACTION_SAVE);				
 				destination = mapping.findForward("view");
 				
 				break;
 			case ACTION_DELETE:
-					this.mbfCompanyDao.deleteMbfCompany(aForm.getId());
-					aForm.clearAllData();
-					req.setAttribute("company_mngCompanyList", this.mbfCompanyDao.getMbfCompanys());
+				
+					if (departmentDao.checkDepartmentByCompany(aForm.getId())) {
+						errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("error.department.exits.company"));
+						req.setAttribute("company_mngCompanyList", this.mbfCompanyDao.getMbfCompanys());
+						destination = mapping.findForward("list");						
+					} else {
+						this.mbfCompanyDao.deleteMbfCompany(aForm.getId());
+						aForm.clearAllData();
+					}
+					
+					mbfCompanyList = loadDepartmentList(errors);
+					req.setAttribute("company_mngCompanyList", mbfCompanyList);
 					destination = mapping.findForward("list");
 				break;
+			case 18:
+				//Case disable
+				this.mbfCompanyDao.disabledMbfCompany(aForm.getId(), 1);
+				
+				mbfCompanyList = loadDepartmentList(errors);
+				req.setAttribute("company_mngCompanyList", mbfCompanyList);								
+				destination = mapping.findForward("list");				
+				break;
+			case 19:
+				//Case ennable
+				this.mbfCompanyDao.disabledMbfCompany(aForm.getId(), 0);				
+				mbfCompanyList = loadDepartmentList(errors);
+				req.setAttribute("company_mngCompanyList", mbfCompanyList);				
+				destination = mapping.findForward("list");				
+				break;
 			default:
+				mbfCompanyList = loadDepartmentList(errors);
+				req.setAttribute("company_mngCompanyList", mbfCompanyList);
 				destination = mapping.findForward("list");
 				break;
 			}
@@ -169,6 +199,25 @@ public class MbfCompanyAction extends StrutsActionBase {
         }
 
 		return destination;
+	}
+	
+	private List<MbfCompanyForm> loadDepartmentList(ActionMessages errors) throws IOException, ServletException {
+
+		List<MbfCompanyForm> results = new ArrayList<MbfCompanyForm>();
+		try {
+			List<MbfCompanyImpl> items = this.mbfCompanyDao.getMbfCompanys();
+			for (MbfCompanyImpl item : items) {
+				MbfCompanyForm obj = new MbfCompanyForm();
+				BeanUtils.copyProperties(obj, item);
+				results.add(obj);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			logger.error("execute: " + e, e);
+			errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("error.exception",
+					configService.getValue(ConfigService.Value.SupportEmergencyUrl)));
+		}
+		return results;
 	}
 
 	private boolean companyChangedToExisting(MbfCompanyForm aForm) {
@@ -207,6 +256,20 @@ public class MbfCompanyAction extends StrutsActionBase {
 	 */
 	public void setMbfCompanyDao(MbfCompanyDao mbfCompanyDao) {
 		this.mbfCompanyDao = mbfCompanyDao;
+	}
+
+	/**
+	 * @return the departmentDao
+	 */
+	public DepartmentDao getDepartmentDao() {
+		return departmentDao;
+	}
+
+	/**
+	 * @param departmentDao the departmentDao to set
+	 */
+	public void setDepartmentDao(DepartmentDao departmentDao) {
+		this.departmentDao = departmentDao;
 	}
 
 }

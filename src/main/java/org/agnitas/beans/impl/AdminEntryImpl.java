@@ -36,11 +36,13 @@ public class AdminEntryImpl implements AdminEntry {
     private int id;
     private Timestamp changeDate;
     private Timestamp creationDate;
+    private int disabled;
+    private String disabledTag = "";
 
     public AdminEntryImpl(Integer id, String username, String fullname, String shortname) {
         this(id, username, fullname, shortname, null);
     }
-
+    
     public AdminEntryImpl(Integer id, String username, String fullname, String shortname, String email) {
         this.username = username;
         this.fullname = fullname;
@@ -61,6 +63,24 @@ public class AdminEntryImpl implements AdminEntry {
         this.email = email;
     }
 
+    public String getDisabledTag(){
+    	if (this.disabled == 0){
+    		disabledTag = "Đang hoạt động";
+    	} else {
+    		disabledTag = "Đang khóa";
+    	}
+    	return disabledTag;
+    	
+    }
+    
+    public int getDisabled() {
+    	return disabled;
+    }
+    
+    public void setDisabled(int disabled) {
+    	this.disabled = disabled;
+    }
+    
     public String getUsername() {
         return username;
     }

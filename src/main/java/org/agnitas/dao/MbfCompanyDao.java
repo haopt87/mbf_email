@@ -36,6 +36,8 @@ public interface MbfCompanyDao {
 	
 	void saveMbfCompany(MbfCompanyImpl entity);
 	
+	void disabledMbfCompany(int id, int status);
+	
 	void deleteMbfCompany(int id);
 	
 	List<MbfCompanyImpl> getMbfCompanys();

@@ -14,6 +14,8 @@ public class MbfCompanyImpl implements Serializable {
 
 	private int deleted;
 
+	private int disabled;
+	
 	public MbfCompanyImpl() {
 	}
 
@@ -82,6 +84,20 @@ public class MbfCompanyImpl implements Serializable {
 	 */
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
+	}
+
+	/**
+	 * @return the disabled
+	 */
+	public int getDisabled() {
+		return disabled;
+	}
+
+	/**
+	 * @param disabled the disabled to set
+	 */
+	public void setDisabled(int disabled) {
+		this.disabled = disabled;
 	}
 	
 }

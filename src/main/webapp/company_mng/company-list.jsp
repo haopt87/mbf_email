@@ -42,12 +42,19 @@
         <display:column class="email" headerClass="" sortable="true" property="id" titleKey="company_mng.id" style="width: 150px;"></display:column>
         <display:column class="email" headerClass="" sortable="true" property="companyName" titleKey="company_mng.companyName" style="width: 150px;"></display:column>
         <display:column class="email" headerClass="" sortable="true" property="description" titleKey="company_mng.description" style="width: 150px;"></display:column>
-<%--         <display:column class="email" headerClass="" property="deleted" sortable="true" style="width: 220px;"></display:column> --%>
+        <display:column class="email" headerClass="" sortable="true" property="disabledTag" title="Trạng thái" style="width: 150px;"></display:column>        
 		<display:column class="edit" >
         	<html:link styleClass="mailing_edit"
         		page="/company_mng.do?action=${ACTION_VIEW}&&id=${company_mngCompany.id}"> </html:link>
 			<html:link styleClass="mailing_delete"
         		page="/company_mng.do?action=${ACTION_DELETE}&&id=${company_mngCompany.id}&previousAction=${ACTION_LIST}" onclick="return confirm('Xóa company vĩnh viễn?')"> </html:link>
+        		
+        	<html:link styleClass="status_error" titleKey="settings.admin.disable"
+            	page="/company_mng.do?action=${18}&id=${company_mngCompany.id}" onclick="return confirm('Bạn muốn khóa công ty này? Tài khoản trong công ty sẽ bị khóa, các tài khoản sẽ không thể đăng nhập vào hệ thống?')"> </html:link>
+                           
+           	<html:link styleClass="status_ok" titleKey="settings.admin.ennable"
+           		page="/company_mng.do?action=${19}&id=${company_mngCompany.id}" onclick="return confirm('Bạn muốn kích hoạt lại công ty này?')"> </html:link>
+                           
 		</display:column>
  	</display:table>
 

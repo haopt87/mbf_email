@@ -67,6 +67,7 @@ public class AdminForm extends StrutsFormBase {
      */
     private int comId = 0;
     private int departmentId = 0;
+    private int disabled = 0;
    
     /** 
      * Holds value of property userRights. 
@@ -525,5 +526,19 @@ public class AdminForm extends StrutsFormBase {
 	 */
 	public void setDepartmentId(int departmentId) {
 		this.departmentId = departmentId;
+	}
+
+	/**
+	 * @return the disabled
+	 */
+	public int getDisabled() {
+		return disabled;
+	}
+
+	/**
+	 * @param disabled the disabled to set
+	 */
+	public void setDisabled(int disabled) {
+		this.disabled = disabled;
 	}
 }

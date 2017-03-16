@@ -27,13 +27,17 @@ import org.agnitas.beans.AdminGroup;
 import org.agnitas.beans.Company;
 import org.agnitas.beans.FailedLoginData;
 import org.agnitas.beans.VersionObject;
+import org.agnitas.beans.impl.DepartmentImpl;
+import org.agnitas.beans.impl.MbfCompanyImpl;
 import org.agnitas.dao.AdminDao;
 import org.agnitas.dao.AdminGroupDao;
 import org.agnitas.dao.AdminPreferencesDao;
 import org.agnitas.dao.CompanyDao;
+import org.agnitas.dao.DepartmentDao;
 import org.agnitas.dao.DocMappingDao;
 import org.agnitas.dao.EmmLayoutBaseDao;
 import org.agnitas.dao.LoginTrackDao;
+import org.agnitas.dao.MbfCompanyDao;
 import org.agnitas.emm.core.commons.password.PasswordCheck;
 import org.agnitas.emm.core.commons.password.PasswordCheckHandler;
 import org.agnitas.emm.core.commons.password.StrutsPasswordCheckHandler;
@@ -94,6 +98,9 @@ public class LogonAction extends StrutsActionBase {
 	protected DocMappingDao docMappingDao;
 	protected ConfigService configService;
     private DataSource dataSource;
+
+	private MbfCompanyDao mbfCompanyDao;
+	private DepartmentDao departmentDao;
 	
 	/** Password checker and error reporter. */
 	private PasswordCheck passwordCheck;
@@ -370,42 +377,47 @@ public class LogonAction extends StrutsActionBase {
 				loginTrackDao.trackLoginDuringBlock(req.getRemoteAddr(), aForm.getUsername());
 
 				return false;
-			} else {
-				if(aAdmin.getDisabled() != 0) {
-					logger.warn("logon: login FAILED (IP " + req.getRemoteAddr() + " blocked) User: " + aForm.getUsername() + " Password-Length: " + aForm.getPassword().length());
-					errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.login"));
-					
-					loginTrackDao.trackFailedLogin(req.getRemoteAddr(), aForm.getUsername());
-					return false;
-				} else {
-					req.getSession().invalidate();
-					session = req.getSession();
-					try {
-						session.setAttribute( FAILED_LOGINS_ATTRIBUTE_NAME, loginTrackService.getNumFailedLoginsSinceLastSuccessful( aAdmin.getUsername(), false));	// Record for current login is written later => disable skipping of current login
-					} catch( LoginTrackServiceException e) {
-						logger.warn( "Error counting number of failed logins", e);
-					}
-					session.setAttribute("emm.admin", aAdmin);
-					session.setAttribute("emm.adminPreferences", adminPreferencesDao.getAdminPreferences(aAdmin.getAdminID()));
-					session.setAttribute("emmLayoutBase", emmLayoutBaseDao.getEmmLayoutBase(aForm.getCompanyID(req), aAdmin.getLayoutBaseID()));
-					session.setAttribute("emm.locale", aAdmin.getLocale());
-					session.setAttribute(org.apache.struts.Globals.LOCALE_KEY, aAdmin.getLocale());
-					String helplanguage = getHelpLanguage(req);
-				    session.setAttribute("helplanguage", helplanguage) ;
-				    writeUserActivityLog(aAdmin, UserActivityLogActions.LOGIN_LOGOUT.getLocalValue(), "Log in");
-				    loginTrackDao.trackSuccessfulLogin(req.getRemoteAddr(), aForm.getUsername());
-	                session.setAttribute("docMapping",docMappingDao.getDocMapping());
-
-	                //set admin's user name to the session and use this data from template
-	                String userName = AgnUtils.getAdmin(req).getFullname();
-	                if (StringUtils.isEmpty(userName)) {
-	                    userName = AgnUtils.getAdmin(req).getUsername();
-	                }
-	                session.setAttribute("userName", userName);
-
-					return true;
-				}
+			} 
+			if(aAdmin.getDisabled() != 0) {
+				logger.warn("logon: login FAILED (IP " + req.getRemoteAddr() + " blocked) User: " + aForm.getUsername() + " Password-Length: " + aForm.getPassword().length());
+				errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.login"));
+				
+				loginTrackDao.trackFailedLogin(req.getRemoteAddr(), aForm.getUsername());
+				return false;
 			}
+			
+			if(isCompanyOrDeparmentDisabled(aAdmin)) {
+				logger.warn("logon: login FAILED (IP " + req.getRemoteAddr() + " blocked) User: " + aForm.getUsername() + " Password-Length: " + aForm.getPassword().length());
+				errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.login.company_or_department.disabled"));				
+				loginTrackDao.trackFailedLogin(req.getRemoteAddr(), aForm.getUsername());
+				return false;
+			}
+			
+			req.getSession().invalidate();
+			session = req.getSession();
+			try {
+				session.setAttribute( FAILED_LOGINS_ATTRIBUTE_NAME, loginTrackService.getNumFailedLoginsSinceLastSuccessful( aAdmin.getUsername(), false));	// Record for current login is written later => disable skipping of current login
+			} catch( LoginTrackServiceException e) {
+				logger.warn( "Error counting number of failed logins", e);
+			}
+			session.setAttribute("emm.admin", aAdmin);
+			session.setAttribute("emm.adminPreferences", adminPreferencesDao.getAdminPreferences(aAdmin.getAdminID()));
+			session.setAttribute("emmLayoutBase", emmLayoutBaseDao.getEmmLayoutBase(aForm.getCompanyID(req), aAdmin.getLayoutBaseID()));
+			session.setAttribute("emm.locale", aAdmin.getLocale());
+			session.setAttribute(org.apache.struts.Globals.LOCALE_KEY, aAdmin.getLocale());
+			String helplanguage = getHelpLanguage(req);
+		    session.setAttribute("helplanguage", helplanguage) ;
+		    writeUserActivityLog(aAdmin, UserActivityLogActions.LOGIN_LOGOUT.getLocalValue(), "Log in");
+		    loginTrackDao.trackSuccessfulLogin(req.getRemoteAddr(), aForm.getUsername());
+            session.setAttribute("docMapping",docMappingDao.getDocMapping());
+
+            //set admin's user name to the session and use this data from template
+            String userName = AgnUtils.getAdmin(req).getFullname();
+            if (StringUtils.isEmpty(userName)) {
+                userName = AgnUtils.getAdmin(req).getUsername();
+            }
+            session.setAttribute("userName", userName);
+			return true;
 		} else {
 			logger.warn("logon: login FAILED User: " + aForm.getUsername() + " Password-Length: " + aForm.getPassword().length());
 			errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.login"));
@@ -414,6 +426,19 @@ public class LogonAction extends StrutsActionBase {
 
 			return false;
 		}
+	}
+	
+	public boolean isCompanyOrDeparmentDisabled(Admin aAdmin) {
+		if (aAdmin.getUsername().toUpperCase().equals("ADMIN")){
+			return false;
+		}
+		
+		MbfCompanyImpl com = this.mbfCompanyDao.getMbfCompany(aAdmin.getComId());
+		DepartmentImpl depart = this.departmentDao.getDepartment(aAdmin.getDepartmentId());
+		if(depart.getDisabled() != 0 || com.getDisabled() !=0) {
+			return true;
+		}
+		return false;
 	}
     
     /**
@@ -483,4 +508,32 @@ public class LogonAction extends StrutsActionBase {
     		return false;
     	}
     }
+
+	/**
+	 * @return the departmentDao
+	 */
+	public DepartmentDao getDepartmentDao() {
+		return departmentDao;
+	}
+
+	/**
+	 * @param departmentDao the departmentDao to set
+	 */
+	public void setDepartmentDao(DepartmentDao departmentDao) {
+		this.departmentDao = departmentDao;
+	}
+
+	/**
+	 * @return the mbfCompanyDao
+	 */
+	public MbfCompanyDao getMbfCompanyDao() {
+		return mbfCompanyDao;
+	}
+
+	/**
+	 * @param mbfCompanyDao the mbfCompanyDao to set
+	 */
+	public void setMbfCompanyDao(MbfCompanyDao mbfCompanyDao) {
+		this.mbfCompanyDao = mbfCompanyDao;
+	}
 }

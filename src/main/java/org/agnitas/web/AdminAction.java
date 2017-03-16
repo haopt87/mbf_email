@@ -732,6 +732,8 @@ public class AdminAction extends StrutsActionBase {
 			}
 
 			if (futureHolder.containsKey(key) && futureHolder.get(key).isDone()) {
+				
+				PaginatedListImpl<AdminEntry> lists = futureHolder.get(key).get();				
 				req.setAttribute("adminEntries", futureHolder.get(key).get());
 				destination = mapping.findForward("list");
 				futureHolder.remove(key);

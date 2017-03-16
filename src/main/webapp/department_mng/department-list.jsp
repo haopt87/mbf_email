@@ -43,15 +43,21 @@
             <display:column class="email" headerClass="" sortable="true" property="departmentName" titleKey="department_mng.departmentName" style="width: 150px;"></display:column>
             <display:column class="email" headerClass="" sortable="true" property="description" titleKey="department_mng.description" style="width: 150px;"></display:column>
             <display:column class="email" headerClass="" sortable="true" property="company.companyName" titleKey="department_mng.company.companyName" style="width: 150px;"></display:column>
-            
-<%--             <display:column headerClass="senddate" class="senddate" property="deleted" sortable="true" style="width: 220px;"></display:column> --%>
+            <display:column class="email" headerClass="" sortable="true" property="disabledTag" title="Trạng thái" style="width: 150px;"></display:column>
+<%--             <display:column headerClass="admin_head_name header" class="description" title="Trạng thái" sortable="false"></display:column> --%>
 			<display:column class="edit" >
                 	<html:link styleClass="mailing_edit" 
                        page="/department_mng.do?action=${ACTION_VIEW}&&id=${department_mngObject.id}"> </html:link>
                     <html:link styleClass="mailing_delete" 
                     	page="/department_mng.do?action=${ACTION_DELETE}&&id=${department_mngObject.id}&previousAction=${ACTION_LIST}" 
-                    	onclick="return confirm('Xóa company vĩnh viễn?')"> </html:link>
+                    	onclick="return confirm('Xóa phòng vĩnh viễn?')"> </html:link>
                     
+                    <html:link styleClass="status_error" titleKey="settings.admin.disable"
+                           page="/department_mng.do?action=${18}&id=${department_mngObject.id}" onclick="return confirm('Bạn muốn khóa phòng này? Tài khoản trong phòng sẽ bị khóa, các tài khoản sẽ không thể đăng nhập vào hệ thống?')"> </html:link>
+                           
+                	<html:link styleClass="status_ok" titleKey="settings.admin.ennable"
+                           page="/department_mng.do?action=${19}&id=${department_mngObject.id}" onclick="return confirm('Bạn muốn kích hoạt lại phòng này?')"> </html:link>
+                           
 				</display:column>
  	</display:table>
 

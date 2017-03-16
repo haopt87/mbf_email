@@ -47,7 +47,7 @@ public class DepartmentDaoImpl extends BaseDaoImpl implements DepartmentDao {
 	public DepartmentImpl getDepartment(int id) {
 
 		return selectObjectDefaultNull(logger,
-				"SELECT id, company_id, department_name, description, deleted FROM mbf_department_tbl WHERE id = ? ",
+				"SELECT id, company_id, department_name, description, deleted, disabled FROM mbf_department_tbl WHERE id = ? ",
 				new Department_RowMapper(), id);
 	}
 
@@ -61,7 +61,7 @@ public class DepartmentDaoImpl extends BaseDaoImpl implements DepartmentDao {
 				readTarget.setDepartmentName(resultSet.getString("department_name"));
 				readTarget.setDescription(resultSet.getString("description"));
 				readTarget.setDeleted(resultSet.getInt("deleted"));
-
+				readTarget.setDisabled(resultSet.getInt("disabled"));
 				return readTarget;
 			} catch (Exception e) {
 				throw new SQLException("Cannot create Department item from ResultSet row", e);
@@ -71,22 +71,22 @@ public class DepartmentDaoImpl extends BaseDaoImpl implements DepartmentDao {
 
 	@Override
 	public void saveDepartment(DepartmentImpl entity) {
-
 		if (entity.getId() == 0) {
 			SqlUpdate sqlUpdate = new SqlUpdate(getDataSource(),
-					"INSERT INTO mbf_department_tbl (company_id, department_name, description, deleted) VALUES (?, ?, ?, ?)",
-					new int[] { Types.INTEGER, Types.VARCHAR, Types.VARCHAR, Types.INTEGER });
+					"INSERT INTO mbf_department_tbl (company_id, department_name, description, deleted, disabled) VALUES (?, ?, ?, ?, ?)",
+					new int[] { Types.INTEGER, Types.VARCHAR, Types.VARCHAR, Types.INTEGER , Types.INTEGER });
 
 			sqlUpdate.setReturnGeneratedKeys(true);
 			sqlUpdate.setGeneratedKeysColumnNames(new String[] { "id" });
 			sqlUpdate.compile();
 			GeneratedKeyHolder key = new GeneratedKeyHolder();
 
-			Object[] paramsWithNext = new Object[4];
+			Object[] paramsWithNext = new Object[5];
 			paramsWithNext[0] = entity.getCompanyId();
 			paramsWithNext[1] = entity.getDepartmentName();
 			paramsWithNext[2] = entity.getDescription();
 			paramsWithNext[3] = entity.getDeleted();
+			paramsWithNext[4] = entity.getDisabled();
 
 			sqlUpdate.update(paramsWithNext, key);
 			
@@ -96,19 +96,28 @@ public class DepartmentDaoImpl extends BaseDaoImpl implements DepartmentDao {
 			update(logger, "UPDATE mbf_department_tbl SET department_name = ?, description = ?, company_id=? WHERE id = ?",
 					entity.getDepartmentName(), entity.getDescription(), entity.getCompanyId(), entity.getId());
 		}
-
+	}
+	
+	@Override
+	public void disabledDepartment(int id, int stattus) {
+		update(logger, "UPDATE mbf_department_tbl SET disabled = ? WHERE id = ? ", stattus, id);
 	}
 
 	@Override
 	public void deleteDepartment(int id) {
 		update(logger, "UPDATE mbf_department_tbl SET deleted = 1 WHERE id = ? ", id);
 	}
-
+	
+	@Override
+	public boolean checkDepartmentByCompany(int companyId) {
+		return selectInt(logger, "SELECT COUNT(*) FROM mbf_department_tbl WHERE deleted = 0 AND company_id = ?", companyId) > 0; 
+	}
+	
 	@Override
 	public List<DepartmentImpl> getDepartments() {
 
 		List<DepartmentImpl> departmentImpls = select(logger,
-				"SELECT id, company_id, department_name, description, deleted FROM mbf_department_tbl WHERE deleted = 0",
+				"SELECT id, company_id, department_name, description, deleted, disabled FROM mbf_department_tbl WHERE deleted = 0",
 				new Department_RowMapper());
 		return departmentImpls;
 	}
@@ -120,7 +129,7 @@ public class DepartmentDaoImpl extends BaseDaoImpl implements DepartmentDao {
 
 	@Override
 	public List<DepartmentImpl> getDepartmentsByCompanyId(int companyId) {
-		String strQuery = "SELECT id, company_id, department_name, description, deleted FROM mbf_department_tbl WHERE company_id = " + companyId + " AND deleted = 0"; 
+		String strQuery = "SELECT id, company_id, department_name, description, deleted, disabled FROM mbf_department_tbl WHERE company_id = " + companyId + " AND deleted = 0"; 
 		List<DepartmentImpl> departmentImpls = select(logger,strQuery, new Department_RowMapper());
 		return departmentImpls;
 	}

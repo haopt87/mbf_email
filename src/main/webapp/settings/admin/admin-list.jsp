@@ -60,22 +60,27 @@
 			    <html:link page="/admin.do?action=${ACTION_VIEW}&adminID=${admin.id}">${admin.fullname} </html:link>
             </span>
             </display:column>
+            	
+            <display:column headerClass="admin_head_name header" class="description" title="Trạng thái" sortable="false">
+            	${admin.disabledTag}
+            </display:column>
 
             <display:column title="&nbsp;" class="edit" headerClass="admin_head_name">
-            <html:link styleClass="mailing_edit" titleKey="settings.admin.edit"
+            	<html:link styleClass="mailing_edit" titleKey="settings.admin.edit"
                        page="/admin.do?action=${ACTION_VIEW}&adminID=${admin.id}"> </html:link>
-            <agn:ShowByPermission token="forms.delete">
+                       
+            	<agn:ShowByPermission token="forms.delete">
+            	
                 <html:link styleClass="mailing_delete" titleKey="settings.admin.delete"
                            page="/admin.do?action=${ACTION_CONFIRM_DELETE}&adminID=${admin.id}"> </html:link>
-                           
-<!--                            action 18 disable user -->
+            
 				<html:link styleClass="status_error" titleKey="settings.admin.disable"
-                           page="/admin.do?action=${18}&adminID=${admin.id}"> </html:link>
-
-<!--                            action 19 ennable user -->                           
+                           page="/admin.do?action=${18}&adminID=${admin.id}" onclick="return confirm('Bạn muốn khóa tài khoản? Tài khoản bị khóa sẽ không thể đăng nhập vào hệ thống?')"> </html:link>
+                           
                 <html:link styleClass="status_ok" titleKey="settings.admin.ennable"
-                           page="/admin.do?action=${19}&adminID=${admin.id}"> </html:link>                                      	
+                           page="/admin.do?action=${19}&adminID=${admin.id}" onclick="return confirm('Bạn muốn kích hoạt lại tài khoản bị khóa?')"> </html:link>                                                                 	
             </agn:ShowByPermission>
+            
         </display:column>
  </display:table>
 </html:form>

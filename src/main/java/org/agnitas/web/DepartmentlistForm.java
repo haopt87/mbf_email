@@ -46,6 +46,9 @@ public class DepartmentlistForm extends StrutsFormBase {
 	private int action;
 	private int previousAction;
 	private MbfCompanyImpl company;
+
+    private int disabled;
+    private String disabledTag = "";
 	
 
 	public void clearAllData() {
@@ -171,6 +174,39 @@ public class DepartmentlistForm extends StrutsFormBase {
 	 */
 	public void setCompany(MbfCompanyImpl company) {
 		this.company = company;
+	}
+
+	/**
+	 * @return the disabledTag
+	 */
+	public String getDisabledTag() {
+		if (this.disabled == 0) {
+			disabledTag = "Đang hoạt động";
+		} else {
+			disabledTag = "Đang khóa";
+		}
+		return disabledTag;
+	}
+
+	/**
+	 * @param disabledTag the disabledTag to set
+	 */
+	public void setDisabledTag(String disabledTag) {
+		this.disabledTag = disabledTag;
+	}
+
+	/**
+	 * @return the disabled
+	 */
+	public int getDisabled() {
+		return disabled;
+	}
+
+	/**
+	 * @param disabled the disabled to set
+	 */
+	public void setDisabled(int disabled) {
+		this.disabled = disabled;
 	}
 
 }

@@ -36,6 +36,7 @@ import org.agnitas.emm.core.velocity.VelocityCheck;
  * @author ar
  */
 public interface AdminDao {
+	public boolean checkAccountByDepartment(int departmentID);
 	
 	public void	updateDisableStatus(int adminId, int disableValue);
 	/**

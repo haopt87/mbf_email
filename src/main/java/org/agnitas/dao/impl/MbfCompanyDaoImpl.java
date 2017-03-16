@@ -47,7 +47,7 @@ public class MbfCompanyDaoImpl extends BaseDaoImpl implements MbfCompanyDao {
 	public MbfCompanyImpl getMbfCompany(int id) {
 
 		return selectObjectDefaultNull(logger,
-				"SELECT id, company_name, description, deleted FROM mbf_company_tbl WHERE id = ? ",
+				"SELECT id, company_name, description, deleted, disabled FROM mbf_company_tbl WHERE id = ? ",
 				new MbfCompany_RowMapper(), id);
 	}
 
@@ -60,7 +60,7 @@ public class MbfCompanyDaoImpl extends BaseDaoImpl implements MbfCompanyDao {
 				readTarget.setCompanyName(resultSet.getString("company_name"));
 				readTarget.setDescription(resultSet.getString("description"));
 				readTarget.setDeleted(resultSet.getInt("deleted"));
-
+				readTarget.setDisabled(resultSet.getInt("disabled"));
 				return readTarget;
 			} catch (Exception e) {
 				throw new SQLException("Cannot create Department item from ResultSet row", e);
@@ -73,18 +73,19 @@ public class MbfCompanyDaoImpl extends BaseDaoImpl implements MbfCompanyDao {
 
 		if (entity.getId() == 0) {
 			SqlUpdate sqlUpdate = new SqlUpdate(getDataSource(),
-					"INSERT INTO mbf_company_tbl (company_name, description, deleted) VALUES (?, ?, ?)",
-					new int[] { Types.VARCHAR, Types.VARCHAR, Types.INTEGER });
+					"INSERT INTO mbf_company_tbl (company_name, description, deleted, disabled) VALUES (?, ?, ?, ?)",
+					new int[] { Types.VARCHAR, Types.VARCHAR, Types.INTEGER, Types.INTEGER});
 
 			sqlUpdate.setReturnGeneratedKeys(true);
 			sqlUpdate.setGeneratedKeysColumnNames(new String[] { "id" });
 			sqlUpdate.compile();
 			GeneratedKeyHolder key = new GeneratedKeyHolder();
 
-			Object[] paramsWithNext = new Object[3];
+			Object[] paramsWithNext = new Object[4];
 			paramsWithNext[0] = entity.getCompanyName();
 			paramsWithNext[1] = entity.getDescription();
 			paramsWithNext[2] = entity.getDeleted();
+			paramsWithNext[3] = entity.getDisabled();
 
 			sqlUpdate.update(paramsWithNext, key);
 			
@@ -94,6 +95,12 @@ public class MbfCompanyDaoImpl extends BaseDaoImpl implements MbfCompanyDao {
 			update(logger, "UPDATE mbf_company_tbl SET company_name = ?, description = ? WHERE id = ?",
 					entity.getCompanyName(), entity.getDescription(), entity.getId());
 		}
+	}
+	
+
+	@Override
+	public void disabledMbfCompany(int id, int status) {
+		update(logger, "UPDATE mbf_company_tbl SET disabled = ? WHERE id = ? ", status, id);
 	}
 	
 	@Override
@@ -106,7 +113,7 @@ public class MbfCompanyDaoImpl extends BaseDaoImpl implements MbfCompanyDao {
 	public List<MbfCompanyImpl> getMbfCompanys() {
 
 		List<MbfCompanyImpl> lists = select(logger,
-				"SELECT id, company_name, description, deleted FROM mbf_company_tbl WHERE deleted = 0",
+				"SELECT id, company_name, description, deleted, disabled FROM mbf_company_tbl WHERE deleted = 0",
 				new MbfCompany_RowMapper());
 		return lists;
 	}

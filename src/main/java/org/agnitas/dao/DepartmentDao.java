@@ -38,9 +38,13 @@ public interface DepartmentDao {
 	
 	void deleteDepartment(int id);
 	
+	boolean checkDepartmentByCompany(int companyId); 
+	
 	List<DepartmentImpl> getDepartments();
 
 	boolean departmentExists(String departmentName, Integer company_id);
 	
 	List<DepartmentImpl> getDepartmentsByCompanyId(int companyId);
+	
+	void disabledDepartment(int id, int stattus);
 }

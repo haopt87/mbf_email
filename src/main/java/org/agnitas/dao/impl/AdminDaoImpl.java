@@ -67,6 +67,11 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
 
 	// ----------------------------------------------------------------------------------------------------------------
 	// Business Logic
+	
+	@Override
+	public boolean checkAccountByDepartment(int departmentID) {
+		return selectInt(logger, "SELECT COUNT(*) FROM admin_tbl WHERE disabled = 0 AND department_id = ?", departmentID) > 0;
+	}
 
 	@Override
 	public boolean isAdminPassword(Admin admin, String password) {
@@ -145,7 +150,7 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
 		SimpleJdbcTemplate template = getSimpleJdbcTemplate();
         String sql = "";        
 		sql = "update admin_tbl set disabled = ? where admin_id = " + adminId;		
-		template.update(sql, new Object[] {disableValue});    
+		template.update(sql, new Object[] {disableValue});
 	}
 
 	@SuppressWarnings("deprecation")
@@ -195,7 +200,16 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
 	@Override
     public List<AdminEntry> getAllAdminsByCompanyId( @VelocityCheck int companyID) {
         SimpleJdbcTemplate tmpl =  getSimpleJdbcTemplate();
-        String query = "SELECT adm.admin_id, adm.username, adm.fullname, comp.shortname FROM admin_tbl adm, company_tbl comp where adm.company_id = comp.company_id and adm.company_id = " + companyID + " ORDER BY adm.username";
+        //String query = "SELECT adm.admin_id, adm.username, adm.fullname, comp.shortname, adm.disabled FROM admin_tbl adm, company_tbl comp where adm.company_id = comp.company_id and adm.company_id = " + companyID + " ORDER BY adm.username";
+        
+        String query = "SELECT adm.admin_id, adm.username, adm.fullname, comp.shortname, adm.disabled FROM admin_tbl adm, company_tbl comp " +
+    	"where adm.company_id = comp.company_id and adm.company_id = " + companyID +
+    	" and adm.department_id in  " +
+    	" (select id from mbf_department_tbl where disabled = 0 AND deleted = 0 and mbf_department_tbl.company_id in " + 
+    	" (select id from mbf_company_tbl where disabled = 0 AND deleted = 0) " +
+    	" ) " +
+    	"ORDER BY adm.username";
+        
         List<Map<String, Object>> adminElements = tmpl.queryForList(query);
 		List<AdminEntry> list = toAdminList(adminElements);
         return list;
@@ -206,7 +220,15 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
 	@Override
     public List<AdminEntry> getAllAdmins() {
         SimpleJdbcTemplate tmpl =  getSimpleJdbcTemplate();
-        String query = "SELECT adm.admin_id, adm.username, adm.fullname, comp.shortname FROM admin_tbl adm, company_tbl comp where adm.company_id = comp.company_id ORDER BY adm.username";
+//        String query = "SELECT adm.admin_id, adm.username, adm.fullname, comp.shortname, adm.disabled FROM admin_tbl adm, company_tbl comp where adm.company_id = comp.company_id ORDER BY adm.username";
+        
+        String query = "SELECT adm.admin_id, adm.username, adm.fullname, comp.shortname, adm.disabled FROM admin_tbl adm, company_tbl comp where adm.company_id = comp.company_id " +
+        		" and adm.department_id in  " +
+            	" (select id from mbf_department_tbl where disabled = 0 AND deleted = 0 and mbf_department_tbl.company_id in " + 
+            	" (select id from mbf_company_tbl where disabled = 0 AND deleted = 0) " +
+            	" ) " +
+        		" ORDER BY adm.username";
+        
         List<Map<String, Object>> adminElements = tmpl.queryForList(query);
 		List<AdminEntry> list = toAdminList(adminElements);
         return list;
@@ -273,7 +295,15 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
 			}
 		}
 
-        String totalRowsQuery = "select count(adm.admin_id) from admin_tbl adm, company_tbl comp  WHERE (adm.company_id=? OR adm.company_id IN (SELECT company_id FROM company_tbl WHERE creator_company_id=?)) AND status<>'deleted' AND comp.company_ID=adm.company_id";
+//        String totalRowsQuery = "select count(adm.admin_id) from admin_tbl adm, company_tbl comp  WHERE (adm.company_id=? OR adm.company_id IN (SELECT company_id FROM company_tbl WHERE creator_company_id=?)) AND status<>'deleted' AND comp.company_ID=adm.company_id";
+        
+        String totalRowsQuery = "select count(adm.admin_id) from admin_tbl adm, company_tbl comp " +
+        		" WHERE (adm.company_id=? OR adm.company_id IN (SELECT company_id FROM company_tbl WHERE creator_company_id=?)) " +
+        		" AND status<>'deleted' AND comp.company_ID=adm.company_id " +
+        		" AND adm.department_id in  " +
+            	" (select id from mbf_department_tbl where disabled = 0 AND deleted = 0 and mbf_department_tbl.company_id in " + 
+            	" (select id from mbf_company_tbl where disabled = 0 AND deleted = 0) " +
+            	" )";
 
         int totalRows = -1;
         try {
@@ -288,7 +318,15 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
         page = AgnUtils.getValidPageNumber(totalRows, page, rownums);
 
         int offset = (page - 1) * rownums;
-        String adminListQuery = "SELECT adm.admin_id, adm.username, adm.fullname, comp.shortname, adm.company_id FROM admin_tbl adm, company_tbl comp WHERE (adm.company_id=? OR adm.company_id IN (SELECT company_id FROM company_tbl WHERE creator_company_id=?)) AND status<>'deleted' AND comp.company_ID=adm.company_id" + sortClause + " LIMIT ?, ?";
+//        String adminListQuery = "SELECT adm.admin_id, adm.username, adm.fullname, comp.shortname, adm.company_id , adm.disabled FROM admin_tbl adm, company_tbl comp WHERE (adm.company_id=? OR adm.company_id IN (SELECT company_id FROM company_tbl WHERE creator_company_id=?)) AND status<>'deleted' AND comp.company_ID=adm.company_id" + sortClause + " LIMIT ?, ?";
+        
+        String adminListQuery = "SELECT adm.admin_id, adm.username, adm.fullname, comp.shortname, adm.company_id , adm.disabled FROM admin_tbl adm, company_tbl comp " +
+        		" WHERE (adm.company_id=? OR adm.company_id IN (SELECT company_id FROM company_tbl WHERE creator_company_id=?))" +
+        		" AND status<>'deleted' AND comp.company_ID=adm.company_id " +
+        		" AND adm.department_id in  " +
+            	" (select id from mbf_department_tbl where disabled = 0 AND deleted = 0 and mbf_department_tbl.company_id in " + 
+            	" (select id from mbf_company_tbl where disabled = 0 AND deleted = 0) " +
+            	" ) " + sortClause + " LIMIT ?, ?";
 
         List<Map<String, Object>> adminElements = getSimpleJdbcTemplate().queryForList(adminListQuery, companyID, companyID, offset, rownums);
         return new PaginatedListImpl<AdminEntry>(toAdminList(adminElements), totalRows, rownums, page, sort, direction);
@@ -301,12 +339,15 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
             String username = (String) row.get("username");
             String fullname = (String) row.get("fullname");
             String shortname = (String) row.get("shortname");
+            Integer disabled = (Integer) row.get("disabled");
+            
             AdminEntry entry = new AdminEntryImpl(id, username, fullname, shortname);
+            entry.setDisabled(disabled);
+            
             mailloopEntryList.add(entry);
         }
 
         return mailloopEntryList;
-
     }
 
     protected List<AdminEntry> wsUsersToAdminList(List<Map<String, Object>> adminElements) {

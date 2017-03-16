@@ -32,6 +32,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.agnitas.beans.impl.DepartmentImpl;
 import org.agnitas.beans.impl.MbfCompanyImpl;
+import org.agnitas.dao.AdminDao;
 import org.agnitas.dao.DepartmentDao;
 import org.agnitas.dao.MbfCompanyDao;
 import org.agnitas.emm.core.commons.util.ConfigService;
@@ -57,6 +58,7 @@ public class DepartmentlistAction extends StrutsActionBase {
 	protected ConfigService configService;
 	private DepartmentDao departmentDao;
 	private MbfCompanyDao mbfCompanyDao;
+	private AdminDao adminDao;
 
 	@Required
 	public void setConfigService(ConfigService configService) {
@@ -115,7 +117,6 @@ public class DepartmentlistAction extends StrutsActionBase {
 				destination = mapping.findForward("view");
 				break;
 			case DepartmentlistAction.ACTION_SAVE:
-				
 				DepartmentImpl entity = this.departmentDao.getDepartment(aForm.getId());
 				if (entity == null) {
 					if (!departmentChangedToExisting(aForm)) {
@@ -151,8 +152,29 @@ public class DepartmentlistAction extends StrutsActionBase {
 				destination = mapping.findForward("view");
 				break;
 			case ACTION_DELETE:
-				//delete department
-				this.departmentDao.deleteDepartment(aForm.getId());	
+				if (!this.adminDao.checkAccountByDepartment(aForm.getId())){
+					errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("error.user.exits.in.department"));					
+				} else {
+					//delete department
+					this.departmentDao.deleteDepartment(aForm.getId());
+				}
+				//reload department
+				departmentsList = loadDepartmentList(errors);
+				req.setAttribute("department_mngObjectList", departmentsList);				
+				destination = mapping.findForward("list");				
+				break;
+			case 18:
+				//Case disable
+				this.departmentDao.disabledDepartment(aForm.getId(), 1);
+				
+				//reload department
+				departmentsList = loadDepartmentList(errors);
+				req.setAttribute("department_mngObjectList", departmentsList);				
+				destination = mapping.findForward("list");				
+				break;
+			case 19:
+				//Case ennable
+				this.departmentDao.disabledDepartment(aForm.getId(), 0);
 				
 				//reload department
 				departmentsList = loadDepartmentList(errors);
@@ -160,6 +182,9 @@ public class DepartmentlistAction extends StrutsActionBase {
 				destination = mapping.findForward("list");				
 				break;
 			default:
+				//reload department
+				departmentsList = loadDepartmentList(errors);
+				req.setAttribute("department_mngObjectList", departmentsList);		
 				destination = mapping.findForward("list");
 				break;
 			}
@@ -196,8 +221,6 @@ public class DepartmentlistAction extends StrutsActionBase {
 		List<DepartmentlistForm> departmentsList = new ArrayList<DepartmentlistForm>();
 		try {
 			List<DepartmentImpl> departments = this.departmentDao.getDepartments();
-			
-
 			for (DepartmentImpl item : departments) {
 				DepartmentlistForm obj = new DepartmentlistForm();
 				BeanUtils.copyProperties(obj, item);
@@ -264,6 +287,20 @@ public class DepartmentlistAction extends StrutsActionBase {
 	 */
 	public void setMbfCompanyDao(MbfCompanyDao mbfCompanyDao) {
 		this.mbfCompanyDao = mbfCompanyDao;
+	}
+
+	/**
+	 * @return the adminDao
+	 */
+	public AdminDao getAdminDao() {
+		return adminDao;
+	}
+
+	/**
+	 * @param adminDao the adminDao to set
+	 */
+	public void setAdminDao(AdminDao adminDao) {
+		this.adminDao = adminDao;
 	}
 
 }
