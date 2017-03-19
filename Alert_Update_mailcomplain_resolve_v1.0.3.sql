@@ -5,8 +5,7 @@ ALTER TABLE `mbf_complain_email_tbl`
 ADD COLUMN `resolve_information`  varchar(10000) NULL AFTER `other_information`;
 
 ALTER TABLE `mbf_complain_email_tbl`
-ADD COLUMN `creation_date` datetime NULL DEFAULT '' AFTER `deleted`;
+ADD COLUMN `creation_date`  timestamp NULL ON UPDATE CURRENT_TIMESTAMP AFTER `deleted`;
 
 ALTER TABLE `mbf_complain_email_tbl`
-ADD COLUMN `resolve_date` datetime NULL DEFAULT '' AFTER `creation_date`;
-
+ADD COLUMN `resolve_date`  timestamp NULL ON UPDATE CURRENT_TIMESTAMP AFTER `creation_date`;
