@@ -1,6 +1,7 @@
 package org.agnitas.beans.impl;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class MbfComplainEmailImpl implements Serializable {
 
@@ -11,6 +12,9 @@ public class MbfComplainEmailImpl implements Serializable {
 	private String customerMobile;
 	private String emailAddress;
 	private String otherInformation;
+	private String resolveInformation;
+    private Date resolveDate;
+    private Date creationDate;
 	private int status;
 	private int deleted;
 
@@ -132,6 +136,48 @@ public class MbfComplainEmailImpl implements Serializable {
 	 */
 	public void setDeleted(int deleted) {
 		this.deleted = deleted;
+	}
+
+	/**
+	 * @return the resolveInformation
+	 */
+	public String getResolveInformation() {
+		return resolveInformation;
+	}
+
+	/**
+	 * @param resolveInformation the resolveInformation to set
+	 */
+	public void setResolveInformation(String resolveInformation) {
+		this.resolveInformation = resolveInformation;
+	}
+
+	/**
+	 * @return the creationDate
+	 */
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	/**
+	 * @param creationDate the creationDate to set
+	 */
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	/**
+	 * @return the resolveDate
+	 */
+	public Date getResolveDate() {
+		return resolveDate;
+	}
+
+	/**
+	 * @param resolveDate the resolveDate to set
+	 */
+	public void setResolveDate(Date resolveDate) {
+		this.resolveDate = resolveDate;
 	}
 
 }

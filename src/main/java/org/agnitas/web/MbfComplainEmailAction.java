@@ -24,6 +24,7 @@ package org.agnitas.web;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -82,14 +83,7 @@ public class MbfComplainEmailAction extends StrutsActionBase {
 		try {
 			switch (aForm.getAction()) {
 			case MbfComplainEmailAction.ACTION_LIST:
-
-				List<MbfComplainEmailImpl> listsEntity = this.mbfComplainEmailDao.getMbfComplainEmails();
-				List<MbfComplainEmailForm> lists = new ArrayList<MbfComplainEmailForm>();
-				for (MbfComplainEmailImpl item : listsEntity) {
-					MbfComplainEmailForm obj = new MbfComplainEmailForm();
-					BeanUtils.copyProperties(obj, item);
-					lists.add(obj);
-				}
+				List<MbfComplainEmailForm> lists = loadListComplain();
 				req.setAttribute("complainemailList", lists);
 				aForm.clearAllData();
 				destination = mapping.findForward("list");
@@ -97,10 +91,12 @@ public class MbfComplainEmailAction extends StrutsActionBase {
 
 			case MbfComplainEmailAction.ACTION_VIEW:
 				req.setAttribute("statusList", getStatusList());
+				
 				if (aForm.getId() != 0) {
 					aForm.setAction(MbfComplainEmailAction.ACTION_SAVE);
 					loadComplainEmail(aForm, req);
 				} else {
+					aForm.clearAllData();
 					aForm.setAction(MbfComplainEmailAction.ACTION_NEW);
 				}
 				destination = mapping.findForward("view");
@@ -116,6 +112,8 @@ public class MbfComplainEmailAction extends StrutsActionBase {
 					entity.setCustomerMobile(aForm.getCustomerMobile());
 					entity.setEmailAddress(aForm.getEmailAddress());
 					entity.setOtherInformation(aForm.getOtherInformation());
+					entity.setResolveInformation(aForm.getResolveInformation());
+					entity.setCreationDate(new Date());
 					entity.setStatus(0);
 					entity.setDeleted(0);
 					this.mbfComplainEmailDao.saveMbfComplainEmail(entity);
@@ -128,34 +126,29 @@ public class MbfComplainEmailAction extends StrutsActionBase {
 					entity.setEmailAddress(aForm.getEmailAddress());
 					entity.setOtherInformation(aForm.getOtherInformation());
 					entity.setStatus(aForm.getStatus());
+					entity.setResolveDate(new Date());
 					entity.setDeleted(0);
 					this.mbfComplainEmailDao.saveMbfComplainEmail(entity);
 					messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("default.changes_saved"));
 				}
 
 				req.setAttribute("statusList", getStatusList());
-				req.setAttribute("complainemailList", this.mbfComplainEmailDao.getMbfComplainEmails());
+//				req.setAttribute("complainemailList", loadListComplain());
+				
 				// Always go back to overview
 				aForm.setAction(MbfComplainEmailAction.ACTION_SAVE);
-
 				destination = mapping.findForward("view");
 				break;
 			case ACTION_DELETE:
-				this.mbfComplainEmailDao.deleteMbfComplainEmail(aForm.getId());
-				aForm.clearAllData();
-				List<MbfComplainEmailImpl> listsEntity1 = this.mbfComplainEmailDao.getMbfComplainEmails();
-				List<MbfComplainEmailForm> lists1 = new ArrayList<MbfComplainEmailForm>();
-				for (MbfComplainEmailImpl item : listsEntity1) {
-					MbfComplainEmailForm obj = new MbfComplainEmailForm();
-					BeanUtils.copyProperties(obj, item);
-					lists1.add(obj);
-				}
-				req.setAttribute("complainemailList", lists1);
-				
+				this.mbfComplainEmailDao.deleteMbfComplainEmail(aForm.getId());				
+				req.setAttribute("complainemailList", loadListComplain());
 				req.setAttribute("statusList", getStatusList());
+				aForm.clearAllData();
 				destination = mapping.findForward("list");
 				break;
 			default:
+				req.setAttribute("complainemailList", loadListComplain());
+				req.setAttribute("statusList", getStatusList());
 				destination = mapping.findForward("list");
 				break;
 			}
@@ -179,18 +172,24 @@ public class MbfComplainEmailAction extends StrutsActionBase {
 		return destination;
 	}
 
-	// private boolean companyChangedToExisting(MbfComplainEmailForm aForm) {
-	// int copanyID = aForm.getId();
-	// if (copanyID != 0) {
-	// MbfCompanyImpl mbfCompanyImpl =
-	// this.mbfComplainEmailDao.getMbfComplainEmail(copanyID);
-	// if (mbfCompanyImpl != null &&
-	// mbfCompanyImpl.getCompanyName().equals(aForm.getCompanyName())){
-	// return false;
-	// }
-	// }
-	// return this.mbfCompanyDao.mailinglistExists(aForm.getCompanyName());
-	// }
+	private List<MbfComplainEmailForm> loadListComplain(){
+		List<MbfComplainEmailForm> lists = null;
+		
+		try {
+			lists = new ArrayList<MbfComplainEmailForm>();
+			List<MbfComplainEmailImpl> listsEntity = this.mbfComplainEmailDao.getMbfComplainEmails();
+			for (MbfComplainEmailImpl item : listsEntity) {
+				MbfComplainEmailForm obj = new MbfComplainEmailForm();
+				BeanUtils.copyProperties(obj, item);
+				lists.add(obj);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			lists = new ArrayList<MbfComplainEmailForm>();
+		}
+		
+		return lists;
+	}
 
 	private List<MbfStatusComplain> getStatusList() {
 		List<MbfStatusComplain> statusList = new ArrayList<>();
@@ -213,6 +212,7 @@ public class MbfComplainEmailAction extends StrutsActionBase {
 		aForm.setCustomerMobile(obj.getCustomerMobile());
 		aForm.setEmailAddress(obj.getEmailAddress());
 		aForm.setOtherInformation(obj.getOtherInformation());
+		aForm.setResolveInformation(obj.getResolveInformation());
 		aForm.setStatus(obj.getStatus());
 		
 	}

@@ -73,6 +73,7 @@
         <div class="grey_box_content">
     <div class="grey_box_left_column" style="float: none;">
 
+
         <div align="right" class="float_right box_button"><html:link
                 page='<%= new String(\"/file_download?key=\" + timekey) %>'><img
                 src="${emmLayoutBase.imagesURL}/icon_save.gif"

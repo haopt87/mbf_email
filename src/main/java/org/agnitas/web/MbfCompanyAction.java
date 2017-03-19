@@ -109,6 +109,7 @@ public class MbfCompanyAction extends StrutsActionBase {
 					aForm.setAction(MbfCompanyAction.ACTION_SAVE);
 					loadCompany(aForm, req);
 				} else {
+					aForm.clearAllData();
 					aForm.setAction(MbfCompanyAction.ACTION_NEW);
 				}
 				destination = mapping.findForward("view");

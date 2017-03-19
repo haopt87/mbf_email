@@ -112,6 +112,7 @@ public class DepartmentlistAction extends StrutsActionBase {
 					aForm.setAction(MbfCompanyAction.ACTION_SAVE);
 					loadDepartment(aForm, req);
 				} else {
+					aForm.clearAllData();
 					aForm.setAction(MbfCompanyAction.ACTION_NEW);
 				}
 				destination = mapping.findForward("view");

@@ -38,7 +38,7 @@
 	        <label for="empfaenger_detail_firstname"><bean:message key="complainemail_mng.other_info"/>:</label>
 	        <html:textarea styleId="empfaenger_detail_firstname" property="otherInformation" cols="40" rows="8"/>
     	</div>
-	    <div class="grey_box_left_column">
+	    <div class="recipient_detail_form_item">
 	    	<label for="mailing_name">Trạng thái xử lý:</label>
 	        <html:select styleId="status" property="status" size="1">
 		    	<c:forEach var="item" items="${statusList}">
@@ -47,7 +47,12 @@
 		        </html:option>
 		        </c:forEach>
 			</html:select>
-	    </div>	            
+	    </div>	 
+
+    	<div class="recipient_detail_form_item">
+	        <label for="empfaenger_detail_firstname">Cách giải quyết:</label>
+	        <html:textarea styleId="empfaenger_detail_firstname" property="resolveInformation" cols="40" rows="8"/>
+    	</div> 	      
 	
 	</div>
 	

@@ -45,6 +45,7 @@ public class MbfComplainEmailForm extends StrutsFormBase {
 	private String customerMobile;
 	private String emailAddress;
 	private String otherInformation;
+	private String resolveInformation;	
 	private int status;
 	private int deleted;
 
@@ -61,6 +62,7 @@ public class MbfComplainEmailForm extends StrutsFormBase {
 		this.customerMobile = "";
 		this.emailAddress = "";
 		this.otherInformation = "";
+		resolveInformation = "";
 		this.status = 0;
 		this.deleted = 0;
 	}
@@ -251,6 +253,20 @@ public class MbfComplainEmailForm extends StrutsFormBase {
 	 */
 	public void setSubOtherInformation(String subOtherInformation) {
 		this.subOtherInformation = subOtherInformation;
+	}
+
+	/**
+	 * @return the resolveInformation
+	 */
+	public String getResolveInformation() {
+		return resolveInformation;
+	}
+
+	/**
+	 * @param resolveInformation the resolveInformation to set
+	 */
+	public void setResolveInformation(String resolveInformation) {
+		this.resolveInformation = resolveInformation;
 	}
 
 }

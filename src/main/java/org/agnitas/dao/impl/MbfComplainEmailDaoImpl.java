@@ -25,12 +25,11 @@ package org.agnitas.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.Date;
 import java.util.List;
 
-import org.agnitas.beans.impl.MbfCompanyImpl;
 import org.agnitas.beans.impl.MbfComplainEmailImpl;
 import org.agnitas.dao.MbfComplainEmailDao;
-import org.agnitas.dao.impl.MbfCompanyDaoImpl.MbfCompany_RowMapper;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.jdbc.object.SqlUpdate;
@@ -63,10 +62,11 @@ public class MbfComplainEmailDaoImpl extends BaseDaoImpl implements MbfComplainE
 				readTarget.setCustomerMobile(resultSet.getString("customer_mobile"));
 				readTarget.setEmailAddress(resultSet.getString("email_address"));
 				readTarget.setOtherInformation(resultSet.getString("other_information"));
+				readTarget.setResolveInformation(resultSet.getString("resolve_information"));
 				readTarget.setStatus(resultSet.getInt("status"));
 				readTarget.setDeleted(resultSet.getInt("deleted"));
-				
-
+				readTarget.setCreationDate(resultSet.getTime("creation_date"));
+				readTarget.setResolveDate(resultSet.getTime("resolve_date"));
 				return readTarget;
 			} catch (Exception e) {
 				throw new SQLException("Cannot create Department item from ResultSet row", e);
@@ -79,31 +79,35 @@ public class MbfComplainEmailDaoImpl extends BaseDaoImpl implements MbfComplainE
 
 		if (entity.getId() == 0) {
 			SqlUpdate sqlUpdate = new SqlUpdate(getDataSource(),
-					"INSERT INTO mbf_complain_email_tbl (customer_name, customer_mobile, email_address, other_information, status, deleted)"
-					+ " VALUES (?, ?, ?, ?, ?, ?)",
-					new int[] { Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.INTEGER, Types.INTEGER });
+					"INSERT INTO mbf_complain_email_tbl (customer_name, customer_mobile, email_address, other_information,"
+					+ " resolve_information, status, deleted, creation_date, resolve_date)"
+					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+					new int[] { Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.INTEGER, Types.INTEGER, Types.TIMESTAMP, Types.DATE});
 
 			sqlUpdate.setReturnGeneratedKeys(true);
 			sqlUpdate.setGeneratedKeysColumnNames(new String[] { "id" });
 			sqlUpdate.compile();
 			GeneratedKeyHolder key = new GeneratedKeyHolder();
 
-			Object[] paramsWithNext = new Object[6];
+			Object[] paramsWithNext = new Object[9];
 			paramsWithNext[0] = entity.getCustomerName();
 			paramsWithNext[1] = entity.getCustomerMobile();
 			paramsWithNext[2] = entity.getEmailAddress();
 			paramsWithNext[3] = entity.getOtherInformation();
-			paramsWithNext[4] = entity.getStatus();
-			paramsWithNext[5] = entity.getDeleted();
+			paramsWithNext[4] = entity.getResolveInformation();
+			paramsWithNext[5] = entity.getStatus();
+			paramsWithNext[6] = entity.getDeleted();
+			paramsWithNext[7] = new Date();
+			paramsWithNext[8] = null;
 
 			sqlUpdate.update(paramsWithNext, key);
 			int newID = key.getKey().intValue();
 			entity.setId(newID);
 		} else {
 			update(logger, "UPDATE mbf_complain_email_tbl SET customer_name = ?, customer_mobile = ? , "
-					+ " email_address = ? , other_information = ?, status = ? WHERE id = ?",
+					+ " email_address = ? , other_information = ?, resolve_information =?, status = ?, resolve_date = ? WHERE id = ?",
 					entity.getCustomerName(), entity.getCustomerMobile(), entity.getEmailAddress(), 
-					entity.getOtherInformation(), entity.getStatus(), entity.getId());
+					entity.getOtherInformation(), entity.getResolveInformation(), entity.getStatus(), new Date(), entity.getId());
 		}
 	}
 	
@@ -117,7 +121,8 @@ public class MbfComplainEmailDaoImpl extends BaseDaoImpl implements MbfComplainE
 	public List<MbfComplainEmailImpl> getMbfComplainEmails() {
 
 		List<MbfComplainEmailImpl> lists = select(logger,
-				"SELECT id, customer_name, customer_mobile, email_address, other_information, status, deleted FROM mbf_complain_email_tbl WHERE deleted = 0",
+				"SELECT id, customer_name, customer_mobile, email_address, other_information, resolve_information, "
+				+ "status, deleted, creation_date, resolve_date FROM mbf_complain_email_tbl WHERE deleted = 0",
 				new MbfComplainEmail_RowMapper());
 		return lists;
 	}
