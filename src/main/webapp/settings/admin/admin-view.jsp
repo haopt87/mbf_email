@@ -26,6 +26,30 @@
     var rank = new PasswordRanking();
 </script>
 <script type="text/javascript">
+	function checkNumber(field){
+		
+		var fieldName = "";
+		if (field.id === "sendSpeed"){
+			fieldName = "Tốc độ gửi/giây";
+		} else if (field.id === "sendByDay"){
+			fieldName = "Số lượng gửi/ngày";
+		} else if (field.id === "replyByDay"){
+			fieldName = "Số lượng reply";
+		} else if (field.id === "sendByMonth"){
+			fieldName = "Số lượng gửi/tháng";
+		} else if (field.id == "boundByMonth"){
+			fieldName = "Được phép gửi lỗi/tháng";
+		}
+		
+		if (isNaN(field.value)) {
+			field.focus();
+		    document.getElementById("displayError").innerHTML =  fieldName + " chỉ được nhập số <br/>";
+			return;
+		} else {
+			document.getElementById("displayError").innerHTML = "";
+		}
+	}
+	
 	function changeCompany (id) {
 		
 		//Get all department
@@ -283,6 +307,45 @@
         </div>
         <div class="blue_box_bottom"></div>
     </div>
+    <div class="blue_box_container">
+        <div class="blue_box_top"></div>
+        <div class="blue_box_content">
+            <div class="admin_filed_detail_topic_item">
+            	Thiết lập hạn mức sử dụng                
+            </div>
+            <label id="displayError" style="color: red;"></label>
+            
+            <div class="admin_filed_detail_form_item">
+                <label for="sendSpeed">Tốc độ gửi/giây:&nbsp;</label>
+                <html:text styleId="sendSpeed" property="sendSpeed" maxlength="99" size="32" onblur="checkNumber(sendSpeed)"/>
+            </div>
+            <div class="admin_filed_detail_form_item">
+                <label for="sendByDay">Số lượng gửi/ngày:&nbsp;</label>
+                <html:text styleId="sendByDay" property="sendByDay" maxlength="99" size="32" onblur="checkNumber(sendByDay)"/>
+            </div>
+            <div class="admin_filed_detail_form_item">
+                <label for="replyByDay">Số lượng reply/ngày:&nbsp;</label>
+                <html:text styleId="replyByDay" property="replyByDay" maxlength="99" size="32" onblur="checkNumber(replyByDay)"/>
+            </div>
+            <div class="admin_filed_detail_form_item">
+                <label for="sendByMonth">Số lượng gửi/tháng:&nbsp;</label>
+                <html:text styleId="sendByMonth" property="sendByMonth" maxlength="99" size="32" onblur="checkNumber(sendByMonth)"/>
+            </div>
+            <div class="admin_filed_detail_form_item">
+                <label for="extendTenPercent">Gửi thêm 10%/tháng:&nbsp;</label>
+                <html:select property="extendTenPercent" size="1" styleId="extendTenPercent">
+                    <html:option value="0">Chưa thiết lập</html:option>
+                    <html:option value="1">Thiết lập</html:option>                    
+                </html:select>
+            </div>
+            <div class="admin_filed_detail_form_item">
+                <label for="boundByMonth">Được phép gửi lỗi/tháng:&nbsp;</label>
+                <html:text styleId="boundByMonth" property="boundByMonth" maxlength="99" size="32" onblur="checkNumber(boundByMonth)"/>    
+            </div>
+        </div>
+        <div class="blue_box_bottom"></div>
+    </div>
+      
     <div class="button_container" style="padding-top:5px;">
         <input type="hidden" name="save" value=""/>
 

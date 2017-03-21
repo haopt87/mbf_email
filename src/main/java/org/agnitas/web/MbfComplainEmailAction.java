@@ -22,12 +22,20 @@
 
 package org.agnitas.web;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -37,6 +45,10 @@ import org.agnitas.emm.core.commons.util.ConfigService;
 import org.agnitas.util.AgnUtils;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -52,7 +64,10 @@ public class MbfComplainEmailAction extends StrutsActionBase {
 	public static final int ACTION_MAILINGLIST_RECIPIENTS_DELETE = ACTION_LAST + 3;
 	public static final int ACTION_MAILINGLIST_RECIPIENTS_CONFIRM_DELETE = ACTION_LAST + 4;
 	public static final int ACTION_MAILINGLIST_RECIPIENTS_DELETE_YES = ACTION_LAST + 5;
-
+	
+	private static final String CHARSET = "UTF-8";
+	public static final String EXPORT_FILE_DIRECTORY = AgnUtils.getTempDir() + File.separator + "RecipientExport";
+	
 	protected ConfigService configService;
 	private MbfComplainEmailDao mbfComplainEmailDao;
 
@@ -101,7 +116,6 @@ public class MbfComplainEmailAction extends StrutsActionBase {
 				}
 				destination = mapping.findForward("view");
 				break;
-
 			case MbfComplainEmailAction.ACTION_SAVE:
 
 				MbfComplainEmailImpl entity = this.mbfComplainEmailDao.getMbfComplainEmail(aForm.getId());
@@ -125,6 +139,7 @@ public class MbfComplainEmailAction extends StrutsActionBase {
 					entity.setCustomerMobile(aForm.getCustomerMobile());
 					entity.setEmailAddress(aForm.getEmailAddress());
 					entity.setOtherInformation(aForm.getOtherInformation());
+					entity.setResolveInformation(aForm.getResolveInformation());
 					entity.setStatus(aForm.getStatus());
 					entity.setResolveDate(new Date());
 					entity.setDeleted(0);
@@ -133,7 +148,6 @@ public class MbfComplainEmailAction extends StrutsActionBase {
 				}
 
 				req.setAttribute("statusList", getStatusList());
-//				req.setAttribute("complainemailList", loadListComplain());
 				
 				// Always go back to overview
 				aForm.setAction(MbfComplainEmailAction.ACTION_SAVE);
@@ -145,6 +159,16 @@ public class MbfComplainEmailAction extends StrutsActionBase {
 				req.setAttribute("statusList", getStatusList());
 				aForm.clearAllData();
 				destination = mapping.findForward("list");
+				break;
+			case 10:
+				destination = mapping.findForward("export");
+				System.out.println("XX:"+ req.getSession().getId());
+
+				req.setAttribute("sessionId", req.getSession().getId());
+				break;
+			case 11:
+				exportData(req, res);
+//				destination = mapping.findForward("export");
 				break;
 			default:
 				req.setAttribute("complainemailList", loadListComplain());
@@ -171,16 +195,145 @@ public class MbfComplainEmailAction extends StrutsActionBase {
 
 		return destination;
 	}
+	
+	@SuppressWarnings("unused")
+	private void exportData(HttpServletRequest req,
+			HttpServletResponse res) throws IOException, ServletException {
+		
+		res.setContentType("text/plain");
+		String outFileName = "ExportComplainEmail"; // contains the Filename, build from the
+									// timestamp
+		String outFile = ""; // contains the actual data.		
+		res.setHeader("Content-Disposition", "attachment; filename=\"" + outFileName + ".xlsx\";");
+		res.setCharacterEncoding("");
+		
+		ActionMessages errors = new ActionMessages();
+		XSSFWorkbook workbook = new XSSFWorkbook();
+		// Create a blank sheet
+		XSSFSheet sheet = workbook.createSheet("Sheet0");
+		Map<String, Object[]> data = new TreeMap<String, Object[]>();
+		String[] rows = outFile.split("\r\n");
+		Object[] header = new Object[8];
+		header[0] = "Tên khách hàng";
+		header[1] = "Điện thoại";
+		header[2] = "Email";
+		header[3] = "Trạng thái xử lý";
+		header[4] = "Thông tin khiếu nại";
+		header[5] = "Thông tin phản hồi";
+		header[6] = "Ngày khiếu nại";
+		header[7] = "Ngày gửi phản hồi";
+		
+		data.put(0 + "", header);	
+		
+		int count = 1;
+		List<MbfComplainEmailForm> lists = loadListComplain();
+		for (MbfComplainEmailForm item : lists) {
+			count++;
+			Object[] content = new Object[8];
+			content[0] = item.getCustomerName();
+			content[1] = item.getCustomerMobile();
+			content[2] = item.getEmailAddress();
+			String statusProcess = "Chưa xử lý"; 
+			int status = item.getStatus(); 
+			switch (status) {
+			case 0:
+				statusProcess = "Chưa xử lý";
+				break;
+			case 1:
+				statusProcess = "Chờ duyệt";
+				break;
+			case 2:
+				statusProcess = "Đang xử lý";
+				break;
+			case 3:
+				statusProcess = "Đã xử lý";
+				break;
+			default:
+				statusProcess = "Chưa xử lý";
+				break;
+			}			
+			content[3] = statusProcess;
+			content[4] = item.getOtherInformation();
+			content[5] = item.getResolveInformation();
+			content[6] = item.getCreationDate();
+			content[7] = item.getActualeResolveDate();
+			data.put(count + "", content);		
+		}
+		
+		
 
-	private List<MbfComplainEmailForm> loadListComplain(){
+		// Iterate over data and write to sheet
+		Set<String> keyset = data.keySet();
+		int rownum = 0;
+		for (String key : keyset) {
+			Row row = sheet.createRow(rownum++);
+			Object[] objArr = data.get(key);
+			int cellnum = 0;
+			for (Object obj : objArr) {
+				Cell cell = row.createCell(cellnum++);
+				if (obj instanceof String){
+					cell.setCellValue((String) obj);
+				}	
+				else if (obj instanceof Integer){
+					cell.setCellValue((Integer) obj);
+				}	
+				else if (obj instanceof Date){
+					System.out.println("obj:"+ obj);
+					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+					String stDate = dateFormat.format(((Date) obj).getTime());
+					cell.setCellValue(stDate);	
+				}					
+			}
+		}
+		
+		
+		try {
+			// Write the workbook in file system
+			File fileOutput = new File(
+					EXPORT_FILE_DIRECTORY + File.separator + "ExportData_" + System.currentTimeMillis() + ".xlsx");
+			// System.out.println(fileOutput.getAbsolutePath());
+			FileOutputStream out1 = new FileOutputStream(fileOutput);
+			workbook.write(out1);
+			out1.close();
+			byte bytes[] = new byte[16384];
+			int len = 0;
+			if (fileOutput != null) {
+				FileInputStream instream = null;
+				try {
+					instream = new FileInputStream(fileOutput);
+					res.setContentType("application/zip");
+					res.setHeader("Content-Disposition", "attachment; filename=\"" + outFileName + ".xlsx\";");
+					res.setContentLength((int) fileOutput.length());
+					ServletOutputStream ostream = res.getOutputStream();
+					while ((len = instream.read(bytes)) != -1) {
+						ostream.write(bytes, 0, len);
+					}
+				} finally {
+					if (instream != null) {
+						instream.close();
+					}
+				}
+			} else {
+				errors.add("global", new ActionMessage("error.export.file_not_ready"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private List<MbfComplainEmailForm> loadListComplain() {
 		List<MbfComplainEmailForm> lists = null;
 		
 		try {
 			lists = new ArrayList<MbfComplainEmailForm>();
 			List<MbfComplainEmailImpl> listsEntity = this.mbfComplainEmailDao.getMbfComplainEmails();
 			for (MbfComplainEmailImpl item : listsEntity) {
-				MbfComplainEmailForm obj = new MbfComplainEmailForm();
+				MbfComplainEmailForm obj = new MbfComplainEmailForm();	
 				BeanUtils.copyProperties(obj, item);
+				if (item.getResolveDate() != null) {
+					obj.setActualeResolveDate(item.getResolveDate());
+				}
 				lists.add(obj);
 			}
 		} catch (Exception e) {

@@ -257,6 +257,7 @@
                 scope="session" input="complainemail_mng_view">
             <forward name="list" path="complainemail_mng_list"/>
             <forward name="view" path="complainemail_mng_view"/>
+            <forward name="export" path="complainemail_export"/>
             <forward name="success" path="company_mng_view"/>
 		</action>		
 		

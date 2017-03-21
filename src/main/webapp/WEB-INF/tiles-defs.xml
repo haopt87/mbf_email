@@ -775,6 +775,13 @@
         <put name="body" value="complainemail_mng/complainemail-view.jsp" type="page"/>
         <put name="page-setup" value="complainemail_mng/complainemail-view-setup.jsp" type="page"/>
     </definition>
+    
+    
+    <definition name="complainemail_export" extends="base">
+        <put name="body" value="complainemail_mng/complainemail-export.jsp" type="page"/>
+        <put name="page-setup" value="complainemail_mng/complainemail-view-setup.jsp" type="page"/>
+    </definition>
+    
 	<!--MOBIFONE END-->
 	<!-- ***************************************************************** -->
     <!-- ***************************************************************** -->

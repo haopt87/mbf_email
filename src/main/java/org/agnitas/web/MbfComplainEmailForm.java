@@ -24,6 +24,7 @@ package org.agnitas.web;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.agnitas.web.forms.StrutsFormBase;
@@ -45,7 +46,9 @@ public class MbfComplainEmailForm extends StrutsFormBase {
 	private String customerMobile;
 	private String emailAddress;
 	private String otherInformation;
-	private String resolveInformation;	
+	private String resolveInformation;
+    private Date actualeResolveDate;
+    private Date creationDate;
 	private int status;
 	private int deleted;
 
@@ -267,6 +270,34 @@ public class MbfComplainEmailForm extends StrutsFormBase {
 	 */
 	public void setResolveInformation(String resolveInformation) {
 		this.resolveInformation = resolveInformation;
+	}
+
+	/**
+	 * @return the creationDate
+	 */
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	/**
+	 * @param creationDate the creationDate to set
+	 */
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	/**
+	 * @return the actualeResolveDate
+	 */
+	public Date getActualeResolveDate() {
+		return actualeResolveDate;
+	}
+
+	/**
+	 * @param actualeResolveDate the actualeResolveDate to set
+	 */
+	public void setActualeResolveDate(Date actualeResolveDate) {
+		this.actualeResolveDate = actualeResolveDate;
 	}
 
 }

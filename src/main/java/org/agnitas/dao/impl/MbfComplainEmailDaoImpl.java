@@ -65,8 +65,8 @@ public class MbfComplainEmailDaoImpl extends BaseDaoImpl implements MbfComplainE
 				readTarget.setResolveInformation(resultSet.getString("resolve_information"));
 				readTarget.setStatus(resultSet.getInt("status"));
 				readTarget.setDeleted(resultSet.getInt("deleted"));
-				readTarget.setCreationDate(resultSet.getTime("creation_date"));
-				readTarget.setResolveDate(resultSet.getTime("resolve_date"));
+				readTarget.setCreationDate(resultSet.getTimestamp("creation_date"));
+				readTarget.setResolveDate(resultSet.getTimestamp("resolve_date"));
 				return readTarget;
 			} catch (Exception e) {
 				throw new SQLException("Cannot create Department item from ResultSet row", e);

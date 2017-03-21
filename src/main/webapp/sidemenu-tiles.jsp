@@ -15,8 +15,8 @@
 				<li>
 					<html:link page="${_navigation_href}" styleClass="<%= \"left_navigation_level1\" + cssClassPostfix + \"_round\" %>">
 						<c:if test="${empty _navigation_plugin}">
-							<bean:message key="${_navigation_navMsg}" /> 
-<%-- 							:${_navigation_navMsg}: --%>
+							<bean:message key="${_navigation_navMsg}" />
+							<%-- :${_navigation_navMsg}: --%>
 						</c:if>	
 						<c:if test="${not empty _navigation_plugin}">
 							<agn:message key="${_navigation_navMsg}" plugin="${_navigation_plugin}"/>
@@ -31,14 +31,21 @@
 										String subCssClassPostfix = _sub_navigation_isHighlightKey.booleanValue() ? "_active" : "_no";
 									%>
 									<li>
-										<html:link page="${_sub_navigation_href}" styleClass="<%= \"left_navigation_level2\" + subCssClassPostfix %>">
-											<c:if test="${empty _sub_navigation_plugin}">
+										<c:if test="${_sub_navigation_navMsg eq 'settings.BackupProcess'}">
+											<a href="http://123.30.238.232/bktool" target="_blank" class="left_navigation_level2_no">
 												<bean:message key="${_sub_navigation_navMsg}" />
-											</c:if>
-											<c:if test="${not empty _sub_navigation_plugin}">
-												<agn:message key="${_sub_navigation_navMsg}" plugin="${_sub_navigation_plugin}"/>
-											</c:if>
-										</html:link>
+											</a>
+										</c:if>
+										<c:if test="${_sub_navigation_navMsg ne 'settings.BackupProcess'}">										
+											<html:link page="${_sub_navigation_href}" styleClass="<%= \"left_navigation_level2\" + subCssClassPostfix %>">
+												<c:if test="${empty _sub_navigation_plugin}">
+													<bean:message key="${_sub_navigation_navMsg}" />
+												</c:if>
+												<c:if test="${not empty _sub_navigation_plugin}">
+													<agn:message key="${_sub_navigation_navMsg}" plugin="${_sub_navigation_plugin}"/>
+												</c:if>
+											</html:link>
+										</c:if>
 									</li>
 								</agn:ShowByPermission>
 							</agn:ShowNavigation>
