@@ -448,6 +448,13 @@ public class AdminAction extends StrutsActionBase {
 			aForm.setNumberOfRows(adminPreferences.getListSize());
             aForm.setMailingContentView(adminPreferences.getMailingContentView());
             aForm.setMailingSettingsView(adminPreferences.getMailingSettingsView());
+            aForm.setSendSpeed(admin.getSendSpeed());
+            aForm.setSendByDay(admin.getSendByDay());
+            aForm.setReplyByDay(admin.getReplyByDay());
+            aForm.setSendByMonth(admin.getSendByMonth());
+            aForm.setExtendTenPercent(admin.getExtendTenPercent());
+            aForm.setBoundByMonth(admin.getBoundByMonth());
+            
 			if (logger.isInfoEnabled()) logger.info("loadAdmin: admin " + aForm.getAdminID()+ " loaded");
 		} else {
 			aForm.setAdminID(0);
@@ -510,6 +517,13 @@ public class AdminAction extends StrutsActionBase {
 		admin.setGroup(group);
 		admin.setComId(aForm.getComId());
 		admin.setDepartmentId(aForm.getDepartmentId());
+		admin.setSendSpeed(aForm.getSendSpeed());
+		admin.setSendByDay(aForm.getSendByDay());
+		admin.setReplyByDay(aForm.getReplyByDay());
+		admin.setSendByMonth(aForm.getSendByMonth());
+		admin.setExtendTenPercent(aForm.getExtendTenPercent());
+		admin.setBoundByMonth(aForm.getBoundByMonth());
+		
 
 		adminDao.save(admin);
 

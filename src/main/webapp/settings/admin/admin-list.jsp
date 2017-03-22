@@ -48,7 +48,7 @@
                    name="adminEntries"
                    requestURI="/admin.do?action=${ACTION_LIST}&__fromdisplaytag=true&numberofRows=${adminForm.numberofRows}" excludedParams="*"
                    size="${adminEntries.fullListSize}" partialList="true">
-            <display:column titleKey="logon.username" headerClass="admin_head_name header" sortable="false">
+            <display:column titleKey="logon.username" headerClass="head_action" sortable="false">
                 <span class="ie7hack">
         		    <html:link page="/admin.do?action=${ACTION_VIEW}&adminID=${admin.id}">${admin.username}</html:link>
                 </span>
@@ -61,11 +61,21 @@
             </span>
             </display:column>
             	
-            <display:column headerClass="admin_head_name header" class="description" title="Trạng thái" sortable="false">
+            <display:column headerClass="mailinglist_head_id header" class="description" title="Trạng thái" sortable="false">
             	${admin.disabledTag}
             </display:column>
+            
+            <display:column headerClass="mailinglist_head_id header" class="description" title="Tốc độ gửi" sortable="false">
+            	${admin.sendSpeed}
+            </display:column>            
+            <display:column headerClass="mailinglist_head_id header" class="description" title="Lượt gửi/ngày" sortable="false">
+            	${admin.sendByDay}
+            </display:column>                       
+            <display:column headerClass="mailinglist_head_id header" class="description" title="Lượt gửi/tháng" sortable="false">
+            	${admin.sendByMonth}
+            </display:column>
 
-            <display:column title="&nbsp;" class="edit" headerClass="admin_head_name">
+            <display:column title="&nbsp;" class="edit" headerClass="mailinglist_head_id header">
             	<html:link styleClass="mailing_edit" titleKey="settings.admin.edit"
                        page="/admin.do?action=${ACTION_VIEW}&adminID=${admin.id}"> </html:link>
                        

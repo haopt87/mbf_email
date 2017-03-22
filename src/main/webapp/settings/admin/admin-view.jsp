@@ -211,13 +211,13 @@
                 <html:select property="language" size="1" styleId="language">
                     <html:option value="<%= Locale.US.toString() %>"><bean:message key="settings.English"/></html:option>
                     <html:option value="<%= Locale.US.toString() %>"><bean:message key="settings.VietNam"/></html:option>
-                    <html:option value="NL_nl"><bean:message key="settings.Dutch"/></html:option>
-                    <html:option value="<%= Locale.FRANCE.toString() %>"><bean:message key="settings.French"/></html:option>
-                    <html:option value="<%= Locale.GERMANY.toString() %>"><bean:message key="settings.German"/></html:option>
-                    <html:option value="<%= Locale.ITALY.toString() %>"><bean:message key="settings.Italian" /></html:option>
-                    <html:option value="PT_pt"><bean:message key="settings.Portuguese"/></html:option>
-                    <html:option value="ES_es"><bean:message key="settings.Spanish"/></html:option>
-                    <html:option value="<%= Locale.CHINA.toString() %>"><bean:message key="settings.Chinese"/></html:option>
+<%--                     <html:option value="NL_nl"><bean:message key="settings.Dutch"/></html:option> --%>
+<%--                     <html:option value="<%= Locale.FRANCE.toString() %>"><bean:message key="settings.French"/></html:option> --%>
+<%--                     <html:option value="<%= Locale.GERMANY.toString() %>"><bean:message key="settings.German"/></html:option> --%>
+<%--                     <html:option value="<%= Locale.ITALY.toString() %>"><bean:message key="settings.Italian" /></html:option> --%>
+<%--                     <html:option value="PT_pt"><bean:message key="settings.Portuguese"/></html:option> --%>
+<%--                     <html:option value="ES_es"><bean:message key="settings.Spanish"/></html:option> --%>
+<%--                     <html:option value="<%= Locale.CHINA.toString() %>"><bean:message key="settings.Chinese"/></html:option> --%>
                 </html:select>
 
             </div>

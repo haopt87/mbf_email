@@ -50,6 +50,18 @@ public interface AdminEntry {
 	public int getDisabled();
 	public void setDisabled(int disabled);
 	public String getDisabledTag();
+	public int getSendSpeed();
+	public void setSendSpeed(int sendSpeed);
+	public int getSendByDay();
+	public void setSendByDay(int sendByDay);
+	public int getReplyByDay();
+	public void setReplyByDay(int replyByDay);
+	public int getSendByMonth();
+	public void setSendByMonth(int sendByMonth);
+	public int getExtendTenPercent();
+	public void setExtendTenPercent(int extendTenPercent);
+	public int getBoundByMonth();
+	public void setBoundByMonth(int boundByMonth);
 	
 	
 

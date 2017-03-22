@@ -102,9 +102,11 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
 		if(adminID==0) {
 			return null;
 		}
+		
         Admin admin = null;
         String query = "select admin_id, username, company_id, fullname, admin_country, admin_lang, " +
-                "admin_lang_variant, admin_timezone, layout_id, creation_date, pwd_change, admin_group_id, pwd_hash, default_import_profile_id, com_id, department_id, disabled " +
+                "admin_lang_variant, admin_timezone, layout_id, creation_date, pwd_change, admin_group_id, pwd_hash, default_import_profile_id, com_id, department_id, " +
+                "disabled, num_send_speed , num_send_by_day, num_reply_by_day, num_send_by_month, num_extend_ten_percent, num_bound_by_month " +
                 "from admin_tbl where admin_id="+ adminID +" AND (company_id="+ companyID +" OR company_id IN (SELECT company_id FROM company_tbl comp WHERE creator_company_id="+ companyID +"))";
         try {
 			admin = getSimpleJdbcTemplate().queryForObject(query, new Admin_RowMapper());
@@ -132,7 +134,8 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
 
         Admin admin = null;
         String query = "select admin_id, username, company_id, fullname, admin_country, admin_lang, " +
-                "admin_lang_variant, admin_timezone, layout_id, creation_date, pwd_change, admin_group_id, pwd_hash, default_import_profile_id, com_id, department_id, disabled " +
+                "admin_lang_variant, admin_timezone, layout_id, creation_date, pwd_change, admin_group_id, pwd_hash, default_import_profile_id, com_id, department_id," +
+                "disabled, num_send_speed , num_send_by_day, num_reply_by_day, num_send_by_month, num_extend_ten_percent, num_bound_by_month " + 
                 "from admin_tbl where username = ? and pwd_hash = ?";
          try {
 			admin = getSimpleJdbcTemplate().queryForObject(query, new Admin_RowMapper(), new Object[] {name, pwdHash});
@@ -163,23 +166,26 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
             int newID = 0;
             if(AgnUtils.isOracleDB()) {
                 newID = template.queryForInt("select admin_tbl_seq.nextval from dual");
-                sql = "insert into admin_tbl values(" + newID + ",?,?,?,sysdate,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                sql = "insert into admin_tbl values(" + newID + ",?,?,?,sysdate,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             } else {
                 newID = template.queryForInt("select ifnull(max(admin_id),0) + 1 from admin_tbl");
-                sql = "insert into admin_tbl values(" + newID + ",?,?,?,now(),?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                sql = "insert into admin_tbl values(" + newID + ",?,?,?,now(),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             }
             admin.setAdminID(newID);
 
         } else {
             sql = "update admin_tbl set username = ?, company_id = ?, fullname = ?, admin_country = ?, admin_lang = ?, " +
                     "admin_lang_variant = ?, admin_timezone = ?, layout_id = ?, creation_date = ?, pwd_change = ?, admin_group_id = ?, pwd_hash = ?, " +
-                    "default_import_profile_id = ?, com_id = ?, department_id = ?, disabled = ? where admin_id = " + admin.getAdminID();
+                    "default_import_profile_id = ?, com_id = ?, department_id = ?, disabled = ?, num_send_speed = ?, num_send_by_day = ?," +
+                    " num_reply_by_day = ?, num_send_by_month = ?, num_extend_ten_percent = ?, num_bound_by_month = ? " +
+                    "where admin_id = " + admin.getAdminID();
         }
         
         template.update(sql, new Object[] {admin.getUsername(), admin.getCompanyID(), admin.getFullname(), admin.getAdminCountry(), admin.getAdminLang(),
                     admin.getAdminLangVariant(), admin.getAdminTimezone(), admin.getLayoutID(), admin.getCreationDate(), admin.getLastPasswordChange(),
                     admin.getGroup().getGroupID(), admin.getPasswordHash(), admin.getDefaultImportProfileID(), admin.getComId(), admin.getDepartmentId()
-                    , admin.getDisabled()});
+                    , admin.getDisabled(), admin.getSendSpeed(), admin.getSendByDay(), admin.getReplyByDay(), admin.getSendByMonth(), admin.getExtendTenPercent()
+                    , admin.getBoundByMonth()});
         if (admin.getAdminPermissions() != null && !admin.getAdminPermissions().isEmpty()){
             saveAdminRights(admin.getAdminID(), admin.getAdminPermissions());
         }
@@ -202,7 +208,9 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
         SimpleJdbcTemplate tmpl =  getSimpleJdbcTemplate();
         //String query = "SELECT adm.admin_id, adm.username, adm.fullname, comp.shortname, adm.disabled FROM admin_tbl adm, company_tbl comp where adm.company_id = comp.company_id and adm.company_id = " + companyID + " ORDER BY adm.username";
         
-        String query = "SELECT adm.admin_id, adm.username, adm.fullname, comp.shortname, adm.disabled FROM admin_tbl adm, company_tbl comp " +
+        String query = "SELECT adm.admin_id, adm.username, adm.fullname, comp.shortname, adm.disabled" +
+        ", adm.num_send_speed, adm.num_send_by_day, adm.num_reply_by_day, adm.num_send_by_month, adm.num_extend_ten_percent, adm.num_bound_by_month " +		
+        " FROM admin_tbl adm, company_tbl comp " +
     	"where adm.company_id = comp.company_id and adm.company_id = " + companyID +
     	" and adm.department_id in  " +
     	" (select id from mbf_department_tbl where disabled = 0 AND deleted = 0 and mbf_department_tbl.company_id in " + 
@@ -222,7 +230,9 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
         SimpleJdbcTemplate tmpl =  getSimpleJdbcTemplate();
 //        String query = "SELECT adm.admin_id, adm.username, adm.fullname, comp.shortname, adm.disabled FROM admin_tbl adm, company_tbl comp where adm.company_id = comp.company_id ORDER BY adm.username";
         
-        String query = "SELECT adm.admin_id, adm.username, adm.fullname, comp.shortname, adm.disabled FROM admin_tbl adm, company_tbl comp where adm.company_id = comp.company_id " +
+        String query = "SELECT adm.admin_id, adm.username, adm.fullname, comp.shortname, adm.disabled" +
+        		", adm.num_send_speed, adm.num_send_by_day, adm.num_reply_by_day, adm.num_send_by_month, adm.num_extend_ten_percent, adm.num_bound_by_month " +
+        		" FROM admin_tbl adm, company_tbl comp where adm.company_id = comp.company_id " +
         		" and adm.department_id in  " +
             	" (select id from mbf_department_tbl where disabled = 0 AND deleted = 0 and mbf_department_tbl.company_id in " + 
             	" (select id from mbf_company_tbl where disabled = 0 AND deleted = 0) " +
@@ -320,7 +330,9 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
         int offset = (page - 1) * rownums;
 //        String adminListQuery = "SELECT adm.admin_id, adm.username, adm.fullname, comp.shortname, adm.company_id , adm.disabled FROM admin_tbl adm, company_tbl comp WHERE (adm.company_id=? OR adm.company_id IN (SELECT company_id FROM company_tbl WHERE creator_company_id=?)) AND status<>'deleted' AND comp.company_ID=adm.company_id" + sortClause + " LIMIT ?, ?";
         
-        String adminListQuery = "SELECT adm.admin_id, adm.username, adm.fullname, comp.shortname, adm.company_id , adm.disabled FROM admin_tbl adm, company_tbl comp " +
+        String adminListQuery = "SELECT adm.admin_id, adm.username, adm.fullname, comp.shortname, adm.company_id , adm.disabled " +
+        		", adm.num_send_speed, adm.num_send_by_day, adm.num_reply_by_day, adm.num_send_by_month, adm.num_extend_ten_percent, adm.num_bound_by_month " +
+        		" FROM admin_tbl adm, company_tbl comp " +
         		" WHERE (adm.company_id=? OR adm.company_id IN (SELECT company_id FROM company_tbl WHERE creator_company_id=?))" +
         		" AND status<>'deleted' AND comp.company_ID=adm.company_id " +
         		" AND adm.department_id in  " +
@@ -340,10 +352,23 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
             String fullname = (String) row.get("fullname");
             String shortname = (String) row.get("shortname");
             Integer disabled = (Integer) row.get("disabled");
+            Integer num_send_speed = (Integer) row.get("num_send_speed");
+            Integer num_send_by_day = (Integer) row.get("num_send_by_day");
+            Integer num_reply_by_day = (Integer) row.get("num_reply_by_day");
+            Integer num_send_by_month = (Integer) row.get("num_send_by_month");
+            Integer num_extend_ten_percent = (Integer) row.get("num_extend_ten_percent");
+            Integer num_bound_by_month = (Integer) row.get("num_bound_by_month");            
+            
             
             AdminEntry entry = new AdminEntryImpl(id, username, fullname, shortname);
             entry.setDisabled(disabled);
-            
+            entry.setSendSpeed(num_send_speed);
+            entry.setSendByDay(num_send_by_day);
+            entry.setReplyByDay(num_reply_by_day);
+            entry.setSendByMonth(num_send_by_month);
+            entry.setExtendTenPercent(num_extend_ten_percent);
+            entry.setBoundByMonth(num_bound_by_month);
+        	
             mailloopEntryList.add(entry);
         }
 
@@ -365,46 +390,65 @@ public class AdminDaoImpl extends BaseDaoImpl implements AdminDao {
 
     protected class Admin_RowMapper implements ParameterizedRowMapper<Admin> {
 
+    	
     	@SuppressWarnings("deprecation")
 		@Override
 		public Admin mapRow(ResultSet resultSet, int row) throws SQLException {
-			Admin admin = new AdminImpl();
-
-			admin.setAdminID(resultSet.getInt("admin_id"));
-			admin.setUsername(resultSet.getString("username"));
-			admin.setFullname(resultSet.getString("fullname"));
-			admin.setCompanyID(resultSet.getInt("company_id"));
-			admin.setPasswordHash((byte[]) resultSet.getObject("pwd_hash"));
-			admin.setCreationDate(resultSet.getTimestamp("creation_date"));
-			admin.setLastPasswordChange(resultSet.getTimestamp("pwd_change"));
-			admin.setAdminCountry(resultSet.getString("admin_country"));
-			admin.setAdminLang(resultSet.getString("admin_lang"));
-			admin.setAdminLangVariant(resultSet.getString("admin_lang_variant"));
-			admin.setAdminTimezone(resultSet.getString("admin_timezone"));
-			admin.setLayoutID(resultSet.getInt("layout_id"));
-			admin.setDefaultImportProfileID(resultSet.getInt("default_import_profile_id"));
-			
-			int com_id = resultSet.getInt("com_id");
-			int department_id = resultSet.getInt("department_id");
-			int disabled = resultSet.getInt("disabled");			
-			admin.setComId(com_id);
-			admin.setDepartmentId(department_id);
-			admin.setDisabled(disabled);		
-			
-
-			// Read additional data
-			admin.setCompany(companyDao.getCompany(admin.getCompanyID()));
-
-			admin.setGroup(adminGroupDao.getAdminGroup(resultSet.getInt("admin_group_id")));
-
-			List<Map<String, Object>> result = getSimpleJdbcTemplate().queryForList("SELECT security_token FROM admin_permission_tbl WHERE admin_id = ?", admin.getAdminID());
-
-			Set<String> adminPermissions = new HashSet<String>();
-			for (Map<String, Object> resultRow : result) {
-				adminPermissions.add((String) resultRow.get("security_token"));
+    		try {
+				Admin admin = new AdminImpl();
+	
+				admin.setAdminID(resultSet.getInt("admin_id"));
+				admin.setUsername(resultSet.getString("username"));
+				admin.setFullname(resultSet.getString("fullname"));
+				admin.setCompanyID(resultSet.getInt("company_id"));
+				admin.setPasswordHash((byte[]) resultSet.getObject("pwd_hash"));
+				admin.setCreationDate(resultSet.getTimestamp("creation_date"));
+				admin.setLastPasswordChange(resultSet.getTimestamp("pwd_change"));
+				admin.setAdminCountry(resultSet.getString("admin_country"));
+				admin.setAdminLang(resultSet.getString("admin_lang"));
+				admin.setAdminLangVariant(resultSet.getString("admin_lang_variant"));
+				admin.setAdminTimezone(resultSet.getString("admin_timezone"));
+				admin.setLayoutID(resultSet.getInt("layout_id"));
+				admin.setDefaultImportProfileID(resultSet.getInt("default_import_profile_id"));
+				
+				int com_id = resultSet.getInt("com_id");
+				int department_id = resultSet.getInt("department_id");
+				int disabled = resultSet.getInt("disabled");
+				int num_send_speed = resultSet.getInt("num_send_speed");
+				int num_send_by_day = resultSet.getInt("num_send_by_day");
+				int num_reply_by_day = resultSet.getInt("num_reply_by_day");
+				int num_send_by_month = resultSet.getInt("num_send_by_month");
+				int num_extend_ten_percent = resultSet.getInt("num_extend_ten_percent");
+				int num_bound_by_month = resultSet.getInt("num_bound_by_month");
+							
+				admin.setComId(com_id);
+				admin.setDepartmentId(department_id);
+				admin.setDisabled(disabled);
+				admin.setSendSpeed(num_send_speed);
+				admin.setSendByDay(num_send_by_day);
+				admin.setReplyByDay(num_reply_by_day);
+				admin.setSendByMonth(num_send_by_month);
+				admin.setExtendTenPercent(num_extend_ten_percent);
+				admin.setBoundByMonth(num_bound_by_month);
+				
+	
+				// Read additional data
+				admin.setCompany(companyDao.getCompany(admin.getCompanyID()));
+	
+				admin.setGroup(adminGroupDao.getAdminGroup(resultSet.getInt("admin_group_id")));
+	
+				List<Map<String, Object>> result = getSimpleJdbcTemplate().queryForList("SELECT security_token FROM admin_permission_tbl WHERE admin_id = ?", admin.getAdminID());
+	
+				Set<String> adminPermissions = new HashSet<String>();
+				for (Map<String, Object> resultRow : result) {
+					adminPermissions.add((String) resultRow.get("security_token"));
+				}
+				admin.setAdminPermissions(adminPermissions);
+				return admin;
+    		} catch (Exception e) {
+    			e.printStackTrace();
 			}
-			admin.setAdminPermissions(adminPermissions);
-			return admin;
+    		return null;
 		}
 	}
 

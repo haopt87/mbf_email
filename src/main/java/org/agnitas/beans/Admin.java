@@ -36,17 +36,26 @@ import java.util.Set;
  */
 public interface Admin extends Serializable {
 	
+	//Mobifone
 	public int getDisabled();
 	public void setDisabled(int disabled);
-
 	public int getDepartmentId();
-
 	public void setDepartmentId(int departmentId);
-
 	public int getComId();
-
 	public void setComId(int comId);
-	
+	public int getSendSpeed();
+	public void setSendSpeed(int sendSpeed);
+	public int getSendByDay();
+	public void setSendByDay(int sendByDay);
+	public int getReplyByDay();
+	public void setReplyByDay(int replyByDay);
+	public int getSendByMonth();
+	public void setSendByMonth(int sendByMonth);
+	public int getExtendTenPercent();
+	public void setExtendTenPercent(int extendTenPercent);
+	public int getBoundByMonth();
+	public void setBoundByMonth(int boundByMonth);
+	//Mobifone
 
     /**
      * Getter for property adminCountry.

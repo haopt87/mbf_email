@@ -68,6 +68,7 @@ public class AdminForm extends StrutsFormBase {
 	private int comId = 0;
 	private int departmentId = 0;
 	private int disabled = 0;
+	
 	private int sendSpeed = 0;
 	private int sendByDay = 0;
 	private int replyByDay = 0;
