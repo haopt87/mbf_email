@@ -122,6 +122,9 @@
     <div class="grey_box_container">
         <div class="grey_box_top"></div>
         <div class="grey_box_content">
+        	<span class="send_page_header">Thiết lập tốc độ gửi email.<br>
+        	<i>(Trường hợp chiến dịch gửi cho nhiều người nhận thì nên đặt tốc độ gửi)</i></span><br><br>
+        
             <div class="send_mail_field">
                 <label><bean:message key="blocksize"/>:</label>
                 <html:text property="blocksize" size="5"/>
