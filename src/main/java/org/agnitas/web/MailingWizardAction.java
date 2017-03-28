@@ -32,7 +32,9 @@ import java.util.Vector;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.agnitas.beans.Admin;
 import org.agnitas.beans.Campaign;
 import org.agnitas.beans.DynamicTag;
 import org.agnitas.beans.DynamicTagContent;
@@ -1037,6 +1039,12 @@ public class MailingWizardAction extends StrutsDispatchActionBase {
 		}
 
 		MailingWizardForm aForm = (MailingWizardForm) form;
+		
+		HttpSession session = req.getSession();		
+		Admin admin1 = (Admin) session.getAttribute("emm.admin");
+		int adminId = admin1.getAdminID();		
+		aForm.getMailing().setMbfUserId(adminId);
+		
 		mailingDao.saveMailing(aForm.getMailing());
 
 		return mapping.findForward("finish");
