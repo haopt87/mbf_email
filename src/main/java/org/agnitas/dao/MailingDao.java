@@ -167,7 +167,7 @@ public interface MailingDao extends ApplicationContextAware {
      *              The number of rows to be shown on page
      * @return PaginatedList of MailingBase
      */
-	public PaginatedListImpl<Map<String, Object>> getMailingList( @VelocityCheck int companyID, String types, boolean isTemplate, String sort, String direction, int page, int rownums);
+	public PaginatedListImpl<Map<String, Object>> getMailingList( @VelocityCheck int companyID, String types, boolean isTemplate, String sort, String direction, int page, int rownums, int mbf_user_id);
 
     /**
      *  Gets date format by given type number

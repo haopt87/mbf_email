@@ -24,6 +24,8 @@ package org.agnitas.cms.web;
 
 import eu.medsea.mimeutil.MimeType;
 import eu.medsea.mimeutil.MimeUtil;
+
+import org.agnitas.beans.Admin;
 import org.agnitas.beans.impl.PaginatedListImpl;
 import org.agnitas.cms.dao.CmsMailingDao;
 import org.agnitas.cms.utils.ClassicTemplateGenerator;
@@ -759,7 +761,13 @@ public class CMTemplateAction extends StrutsActionBase {
 		}
 		int page = Integer.parseInt(pageStr);
 		int rownums = aForm.getNumberofRows();
-		PaginatedListImpl<Map<String, Object>> mailingList = mailingDao.getMailingList(AgnUtils.getCompanyID(request), "0", false, sort, direction, page, rownums);
+		
+
+		HttpSession session = request.getSession();		
+		Admin admin1 = (Admin) session.getAttribute("emm.admin");
+		int adminId = admin1.getAdminID();	
+		
+		PaginatedListImpl<Map<String, Object>> mailingList = mailingDao.getMailingList(AgnUtils.getCompanyID(request), "0", false, sort, direction, page, rownums, adminId);
 		return mailingList;
 	}
 

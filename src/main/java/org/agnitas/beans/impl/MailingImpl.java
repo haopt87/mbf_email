@@ -104,6 +104,7 @@ public class MailingImpl extends MailingBaseImpl implements Mailing {
 	protected int searchPos;
 	protected int clickActionID;
 	protected int openActionID;
+	protected int mbfUserId;
 	protected Set<MaildropEntry> maildropStatus = new LinkedHashSet<MaildropEntry>();
 	protected Map<Integer, Mediatype> mediatypes = new LinkedHashMap<Integer, Mediatype>();
 	protected Timestamp creationDate;
@@ -126,6 +127,17 @@ public class MailingImpl extends MailingBaseImpl implements Mailing {
 	 * Date-Based 3: Followup Defined in Mailing.java eg. TYPE_NORMAL
 	 */
 	protected int mailingType;
+	
+
+	@Override
+    public int getMbfUserId(){
+    	return this.mbfUserId;
+    }
+
+	@Override
+    public void setMbfUserId(int mbfUserId){
+		this.mbfUserId = mbfUserId;
+    }
 
 	@Override
 	public boolean parseTargetExpression(String tExp) {

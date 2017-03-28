@@ -502,6 +502,10 @@ public interface Mailing extends java.io.Serializable, MailingBase {
     public int getOpenActionID();
 
     public void setOpenActionID(int id);
+    
+    public int getMbfUserId();
+
+    public void setMbfUserId(int id);
 
     public int getClickActionID();
 

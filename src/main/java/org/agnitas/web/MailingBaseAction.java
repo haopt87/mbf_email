@@ -22,6 +22,30 @@
 
 package org.agnitas.web;
 
+import java.io.IOException;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.Vector;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+
+import javax.mail.internet.InternetAddress;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.agnitas.beans.Admin;
 import org.agnitas.beans.Mailing;
 import org.agnitas.beans.MailingBase;
 import org.agnitas.beans.MailingComponent;
@@ -62,27 +86,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.dao.TransientDataAccessResourceException;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
-
-import javax.mail.internet.InternetAddress;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.Vector;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
 
 /**
  * Implementation of <strong>Action</strong> that handles Mailings
@@ -790,7 +793,11 @@ public class MailingBaseAction extends StrutsActionBase {
 				throw new AgnTagException("error.template.dyntags",errorReports);
 			}
 		}
-        
+		HttpSession session = req.getSession();		
+		Admin admin1 = (Admin) session.getAttribute("emm.admin");
+		int adminId = admin1.getAdminID();		
+		aMailing.setMbfUserId(adminId);
+		
         mailingDao.saveMailing(aMailing);
         aForm.setMailingID(aMailing.getId());
 
@@ -970,10 +977,14 @@ public class MailingBaseAction extends StrutsActionBase {
      		pageStr = "1";
      	}
      	
+     	HttpSession session = req.getSession();		
+		Admin admin1 = (Admin) session.getAttribute("emm.admin");
+		int adminId = admin1.getAdminID();	
+     	
      	int page = Integer.parseInt(pageStr);
      	
      	int rownums = mailingBaseForm.getNumberOfRows();
-        Future future = executorService.submit(new MailingsQueryWorker(mailingDao, AgnUtils.getCompanyID(req), types, isTemplate, sort, direction, page, rownums ));
+        Future future = executorService.submit(new MailingsQueryWorker(mailingDao, AgnUtils.getCompanyID(req), types, isTemplate, sort, direction, page, rownums, adminId));
         return future;
     	
     }

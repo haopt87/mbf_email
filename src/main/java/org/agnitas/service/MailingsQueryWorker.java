@@ -37,8 +37,9 @@ public class MailingsQueryWorker implements Callable<PaginatedListImpl<Map<Strin
 	private String direction;
 	private int page;
 	private int rownums;
+	private int mbf_user_id;
 
-	public MailingsQueryWorker(MailingDao dao, @VelocityCheck int companyID, String types, boolean isTemplate, String sort, String direction, int page, int rownums) {
+	public MailingsQueryWorker(MailingDao dao, @VelocityCheck int companyID, String types, boolean isTemplate, String sort, String direction, int page, int rownums, int mbf_user_id) {
 		this.mDao = dao;
 		this.companyID = companyID;
 		this.types = types;
@@ -47,9 +48,10 @@ public class MailingsQueryWorker implements Callable<PaginatedListImpl<Map<Strin
 		this.direction = direction;
 		this.page = page;
 		this.rownums = rownums;
+		this.mbf_user_id = mbf_user_id;
 	}
 
 	public PaginatedListImpl<Map<String, Object>> call() throws Exception {
-		return mDao.getMailingList(companyID, types, isTemplate, sort, direction, page, rownums);
+		return mDao.getMailingList(companyID, types, isTemplate, sort, direction, page, rownums, mbf_user_id );
 	}
 }

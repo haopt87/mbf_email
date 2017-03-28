@@ -481,7 +481,7 @@ public class MailingDaoImpl extends BaseDaoImpl implements MailingDao {
     }
 
 	@Override
-	public PaginatedListImpl<Map<String, Object>> getMailingList(@VelocityCheck int companyID, String types, boolean isTemplate, String sort, String direction, int page, int rownums) {
+	public PaginatedListImpl<Map<String, Object>> getMailingList(@VelocityCheck int companyID, String types, boolean isTemplate, String sort, String direction, int page, int rownums, int mbf_user_id) {
 		JdbcTemplate aTemplate = new JdbcTemplate((DataSource) applicationContext.getBean("dataSource"));
 		List<String> charColumns = Arrays.asList(new String[] { "shortname", "description", "mailinglist" });
 
@@ -507,13 +507,25 @@ public class MailingDaoImpl extends BaseDaoImpl implements MailingDao {
 			sortClause = " ORDER BY send_null ASC, senddate DESC, mailing_id DESC";
 		}
 
+//		String sqlStatement = " SELECT *, case when senddate is null then 0 else 1 end as send_null " + " FROM (SELECT a.mailing_id, a.shortname  , a.description ,   min(c."
+//				+ AgnUtils.changeDateName() + ") senddate, m.shortname mailinglist "
+//				+ " FROM (mailing_tbl  a LEFT JOIN mailing_account_tbl c ON (a.mailing_id=c.mailing_id AND c.status_field='W')) "
+//				+ " LEFT JOIN mailinglist_tbl m ON (a.mailinglist_id=m.mailinglist_id AND a.company_id=m.company_id) "
+//				+ "  WHERE a.company_id = ? AND m.deleted=0 AND a.deleted = 0 AND a.is_template=?" + mailingTypes
+//				+ "  GROUP BY a.mailing_id, a.shortname, a.description, m.shortname ) openemm" + sortClause;
+		
+		String sqlByPermission = "";
+		if (mbf_user_id != 1) {
+			sqlByPermission = " AND a.mbf_user_id = " + mbf_user_id;
+		}
+
 		String sqlStatement = " SELECT *, case when senddate is null then 0 else 1 end as send_null " + " FROM (SELECT a.mailing_id, a.shortname  , a.description ,   min(c."
 				+ AgnUtils.changeDateName() + ") senddate, m.shortname mailinglist "
 				+ " FROM (mailing_tbl  a LEFT JOIN mailing_account_tbl c ON (a.mailing_id=c.mailing_id AND c.status_field='W')) "
 				+ " LEFT JOIN mailinglist_tbl m ON (a.mailinglist_id=m.mailinglist_id AND a.company_id=m.company_id) "
-				+ "  WHERE a.company_id = ? AND m.deleted=0 AND a.deleted = 0 AND a.is_template=?" + mailingTypes
-				+ "  GROUP BY a.mailing_id, a.shortname, a.description, m.shortname ) openemm" + sortClause;
-
+				+ "  WHERE a.company_id = ? AND m.deleted=0 AND a.deleted = 0 AND a.is_template=? " + sqlByPermission + " " + mailingTypes
+				+ "  GROUP BY a.mailing_id, a.shortname, a.description, m.shortname ) openemm" + sortClause;		
+		
 		int totalsize = aTemplate.queryForInt("select count(*) from ( " + sqlStatement + ") agn", new Object[] { companyID, (isTemplate ? 1 : 0) });
         page = AgnUtils.getValidPageNumber(totalsize, page, rownums);
         int offset = (page - 1) * rownums;
