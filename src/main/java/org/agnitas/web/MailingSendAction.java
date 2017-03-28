@@ -70,6 +70,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.Connection;
@@ -292,6 +293,12 @@ public class MailingSendAction extends StrutsActionBase {
         if(!AgnUtils.isUserLoggedIn(req)) {
             return mapping.findForward("logon");
         }
+        
+//
+//		HttpSession session = req.getSession();		
+//		Admin admin = (Admin) session.getAttribute("emm.admin");
+//		int adminId = admin.getAdminID();
+			
 
         aForm=(MailingSendForm)form;
         if (logger.isInfoEnabled()) logger.info("Action: " + aForm.getAction());
@@ -337,10 +344,12 @@ public class MailingSendAction extends StrutsActionBase {
                     break;
 
                 case MailingSendAction.ACTION_VIEW_SEND2:
+                	//TODO
                     if(allowed("mailing.send.show", req)) {
                         loadMailing(aForm, req);
                         loadSendStats(aForm, req);
                         aForm.setAction(MailingSendAction.ACTION_CONFIRM_SEND_WORLD);
+                        
                         Set<Integer> targetGroups = (Set<Integer>) aForm.getTargetGroups();
                         if(targetGroups == null){
                             targetGroups = new HashSet<Integer>();
@@ -810,8 +819,20 @@ public class MailingSendAction extends StrutsActionBase {
         mailingDao.saveMailing(aMailing);
         if (startGen==1 && maildropEntry.getStatus() != MaildropEntry.STATUS_ACTIONBASED && maildropEntry.getStatus() != MaildropEntry.STATUS_DATEBASED) {
 			CmsUtils.generateClassicTemplate(aForm.getMailingID(), req, getApplicationContext(req));
-            aMailing.triggerMailing(maildropEntry.getId(), new Hashtable<String, Object>(), this.getApplicationContext(req));
+			
+			
+			Map<String, Object> maps = new Hashtable<String, Object>();
+	
+			HttpSession session = req.getSession();		
+			Admin admin1 = (Admin) session.getAttribute("emm.admin");
+			int adminId = admin1.getAdminID();
+			maps.put("mbf_user_id", adminId);
+			
+			
+//            aMailing.triggerMailing(maildropEntry.getId(), new Hashtable<String, Object>(), this.getApplicationContext(req));
+            aMailing.triggerMailing(maildropEntry.getId(), maps, this.getApplicationContext(req));
         }
+        
         if (logger.isInfoEnabled()) {
         	logger.info("send mailing id: "+aMailing.getId()+" type: "+maildropEntry.getStatus());
         }

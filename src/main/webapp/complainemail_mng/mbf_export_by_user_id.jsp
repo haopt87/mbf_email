@@ -16,10 +16,11 @@
 
 <c:set var="ACTION_VIEW" value="2" />
 
-<div class="export_stats_content">
+<div class="export_stats_content"> 
         <div class="target_view_link_container">
         	Nhấn vào nút bên cạnh để tải về
-            <div class="action_button download_button"><a href="/Openemm/complainemail_mng.do;jsessionid=${sessionId}?action=11"><span>Tải về</span></a>
+<%--             <div class="action_button download_button"><a href="/Openemm/update.do;jsessionid=${sessionId}?action=23"><span>Tải về</span></a> --%>
+            <div class="action_button download_button"><a href="/Openemm/admin.do;jsessionid=${sessionId}?action=23"><span>Tải về</span></a>
             </div>
         </div>
         <br>        

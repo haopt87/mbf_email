@@ -91,6 +91,10 @@
 		<parameter-def id="navigation-bundle" type="string" />
 	</extension-point>
 	
+	<extension-point id="tabs.complainemail_mng.export">
+		<parameter-def id="navigation-bundle" type="string" />
+	</extension-point>
+	
 	<!--MOBIFONE END-->
 	<!-- tabs menu -->
 

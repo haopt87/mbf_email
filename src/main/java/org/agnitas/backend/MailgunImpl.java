@@ -223,7 +223,10 @@ public class MailgunImpl implements Mailgun {
     private void doPrepare (Hashtable <String, Object> opts) throws Exception {
         data.resume ();
         data.options (opts, 1);
-
+        
+        Integer mbfUserId = (Integer) opts.get("mbf_user_id");
+        data.setMbfUserId(mbfUserId);
+        
         data.logging (Log.DEBUG, "prepare", "Starting firing");
         // create new Block collection and store in member var
         allBlocks = (BlockCollection) mkBlockCollection ();

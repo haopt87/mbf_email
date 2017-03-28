@@ -176,16 +176,11 @@ public class ShowNavigationTag extends BodyTagSupport {
 
 		try {
     		if( declaringPlugin == null || declaringPlugin.equals( "")) {
-    			
     			String resNavPath = "navigation" + "." + navigation;
-    			//System.out.println("xba: prepareNavigationData()- 182:" + resNavPath);
     			resourceBundle = ResourceBundle.getBundle( resNavPath);
     			prepareNavigationDataFromResourceBundle( resourceBundle, null, null);
     		} else {
 				resourceBundle = getExtensionResourceBundle( declaringPlugin, navigation);
-				
-				//System.out.println("xba: prepareNavigationData()- 188 :" + extension);
-				
 	    		prepareNavigationDataFromResourceBundle( resourceBundle, declaringPlugin, extension);
 			}
 
@@ -230,8 +225,6 @@ public class ShowNavigationTag extends BodyTagSupport {
             if( logger.isInfoEnabled()) {
                 logger.info( "extension '" + extension + "' in plugin '" + plugin + "' added menu item. Label key is: " + msgKey);
             }
-            //System.out.println("xba: prepareNavigationDataFromResourceBundle()- 234:" + resourceBundle.getString( msgKey) +":" + resourceBundle.getString( tokenKey));
-            
             navigationData = new NavigationData( resourceBundle.getString( msgKey), resourceBundle.getString( tokenKey),
                     resourceBundle.getString( hrefKey), getDataQuietly(resourceBundle, showWithoutPermissionKey).equals("true"),
                     getDataQuietly(resourceBundle, hintWithoutPermissionKey),
@@ -255,8 +248,7 @@ public class ShowNavigationTag extends BodyTagSupport {
 		//getting data from navigation.property file for the extension point
 		String plugin = resourceBundle.getString( "navigation.plugin");
 		String extensionPoint = resourceBundle.getString( "navigation.extensionpoint");
-
-        //System.out.println("xba prepareNavigationDataFromExtensionPoints() - 289:" + plugin + ":" + extensionPoint);
+		
 		ExtensionSystem extensionSystem = ExtensionUtils.getExtensionSystem( pageContext.getServletContext());
 		Collection<Extension> extensions = extensionSystem.getActiveExtensions( plugin, extensionPoint);
 		
@@ -270,7 +262,7 @@ public class ShowNavigationTag extends BodyTagSupport {
 	
 	private void setBodyAttributes() {
 		NavigationData navigationData = this.navigationDataIterator.next();
-		navigationIndex++;	
+		navigationIndex++;
 		
 		logger.info( "setting navigation attributes " + prefix + "_navigation_href = " + navigationData.getHref());
 		
@@ -287,10 +279,7 @@ public class ShowNavigationTag extends BodyTagSupport {
         pageContext.setAttribute( prefix + "_navigation_isShowWithoutPermission",  navigationData.getShowWithoutPermissionKey());
         pageContext.setAttribute( prefix + "_navigation_hintWithoutPermission",  navigationData.getHintWithoutPermissionKey().trim());
         pageContext.setAttribute( prefix + "_navigation_isHideAnyCase",  (navigationData.getHideForMysqlKey() && !AgnUtils.isOracleDB()));
-        
-        //System.out.println("xba setBodyAttributes() - 289:" + navigationData.getMessage().trim());
         pageContext.setAttribute( prefix + "_navigation_navMsg", navigationData.getMessage().trim());
-        
         pageContext.setAttribute( prefix + "_navigation_index", Integer.valueOf(this.navigationIndex));
         pageContext.setAttribute( prefix + "_navigation_plugin", navigationData.getPlugin() != null ? navigationData.getPlugin().trim() : "");
         pageContext.setAttribute( prefix + "_navigation_extension", navigationData.getExtension() != null ? navigationData.getExtension().trim() : "");

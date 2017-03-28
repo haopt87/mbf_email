@@ -142,11 +142,12 @@
 
 		<!-- Process a update -->
 		<action path="/update" type="org.agnitas.web.UpdateAction"
-                name="updateForm" scope="request" input="start">
+                name="updateForm" scope="request" input="start">                
             <forward name="success" path="update_update"/>
             <forward name="question" path="update_update_question"/>
             <forward name="error" path="update_update_error"/>
             <forward name="list" path="splash_settings"/>
+            <forward name="export" path="mbf_export_by_user_id"/>
 		</action>
 
 		<!-- Process a campaign -->
@@ -168,6 +169,7 @@
             <forward name="delete" path="settings_admin_delete"/>
             <forward name="rights" path="settings_admin_rights"/>
             <forward name="loading" path="admin_loading"/>
+            <forward name="export" path="mbf_export_by_user_id"/>
 		</action>
 
         <!-- Process an userselfservice -->

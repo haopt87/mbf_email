@@ -29,6 +29,7 @@ import org.agnitas.beans.AdminPreferences;
 import org.agnitas.beans.impl.AdminImpl;
 import org.agnitas.beans.impl.DepartmentImpl;
 import org.agnitas.beans.impl.MbfCompanyImpl;
+import org.agnitas.beans.impl.MbfExportImpl;
 import org.agnitas.beans.impl.PaginatedListImpl;
 import org.agnitas.dao.AdminDao;
 import org.agnitas.dao.AdminGroupDao;
@@ -36,6 +37,7 @@ import org.agnitas.dao.AdminPreferencesDao;
 import org.agnitas.dao.CompanyDao;
 import org.agnitas.dao.DepartmentDao;
 import org.agnitas.dao.MbfCompanyDao;
+import org.agnitas.dao.MbfExportDao;
 import org.agnitas.emm.core.commons.password.PasswordCheck;
 import org.agnitas.emm.core.commons.password.PasswordCheckHandler;
 import org.agnitas.emm.core.commons.password.StrutsPasswordCheckHandler;
@@ -46,6 +48,10 @@ import org.agnitas.web.forms.AdminForm;
 import org.agnitas.web.forms.StrutsFormBase;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -54,10 +60,16 @@ import org.apache.struts.action.ActionMessages;
 import org.springframework.beans.factory.annotation.Required;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
@@ -68,6 +80,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -84,6 +97,8 @@ public class AdminAction extends StrutsActionBase {
     /** The logger. */
 	private static final transient Logger logger = Logger.getLogger(AdminAction.class);
 
+    private static final String CHARSET = "UTF-8";
+	public static final String EXPORT_FILE_DIRECTORY = AgnUtils.getTempDir() + File.separator + "RecipientExport";
 	public static final int ACTION_VIEW_RIGHTS = ACTION_LAST + 1;
 	public static final int ACTION_SAVE_RIGHTS = ACTION_LAST + 2;
 	public static final int ACTION_VIEW_WITHOUT_LOAD = ACTION_LAST + 3;
@@ -108,6 +123,8 @@ public class AdminAction extends StrutsActionBase {
 	
 	/** Service for accessing configuration. */
 	protected ConfigService configService;
+	
+	private MbfExportDao mbfExportDao;
 	
 	/** Password checker and error reporter. */
 	private PasswordCheck passwordCheck;
@@ -351,6 +368,13 @@ public class AdminAction extends StrutsActionBase {
 				destination = prepareList(mapping, req, errors, destination,
 						aForm);
 				break;
+			case 22:
+            	destination=mapping.findForward("export");
+				req.setAttribute("sessionId", req.getSession().getId());
+				break;
+			case 23:
+				exportData(req, res);
+				break;
 			default:
 				aForm.setAction(AdminAction.ACTION_LIST);
 				destination = prepareList(mapping, req, errors, destination,
@@ -377,6 +401,115 @@ public class AdminAction extends StrutsActionBase {
 		}
 
 		return destination;
+	}
+	
+	@SuppressWarnings("unused")
+	private void exportData(HttpServletRequest req,
+			HttpServletResponse res) throws IOException, ServletException {
+		
+		res.setContentType("text/plain");
+		String outFileName = "ExportBillByUser";
+		String outFile = "";		
+		res.setHeader("Content-Disposition", "attachment; filename=\"" + outFileName + ".xlsx\";");
+		res.setCharacterEncoding("");
+		
+		ActionMessages errors = new ActionMessages();
+		XSSFWorkbook workbook = new XSSFWorkbook();
+		// Create a blank sheet
+		XSSFSheet sheet = workbook.createSheet("Sheet0");
+		Map<String, Object[]> data = new TreeMap<String, Object[]>();
+		String[] rows = outFile.split("\r\n");
+		Object[] header = new Object[8];
+		header[0] = "Mã NV";
+		header[1] = "Tài khoản";
+		header[2] = "Tên tài khoản";
+		header[3] = "Tên chiến dịch";
+		header[4] = "Số email";
+		header[5] = "Đơn giá";
+		header[6] = "Tổng chi phí";
+		header[7] = "Ngày tạo";
+				
+		data.put(0 + "", header);	
+		
+		int count = 1;
+
+		HttpSession session = req.getSession();		
+		Admin admin1 = (Admin) session.getAttribute("emm.admin");
+		int adminId = admin1.getAdminID();		
+		
+		List<MbfExportImpl> lists = this.mbfExportDao.getMbfExportImpls(adminId);
+		
+		for (MbfExportImpl mbfExportImpl : lists) {
+			count++;
+			Object[] content = new Object[8];
+			content[0] = mbfExportImpl.getId();
+			content[1] = mbfExportImpl.getUserName();
+			content[2] = mbfExportImpl.getFullName();
+			content[3] = mbfExportImpl.getCampainName();
+			content[4] = mbfExportImpl.getTotalMailsOfCampain();
+			content[5] = "1000";
+			content[6] = mbfExportImpl.getTotalMailsOfCampain() * 1000;
+			content[7] = mbfExportImpl.getCreationDate();		
+			
+			data.put(count + "", content);
+		}
+		// Iterate over data and write to sheet
+		Set<String> keyset = data.keySet();
+		int rownum = 0;
+		for (String key : keyset) {
+			Row row = sheet.createRow(rownum++);
+			Object[] objArr = data.get(key);
+			int cellnum = 0;
+			for (Object obj : objArr) {
+				Cell cell = row.createCell(cellnum++);
+				if (obj instanceof String){
+					cell.setCellValue((String) obj);
+				}	
+				else if (obj instanceof Integer){
+					cell.setCellValue((Integer) obj);
+				}	
+				else if (obj instanceof Date){
+					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+					String stDate = dateFormat.format(((Date) obj).getTime());
+					cell.setCellValue(stDate);	
+				}					
+			}
+		}
+		
+		
+		try {
+			// Write the workbook in file system
+			File fileOutput = new File(
+					EXPORT_FILE_DIRECTORY + File.separator + "ExportData_" + System.currentTimeMillis() + ".xlsx");
+			// System.out.println(fileOutput.getAbsolutePath());
+			FileOutputStream out1 = new FileOutputStream(fileOutput);
+			workbook.write(out1);
+			out1.close();
+			byte bytes[] = new byte[16384];
+			int len = 0;
+			if (fileOutput != null) {
+				FileInputStream instream = null;
+				try {
+					instream = new FileInputStream(fileOutput);
+					res.setContentType("application/zip");
+					res.setHeader("Content-Disposition", "attachment; filename=\"" + outFileName + ".xlsx\";");
+					res.setContentLength((int) fileOutput.length());
+					ServletOutputStream ostream = res.getOutputStream();
+					while ((len = instream.read(bytes)) != -1) {
+						ostream.write(bytes, 0, len);
+					}
+				} finally {
+					if (instream != null) {
+						instream.close();
+					}
+				}
+			} else {
+				errors.add("global", new ActionMessage("error.export.file_not_ready"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
         
     /**
@@ -1054,5 +1187,19 @@ public class AdminAction extends StrutsActionBase {
 	 */
 	public void setDepartmentDao(DepartmentDao departmentDao) {
 		this.departmentDao = departmentDao;
+	}
+
+	/**
+	 * @return the mbfExportDao
+	 */
+	public MbfExportDao getMbfExportDao() {
+		return mbfExportDao;
+	}
+
+	/**
+	 * @param mbfExportDao the mbfExportDao to set
+	 */
+	public void setMbfExportDao(MbfExportDao mbfExportDao) {
+		this.mbfExportDao = mbfExportDao;
 	}
 }

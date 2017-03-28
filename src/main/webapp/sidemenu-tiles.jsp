@@ -54,10 +54,5 @@
 				</li>
 			</agn:ShowByPermission>
 		</agn:ShowNavigation>
-<!-- 				<li> -->
-<%-- 					<html:link page="/department_mng.do?action=1" styleClass="left_navigation_level1_no_round"> --%>
-<!-- 						Quản lý phòng ban -->
-<%-- 					</html:link>  --%>
-<!-- 				</li> -->
 	</ul>
 </div>

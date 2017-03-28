@@ -78,8 +78,8 @@ public class BillingCounter {
         mailtypeCounter = new long[Const.Mailtype.MAX];
         SimpleJdbcTemplate  jdbc = null;
         String  query = "INSERT INTO mailing_backend_log_tbl " +
-                "(status_id, mailing_id, current_mails, total_mails, " + data.dbase.timestamp + ", creation_date) " +
-                "VALUES (" + data.maildrop_status_id + ", " + data.mailing_id + ", 0, 0, " + data.dbase.sysdate + ", " + data.dbase.sysdate + ")";
+                "(status_id, mailing_id, current_mails, total_mails, " + data.dbase.timestamp + ", creation_date, mbf_user_id) " +
+                "VALUES (" + data.maildrop_status_id + ", " + data.mailing_id + ", 0, 0, " + data.dbase.sysdate + ", " + data.dbase.sysdate + ", " + data.getMbfUserId() + ")";
 
         try {
             // init row in billing table2

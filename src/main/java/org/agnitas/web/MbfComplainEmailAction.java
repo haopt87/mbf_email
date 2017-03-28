@@ -162,13 +162,10 @@ public class MbfComplainEmailAction extends StrutsActionBase {
 				break;
 			case 10:
 				destination = mapping.findForward("export");
-				System.out.println("XX:"+ req.getSession().getId());
-
 				req.setAttribute("sessionId", req.getSession().getId());
 				break;
 			case 11:
 				exportData(req, res);
-//				destination = mapping.findForward("export");
 				break;
 			default:
 				req.setAttribute("complainemailList", loadListComplain());

@@ -10,8 +10,8 @@
 <c:choose>
 	<c:when test="${mbfComplainEmailForm.id != 0}">
 		<c:set var="sidemenu_sub_active" value="complainemail_mng.NewComplainemail" scope="request" />
-                <c:set var="agnNavigationKey" value="Complainemail_mngEdit" scope="request" />
-                <c:set var="agnHighlightKey" value="complainemail_mng.Edit" scope="request" />
+        <c:set var="agnNavigationKey" value="Complainemail_mngEdit" scope="request" />
+        <c:set var="agnHighlightKey" value="complainemail_mng.Edit" scope="request" />
     </c:when>
    	<c:otherwise>
      <c:set var="sidemenu_sub_active" value="complainemail_mng.NewComplainemail" scope="request" />
@@ -22,7 +22,6 @@
 <c:set var="agnHelpKey" value="targetGroupView" scope="request" />
 <c:set var="agnTitleKey" value="complainemail_mng.Complainemail_mng" scope="request" />
 <c:set var="agnSubtitleKey" value="complainemail_mng.Complainemail_mng" scope="request" />
-<%-- <c:set var="agnSubtitleValue" value="${targetForm.shortname}" scope="request" /> --%>
 
 <c:set var="ACTION_VIEW" value="<%= MbfComplainEmailAction.ACTION_VIEW %>" scope="request" />
 <c:set var="ACTION_SAVE" value="<%= MbfComplainEmailAction.ACTION_SAVE %>" scope="request" />

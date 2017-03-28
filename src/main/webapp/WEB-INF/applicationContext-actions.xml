@@ -175,6 +175,7 @@
 	</bean>
 
 	<bean name="/admin" class="org.agnitas.web.AdminAction">
+		<property name="mbfExportDao" ref="MbfExportDao" />
 		<property name="adminDao" ref="AdminDao" />
 		<property name="configService" ref="ConfigService" />
 		<property name="adminGroupDao" ref="AdminGroupDao" />

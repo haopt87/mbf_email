@@ -882,6 +882,10 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
+	<bean id="MbfExportDao" class="org.agnitas.dao.impl.MbfExportDaoImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
 	<!--MOBIFONE END-->
 	<!-- ***************************************************************** -->
 	<!-- ***************************************************************** -->

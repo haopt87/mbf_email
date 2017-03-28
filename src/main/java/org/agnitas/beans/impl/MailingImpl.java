@@ -739,7 +739,12 @@ public class MailingImpl extends MailingBaseImpl implements Mailing {
 			}
 			aMailgun = (Mailgun) con.getBean("Mailgun");
 			aMailgun.initializeMailgun(Integer.toString(maildropStatusID));
-			aMailgun.prepareMailgun(new Hashtable<String, Object>());
+			Hashtable<String, Object> maps = new Hashtable<String, Object>();
+//			opts.get("mbf_user_id");
+			maps.put("mbf_user_id", opts.get("mbf_user_id"));
+			aMailgun.prepareMailgun(maps);
+//			aMailgun.prepareMailgun(new Hashtable<String, Object>());
+			
 			aMailgun.executeMailgun(opts);
 		} catch (Exception e) {
 			logger.error("triggerMailing", e);

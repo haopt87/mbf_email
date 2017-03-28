@@ -1623,6 +1623,23 @@ public class Data {
             virtualMapMulti = (Hashtable <Long, Hashtable <String, String>>) opts.get ("virtual-multi");
         }
     }
+    
+    private Integer mbfUserId;
+    
+	/**
+	 * @return the mbfUserId
+	 */
+	public Integer getMbfUserId() {
+		return mbfUserId;
+	}
+
+	/**
+	 * @param mbfUserId the mbfUserId to set
+	 */
+	public void setMbfUserId(Integer mbfUserId) {
+		this.mbfUserId = mbfUserId;
+	}
+
 
     /**
      * Should we use this record, according to our virtual data?
