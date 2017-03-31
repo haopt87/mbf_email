@@ -6,13 +6,13 @@
 
 <agn:Permission token="profileField.show"/>
 
-<%-- <% request.setAttribute("sidemenu_active", new String("ExportReport1")); %> --%>
+<% request.setAttribute("sidemenu_active", new String("Administration")); %>
 <% request.setAttribute("sidemenu_sub_active", new String("settings.ExportReport1")); %>
 <% request.setAttribute("agnTitleKey", new String("settings.ExportReport1")); %>
 <% request.setAttribute("agnSubtitleKey", new String("settings.ExportReport1")); %>
 <% request.setAttribute("agnNavigationKey", new String("admins")); %>
 <% request.setAttribute("agnHighlightKey", new String("settings.ExportReport1")); %>
-<% request.setAttribute("sidemenu_active", new String("Administration")); %>      
+
 
 
 

@@ -114,6 +114,9 @@
 			
 		<form-bean name="mbfComplainEmailForm"
 			type="org.agnitas.web.MbfComplainEmailForm" />
+			
+		<form-bean name="exportreportForm"
+			type="org.agnitas.web.ExportreportForm" />
 		<!--MOBIFONE END-->
 		<!-- ***************************************************************** -->
 	    <!-- ***************************************************************** -->
@@ -142,7 +145,7 @@
 
 		<!-- Process a update -->
 		<action path="/update" type="org.agnitas.web.UpdateAction"
-                name="updateForm" scope="request" input="start">                
+                name="updateForm" scope="request" input="start">
             <forward name="success" path="update_update"/>
             <forward name="question" path="update_update_question"/>
             <forward name="error" path="update_update_error"/>
@@ -260,8 +263,17 @@
             <forward name="list" path="complainemail_mng_list"/>
             <forward name="view" path="complainemail_mng_view"/>
             <forward name="export" path="complainemail_export"/>
-            <forward name="success" path="company_mng_view"/>
-		</action>		
+            <forward name="success" path="complainemail_mng_view"/>
+		</action>	
+		
+        <action path="/exportreport"
+			type="org.springframework.web.struts.DelegatingActionProxy" name="exportreportForm"
+                scope="session" input="exportreport_view">
+            <forward name="view" path="exportreport_view"/>
+            <forward name="list" path="exportreport_list"/>
+            <forward name="export_detail" path="exportreport_export"/>
+            <forward name="success" path="exportreport_view"/>
+		</action>
 		
 		<!--MOBIFONE END-->
 		<!-- ***************************************************************** -->

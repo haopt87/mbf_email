@@ -275,7 +275,6 @@ public class MbfComplainEmailAction extends StrutsActionBase {
 					cell.setCellValue((Integer) obj);
 				}	
 				else if (obj instanceof Date){
-					System.out.println("obj:"+ obj);
 					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 					String stDate = dateFormat.format(((Date) obj).getTime());
 					cell.setCellValue(stDate);	
@@ -364,7 +363,6 @@ public class MbfComplainEmailAction extends StrutsActionBase {
 		aForm.setOtherInformation(obj.getOtherInformation());
 		aForm.setResolveInformation(obj.getResolveInformation());
 		aForm.setStatus(obj.getStatus());
-		
 	}
 
 	/**

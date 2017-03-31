@@ -95,6 +95,39 @@
 		<parameter-def id="navigation-bundle" type="string" />
 	</extension-point>
 	
+	
+	
+	
+	
+	<extension-point id="navigation.exportreport">
+		<parameter-def id="navigation-bundle" type="string" />
+	</extension-point>
+		
+	<extension-point id="tabs.exportreport.overview">
+		<parameter-def id="navigation-bundle" type="string" />
+	</extension-point>
+
+	<extension-point id="tabs.exportreport.new">
+		<parameter-def id="navigation-bundle" type="string" />
+	</extension-point>
+	
+	<extension-point id="tabs.exportreport.edit">
+		<parameter-def id="navigation-bundle" type="string" />
+	</extension-point>
+	
+	<extension-point id="tabs.exportreport.export">
+		<parameter-def id="navigation-bundle" type="string" />
+	</extension-point>
+	
+	
+	<!--extension-point id="tabs.exportcampaingbyuser">
+		<parameter-def id="navigation-bundle" type="string" />
+	</extension-point>
+
+	<extension-point id="tabs.exportcampaingbyuser.edit">
+		<parameter-def id="navigation-bundle" type="string" />
+	</extension-point-->
+	
 	<!--MOBIFONE END-->
 	<!-- tabs menu -->
 

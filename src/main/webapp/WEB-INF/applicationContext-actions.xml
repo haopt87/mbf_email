@@ -303,6 +303,19 @@
 		<property name="mbfComplainEmailDao" ref="MbfComplainEmailDao" />
 	</bean>
 	
+	
+	<bean name="/exportreport" class="org.agnitas.web.ExportreportAction">
+		<property name="configService" ref="ConfigService" />
+		<property name="userActivityLogService" ref="UserActivityLogService" />
+		<property name="mbfCompanyDao" ref="MbfCompanyDao" />
+		<property name="departmentDao" ref="DepartmentDao" />
+		<property name="mbfSettingSystemDao" ref="MbfSettingSystemDao" />
+		
+	</bean>
+	
+	
+	
+	
 		<!--MOBIFONE END-->
 		<!-- ***************************************************************** -->
 	    <!-- ***************************************************************** -->

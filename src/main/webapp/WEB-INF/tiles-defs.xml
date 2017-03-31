@@ -783,10 +783,46 @@
     </definition>
     
     
+    
+    
     <definition name="mbf_export_by_user_id" extends="base">
         <put name="body" value="complainemail_mng/mbf_export_by_user_id.jsp" type="page"/>
         <put name="page-setup" value="complainemail_mng/mbf_export_by_user_id-setup.jsp" type="page"/>
     </definition>
+    
+    
+    
+    
+    
+    
+    
+    <definition name="exportreport_list" extends="base">
+        <put name="body" value="mbf_export_campain/export-campain-list.jsp" type="page"/>
+        <put name="page-setup" value="mbf_export_campain/export-campain-list-setup.jsp" type="page"/>
+        <put name="messages" value="/messages-transitional.jsp" type="page"/>
+    </definition>
+    
+    <definition name="exportreport_view" extends="base">
+        <put name="body" value="mbf_export_campain/export-campain-view.jsp" type="page"/>
+        <put name="page-setup" value="mbf_export_campain/export-campain-view-setup.jsp" type="page"/>
+    </definition>
+    
+    
+    <definition name="exportreport_export" extends="base">
+        <put name="body" value="mbf_export_campain/export-campain-export.jsp" type="page"/>
+        <put name="page-setup" value="mbf_export_campain/export-campain-export-setup.jsp" type="page"/>
+    </definition>
+    
+    
+    <!--definition name="mbf_export_campaing_by_user_id_view" extends="base">
+        <put name="body" value="mbf_export_campain/export-campain-view.jsp" type="page"/>
+        <put name="page-setup" value="mbf_export_campain/export-campain-view-setup.jsp" type="page"/>
+    </definition>
+    
+    <definition name="mbf_export_campaing_by_user_id_list" extends="base">
+        <put name="body" value="mbf_export_campain/export-campain-list.jsp" type="page"/>
+        <put name="page-setup" value="mbf_export_campain/export-campain-list-setup.jsp" type="page"/>
+    </definition-->
     
 	<!--MOBIFONE END-->
 	<!-- ***************************************************************** -->

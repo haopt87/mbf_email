@@ -16,13 +16,19 @@
 
 <c:set var="ACTION_VIEW" value="2" />
 
-<div class="export_stats_content"> 
-        <div class="target_view_link_container">
-        	Nhấn vào nút bên cạnh để tải về
-<%--             <div class="action_button download_button"><a href="/Openemm/update.do;jsessionid=${sessionId}?action=23"><span>Tải về</span></a> --%>
-            <div class="action_button download_button"><a href="/Openemm/admin.do;jsessionid=${sessionId}?action=23"><span>Tải về</span></a>
-            </div>
+<div class="blue_box_container">
+    <div class="blue_box_top"></div>
+    <div class="blue_box_content">
+        <div class="admin_filed_detail_topic_item">
+        	Thực hiện xuất báo cáo tổng thể các chiến dịch của tài khoản đang đăng nhập               
         </div>
-        <br>        
-</div> 
+    <div class="target_view_link_container">
+    	Nhấn vào nút bên cạnh để tải về
+<%--             <div class="action_button download_button"><a href="/Openemm/update.do;jsessionid=${sessionId}?action=23"><span>Tải về</span></a> --%>
+        <div class="action_button download_button"><a href="/Openemm/admin.do;jsessionid=${sessionId}?action=23"><span>Tải về</span></a>
+         </div>
+     </div>      
+</div>
+     <div class="blue_box_bottom"></div>
+</div>  
 

@@ -886,6 +886,11 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
+	<bean id="MbfSettingSystemDao" class="org.agnitas.dao.impl.MbfSettingSystemDaoImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	
 	<!--MOBIFONE END-->
 	<!-- ***************************************************************** -->
 	<!-- ***************************************************************** -->
