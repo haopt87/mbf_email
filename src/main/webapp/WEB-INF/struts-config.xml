@@ -117,6 +117,9 @@
 			
 		<form-bean name="exportreportForm"
 			type="org.agnitas.web.ExportreportForm" />
+			
+		<form-bean name="mbfSettingSystemForm"
+			type="org.agnitas.web.MbfSettingSystemForm" />
 		<!--MOBIFONE END-->
 		<!-- ***************************************************************** -->
 	    <!-- ***************************************************************** -->
@@ -269,11 +272,19 @@
         <action path="/exportreport"
 			type="org.springframework.web.struts.DelegatingActionProxy" name="exportreportForm"
                 scope="session" input="exportreport_view">
+            <forward name="view-over" path="exportreport_view"/>
             <forward name="view" path="exportreport_view"/>
             <forward name="list" path="exportreport_list"/>
             <forward name="export_detail" path="exportreport_export"/>
             <forward name="success" path="exportreport_view"/>
 		</action>
+		
+		<action path="/setting_system_view"
+			type="org.springframework.web.struts.DelegatingActionProxy" name="mbfSettingSystemForm"
+                scope="session" input="exportreport_view">            
+            <forward name="view" path="setting_system_view"/>
+		</action>
+		
 		
 		<!--MOBIFONE END-->
 		<!-- ***************************************************************** -->
@@ -286,6 +297,15 @@
             <forward name="select" path="stats_recipient_select"/>
             <forward name="display" path="stats_recipient_display"/>
 		</action>
+		
+		
+		<action path="/campaign_export_over"
+			type="org.springframework.web.struts.DelegatingActionProxy" name="exportreportForm"
+                scope="request" input="stats_recipient_select">
+            <forward name="view" path="campaign_export_over"/>
+		</action>
+		
+		
 
 		<!-- compare two up to n mailing response statistics -->
 		<action path="/mailing_compare"

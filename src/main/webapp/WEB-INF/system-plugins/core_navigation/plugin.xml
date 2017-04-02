@@ -119,6 +119,18 @@
 		<parameter-def id="navigation-bundle" type="string" />
 	</extension-point>
 	
+	<extension-point id="tabs.exportreport.overexport">
+		<parameter-def id="navigation-bundle" type="string" />
+	</extension-point>
+	
+	<extension-point id="tabs.campaign_export_over">
+		<parameter-def id="navigation-bundle" type="string" />
+	</extension-point>
+	
+	<extension-point id="tabs.mbf_setting_system">
+		<parameter-def id="navigation-bundle" type="string" />
+	</extension-point>
+	
 	
 	<!--extension-point id="tabs.exportcampaingbyuser">
 		<parameter-def id="navigation-bundle" type="string" />
@@ -194,7 +206,7 @@
 	<extension-point id="tabs.statistics.ip">
 		<parameter-def id="navigation-bundle" type="string" />
 	</extension-point>
-
+	
 	<extension-point id="tabs.mailinglists.edit">
 		<parameter-def id="navigation-bundle" type="string" />
 	</extension-point>
@@ -266,6 +278,11 @@
 	<extension-point id="tabs.statistics.recipients">
 		<parameter-def id="navigation-bundle" type="string" />
 	</extension-point>
+
+	<extension-point id="tabs.statistics.campaign_export_over">
+		<parameter-def id="navigation-bundle" type="string" />
+	</extension-point>
+
 
 	<extension-point id="tabs.recipients.edit">
 		<parameter-def id="navigation-bundle" type="string" />

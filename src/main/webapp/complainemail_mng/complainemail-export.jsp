@@ -7,21 +7,23 @@
 
 <agn:ShowColumnInfo id="colsel"/>
 
-<script type="text/javascript">
-	function submitAction(actionId) {
-		document.getElementsByName("action")[0].value = actionId;
-		document.mbfComplainEmailForm.submit();
-	}
-</script>
-
 <c:set var="ACTION_VIEW" value="2" />
 
-<div class="export_stats_content">
-        <div class="target_view_link_container">
-        	Nhấn vào nút bên cạnh để tải về
-            <div class="action_button download_button"><a href="/Openemm/complainemail_mng.do;jsessionid=${sessionId}?action=11"><span>Tải về</span></a>
-            </div>
-        </div>
-        <br>        
-</div> 
 
+<div class="blue_box_container">
+       <div class="blue_box_top"></div>
+       <div class="blue_box_content">
+           <div class="admin_filed_detail_topic_item">
+           	Thực hiện xuất báo cáo tình trạng khiếu nại của khách hàng đến thời điểm hiện tại               
+           </div>
+    
+	     <div class="contentbox_left_column">
+	     	<label for="mailing_name">Nhấn vào nút bên cạnh để tải về:</label>
+            <div class="action_button download_button"><a href="/Openemm/complainemail_mng.do;jsessionid=${sessionId}?action=11"><span>Tải về</span></a>
+            
+		 </div>
+	 </div>
+	 </div>
+       <div class="blue_box_bottom"></div>
+</div>  
+	

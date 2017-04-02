@@ -68,10 +68,10 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.springframework.beans.factory.annotation.Required;
 
-public class ExportreportAction extends StrutsActionBase {
+public class ExportCampaignAction extends StrutsActionBase {
 
 	/** The logger. */
-	private static final transient Logger logger = Logger.getLogger(ExportreportAction.class);
+	private static final transient Logger logger = Logger.getLogger(ExportCampaignAction.class);
 
 	public static final int ACTION_MAILINGLIST_RECIPIENTS_DELETE = ACTION_LAST + 3;
 	public static final int ACTION_MAILINGLIST_RECIPIENTS_CONFIRM_DELETE = ACTION_LAST + 4;
@@ -149,25 +149,25 @@ public class ExportreportAction extends StrutsActionBase {
 		try {
 			List<ExportreportForm> mbfCompanyList = null;			
 			switch (aForm.getAction()) {
-			case ExportreportAction.ACTION_LIST:
+			case ExportCampaignAction.ACTION_LIST:
 				List<ExportreportForm> list = loadMbfSettingSystem(errors);
 				
 				req.setAttribute("settingSystemLists", list);				
 				destination = mapping.findForward("list");
 				break;
 
-			case ExportreportAction.ACTION_VIEW:
+			case ExportCampaignAction.ACTION_VIEW:
 				if (aForm.getId() != 0) {
-					aForm.setAction(ExportreportAction.ACTION_SAVE);
+					aForm.setAction(ExportCampaignAction.ACTION_SAVE);
 					loadExportreport(aForm);
 				} else {
 					aForm.clearAllData();
-					aForm.setAction(ExportreportAction.ACTION_NEW);
+					aForm.setAction(ExportCampaignAction.ACTION_NEW);
 				}
 				destination = mapping.findForward("view");
 				break;
 
-			case ExportreportAction.ACTION_SAVE:	
+			case ExportCampaignAction.ACTION_SAVE:	
 				if (aForm.getSendEmail()== null || aForm.getSendEmail().equals("")) {
                     errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("error.mbf.setting.system.name.empty"));
 				} else {
@@ -220,7 +220,7 @@ public class ExportreportAction extends StrutsActionBase {
                 
 				break;
 			case 32:
-				destination = mapping.findForward("view-over");
+				destination = mapping.findForward("view");
 				req.setAttribute("sessionId", req.getSession().getId());
                 //load company list
 //				List<ExportreportUser> userList = this.mbfSettingSystemDao.getExportreportUsers();  

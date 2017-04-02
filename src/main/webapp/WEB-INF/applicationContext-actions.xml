@@ -252,6 +252,8 @@
 		<property name="userActivityLogService" ref="UserActivityLogService" />
 	</bean>
 
+	
+	
 	<bean name="/mwStart, /mwName, /mwTemplate, /mwType, /mwSendaddress, /mwMailtype, /mwSubject, /mwTarget, /mwTextmodules, /mwTextmodule, /mwLinks, /mwLink, /mwAttachment, /mwAttachmentDownload, /mwFinish" class="org.agnitas.web.MailingWizardAction">
 		<property name="mailinglistDao" ref="MailinglistDao" />
 		<property name="mailingDao" ref="MailingDao" />
@@ -314,6 +316,22 @@
 	</bean>
 	
 	
+	<bean name="/campaign_export_over" class="org.agnitas.web.ExportCampaignAction">
+		<property name="configService" ref="ConfigService" />
+		<property name="userActivityLogService" ref="UserActivityLogService" />
+		<property name="mbfCompanyDao" ref="MbfCompanyDao" />
+		<property name="departmentDao" ref="DepartmentDao" />
+		<property name="mbfSettingSystemDao" ref="MbfSettingSystemDao" />
+	</bean>
+	
+	
+	<bean name="/setting_system_view" class="org.agnitas.web.MbfSettingSystemAction">
+		<property name="configService" ref="ConfigService" />
+		<property name="userActivityLogService" ref="UserActivityLogService" />
+		<property name="mbfCompanyDao" ref="MbfCompanyDao" />
+		<property name="departmentDao" ref="DepartmentDao" />
+		<property name="mbfSettingSystemDao" ref="MbfSettingSystemDao" />
+	</bean>	
 	
 	
 		<!--MOBIFONE END-->

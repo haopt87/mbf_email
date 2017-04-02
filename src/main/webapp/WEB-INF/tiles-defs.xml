@@ -240,6 +240,15 @@
         <!-- This is for transitional phase only! For new pages, remove that "put" and use Struts messages and errors the correct way! -->
         <put name="messages" value="/messages-transitional.jsp" type="page"/>
     </definition>
+    
+    
+    <definition name="campaign_export_over" extends="base">    							
+        <put name="body" value="/mbf_export_campain/over/export-over-campain-export.jsp" type="page"/>
+        <put name="page-setup" value="/mbf_export_campain/over/export-over-campain-export-setup.jsp" type="page"/>
+        
+        <!-- This is for transitional phase only! For new pages, remove that "put" and use Struts messages and errors the correct way! -->
+        <put name="messages" value="/messages-transitional.jsp" type="page"/>
+    </definition>
 
     <definition name="stats_recipient_select" extends="base">
         <put name="body" value="/stats/recipient/stats-recipient-select.jsp" type="page"/>
@@ -814,15 +823,15 @@
     </definition>
     
     
-    <!--definition name="mbf_export_campaing_by_user_id_view" extends="base">
-        <put name="body" value="mbf_export_campain/export-campain-view.jsp" type="page"/>
-        <put name="page-setup" value="mbf_export_campain/export-campain-view-setup.jsp" type="page"/>
+    <definition name="over-exportreport_view" extends="base">
+        <put name="body" value="mbf_export_campain/export-over-campain-view.jsp" type="page"/>
+        <put name="page-setup" value="mbf_export_campain/export-over-campain-view-setup.jsp" type="page"/>
     </definition>
     
-    <definition name="mbf_export_campaing_by_user_id_list" extends="base">
-        <put name="body" value="mbf_export_campain/export-campain-list.jsp" type="page"/>
-        <put name="page-setup" value="mbf_export_campain/export-campain-list-setup.jsp" type="page"/>
-    </definition-->
+	<definition name="setting_system_view" extends="base">
+        <put name="body" value="mbf_setting_system/setting-system-view.jsp" type="page"/>
+        <put name="page-setup" value="mbf_setting_system/setting-system-view-setup.jsp" type="page"/>
+    </definition>
     
 	<!--MOBIFONE END-->
 	<!-- ***************************************************************** -->
