@@ -1,0 +1,15 @@
+1) add:
+	campaign_export_over => tiles-defs.xml
+2) add:
+	<action path="/campaign_export_over" => strus-config.xml		
+3) add:
+	/campaign_export_over => applicationContext-action.xml
+	
+4) add	
+	<extension-point id="tabs.statistics.campaign_export_over">
+		<parameter-def id="navigation-bundle" type="string" />
+	</extension-point>
+	
+	=>WEB-INF/system-plugins/core-naviagion/plugin.xml
+4) add file
+		campaign_export_over.properties
