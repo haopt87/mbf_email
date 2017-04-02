@@ -32,6 +32,7 @@ import org.agnitas.dao.MbfSettingSystemDao;
 import org.agnitas.web.ExportreportDataDetail;
 import org.agnitas.web.ExportreportMailingBackendLogTbl;
 import org.agnitas.web.ExportreportUser;
+import org.agnitas.web.MbfSettingSystemForm;
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 
@@ -44,14 +45,6 @@ public class MbfSettingSystemDaoImpl extends BaseDaoImpl implements MbfSettingSy
 	/** The logger. */
 	private static final transient Logger logger = Logger.getLogger(MbfSettingSystemDaoImpl.class);
 
-	@Override
-	public MbfSettingSystemImpl getMbfSettingSystemImpl(int id) {
-
-		return selectObjectDefaultNull(logger,
-				"SELECT id, send_email, reply_email, backup_type, backup_time, deleted FROM mbf_setting_system WHERE deleted = 0 AND id = ? ",
-				new MbfSettingSystemImpl_RowMapper(), id);
-	}
-
 	protected class MbfSettingSystemImpl_RowMapper implements ParameterizedRowMapper<MbfSettingSystemImpl> {
 		@Override
 		public MbfSettingSystemImpl mapRow(ResultSet resultSet, int row) throws SQLException {
@@ -60,9 +53,12 @@ public class MbfSettingSystemDaoImpl extends BaseDaoImpl implements MbfSettingSy
 				readTarget.setId(resultSet.getInt("id"));
 				readTarget.setSendEmail(resultSet.getString("send_email"));
 				readTarget.setReplyEmail(resultSet.getString("reply_email"));
-				readTarget.setBackupType(resultSet.getString("backup_type"));
+				readTarget.setBackupType(resultSet.getInt("backup_type"));
 				readTarget.setBackupTime(resultSet.getString("backup_time"));
 				readTarget.setDeleted(resultSet.getInt("deleted"));
+				readTarget.setLog_user_action(resultSet.getInt("log_user_action"));
+				readTarget.setPrice_an_email(resultSet.getInt("price_an_email"));
+				readTarget.setPriceAnEmail(resultSet.getInt("price_an_email"));
 				return readTarget;
 			} catch (Exception e) {
 				throw new SQLException("Cannot create Department item from ResultSet row", e);
@@ -180,7 +176,25 @@ public class MbfSettingSystemDaoImpl extends BaseDaoImpl implements MbfSettingSy
 				"SELECT  admin_id, username, fullname FROM admin_tbl WHERE disabled = 0 AND id = ?",
 				new ExportreportUser_RowMapper(), id);
 	}
+	
+	@Override
+	public MbfSettingSystemImpl getMbfSettingSystemImpl(int id) {
 
+		return selectObjectDefaultNull(logger,
+				"SELECT id, send_email, reply_email, backup_type, backup_time, deleted, log_user_action, price_an_email FROM mbf_setting_system WHERE deleted = 0 AND id = ? ",
+				new MbfSettingSystemImpl_RowMapper(), id);
+	}
+	
+	@Override
+	public void saveMbfSettingSystemImplAFrom(MbfSettingSystemForm entity) {
+		update(logger,
+				"UPDATE mbf_setting_system SET send_email = ?, reply_email = ? ,"
+						+ " backup_type = ? , backup_time = ? , deleted = ? , log_user_action = ? , price_an_email = ?  WHERE id = ?",
+				entity.getSendEmail(), entity.getReplyEmail(), entity.getBackupType(), entity.getBackupTime(), entity.getDeleted(),
+				entity.getLogUserType(), entity.getPriceAnEmail(), 
+				entity.getId());
+	}
+	
 	@Override
 	public void saveMbfSettingSystemImpl(MbfSettingSystemImpl entity) {
 

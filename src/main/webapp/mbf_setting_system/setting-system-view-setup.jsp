@@ -15,5 +15,7 @@
 
 <% request.setAttribute("ACTION_LIST", MbfSettingSystemAction.ACTION_LIST ); %>
 <% request.setAttribute("ACTION_VIEW", MbfSettingSystemAction.ACTION_VIEW ); %>
+<% request.setAttribute("ACTION_SAVE", MbfSettingSystemAction.ACTION_SAVE ); %>
+
 <% request.setAttribute("ACTION_CONFIRM_DELETE", MbfSettingSystemAction.ACTION_CONFIRM_DELETE); %>
 <% request.setAttribute("ACTION_DELETE", MbfSettingSystemAction.ACTION_DELETE); %>

@@ -39,7 +39,7 @@ public class ExportreportForm extends StrutsFormBase {
 	private int id;
 	private String sendEmail;
 	private String replyEmail;
-	private String backupType;
+	private int backupType;
 	private String backupTime;
 	private int deleted;
 	private int disabled;
@@ -127,14 +127,14 @@ public class ExportreportForm extends StrutsFormBase {
 	/**
 	 * @return the backupType
 	 */
-	public String getBackupType() {
+	public int getBackupType() {
 		return backupType;
 	}
 
 	/**
 	 * @param backupType the backupType to set
 	 */
-	public void setBackupType(String backupType) {
+	public void setBackupType(int backupType) {
 		this.backupType = backupType;
 	}
 

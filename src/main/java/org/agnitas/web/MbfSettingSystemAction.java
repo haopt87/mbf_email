@@ -97,7 +97,23 @@ public class MbfSettingSystemAction extends StrutsActionBase {
 		Locale locale = admin.getLocale();
 		return (SimpleDateFormat) SimpleDateFormat.getDateInstance( DateFormat.SHORT, locale);
 	}
-	
+    
+
+	private List<MbfSettingSystemBackUpType> getBackupTypeList() {		
+		List<MbfSettingSystemBackUpType> statusList = new ArrayList<>();
+		statusList.add(new MbfSettingSystemBackUpType(0,"Tự động"));
+		statusList.add(new MbfSettingSystemBackUpType(1,"Lưu thủ công"));
+		return statusList;
+	}
+    
+    private List<MbfSettingSystemLogType> getLogTypeList() {		
+		List<MbfSettingSystemLogType> statusList = new ArrayList<>();				
+		statusList.add(new MbfSettingSystemLogType(0,"đăng nhập"));
+		statusList.add(new MbfSettingSystemLogType(1,"tạo chiến dịch"));	
+			
+		return statusList;
+	}
+    
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest req,
 			HttpServletResponse res) throws IOException, ServletException {
@@ -118,27 +134,33 @@ public class MbfSettingSystemAction extends StrutsActionBase {
 		}
 
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         HttpSession session = req.getSession();		
 		Admin admin1 = (Admin) session.getAttribute("emm.admin");
         SimpleDateFormat localeFormat = getLocaleFormat(admin1);
         aForm.setAutoImportTime(localeFormat.format(new Date()));
         
-		try {
-			List<ExportreportForm> mbfCompanyList = null;			
+		try {	
 			switch (aForm.getAction()) {
-			case MbfSettingSystemAction.ACTION_LIST:
-//				List<ExportreportForm> list = loadMbfSettingSystem(errors);
-//				
-//				req.setAttribute("settingSystemLists", list);				
+			case MbfSettingSystemAction.ACTION_LIST:				
 				destination = mapping.findForward("list");
 				break;
 
 			case MbfSettingSystemAction.ACTION_VIEW:
+				MbfSettingSystemImpl entityEdit = this.mbfSettingSystemDao.getMbfSettingSystemImpl(1);
+				aForm.setId(entityEdit.getId());
+				aForm.setSendEmail(entityEdit.getSendEmail());
+				aForm.setReplyEmail(entityEdit.getReplyEmail());
+				aForm.setBackupType(entityEdit.getBackupType());
+				aForm.setIntPriceAnEmail(entityEdit.getPriceAnEmail());
+				aForm.setPriceAnEmail(entityEdit.getPriceAnEmail() + "");
+				aForm.setBackupTime("");
+				aForm.setLogUserType(entityEdit.getLog_user_action());
+				aForm.setDeleted(0);
+				
 				if (aForm.getId() != 0) {
 					aForm.setAction(MbfSettingSystemAction.ACTION_SAVE);					
 				} else {
-					aForm.clearAllData();
 					aForm.setAction(MbfSettingSystemAction.ACTION_NEW);
 				}
 				destination = mapping.findForward("view");
@@ -147,39 +169,41 @@ public class MbfSettingSystemAction extends StrutsActionBase {
 			case MbfSettingSystemAction.ACTION_SAVE:	
 				if (aForm.getSendEmail()== null || aForm.getSendEmail().equals("")) {
                     errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("error.mbf.setting.system.name.empty"));
-				} else {
-					MbfSettingSystemImpl entity = this.mbfSettingSystemDao.getMbfSettingSystemImpl(aForm.getId());
-					if (entity == null) {
-//						if (!companyChangedToExisting(aForm)) {
-//							entity = new MbfCompanyImpl();
-//							entity.setId(0);
-//							entity.setCompanyName(aForm.getCompanyName());
-//							entity.setDescription(aForm.getDescription());
-//							entity.setDeleted(0);
-//							this.mbfCompanyDao.saveMbfCompany(entity);
-//							aForm.setId(entity.getId());
-//			                messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("default.changes_saved"));
-//						}else {
-//	                        errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("error.mailinglist.duplicate", aForm.getCompanyName()));
-//	                    }
-					} else {
-						entity.setId(aForm.getId());
-						entity.setSendEmail(aForm.getSendEmail());
-						entity.setReplyEmail(aForm.getReplyEmail());
-						entity.setBackupTime(aForm.getBackupTime());
-						entity.setBackupType(aForm.getBackupType());
-						
-						this.mbfSettingSystemDao.saveMbfSettingSystemImpl(entity);
-		                messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("default.changes_saved"));
-					}
-				}	
+				} else if (aForm.getReplyEmail() == null || aForm.getReplyEmail().equals("")) {
+					errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("error.mbf.setting.system.ReplyEmail.empty"));
+				} 
+				try {
+					aForm.setIntPriceAnEmail(Integer.parseInt(aForm.getPriceAnEmail()));
+				} catch (Exception e) {
+					errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("error.mbf.setting.system.PriceAnEmail.empty"));
+					destination = mapping.findForward("view");
+					break;
+				}
+				
+				
+				this.mbfSettingSystemDao.saveMbfSettingSystemImplAFrom(aForm);
+	               messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("default.changes_saved"));
+				 
+//				MbfSettingSystemImpl entity = this.mbfSettingSystemDao.getMbfSettingSystemImpl(aForm.getId());				
+//				if (entity == null) {
+//				} else {
+//					entity.setId(aForm.getId());
+//					entity.setSendEmail(aForm.getSendEmail());
+//					entity.setReplyEmail(aForm.getReplyEmail());
+//					entity.setBackupTime(aForm.getBackupTime());
+//					entity.setBackupType(aForm.getBackupType());
+//					entity.setPriceAnEmail(aForm.getIntPriceAnEmail());
+//					
+//					this.mbfSettingSystemDao.saveMbfSettingSystemImpl(entity);
+//		               messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("default.changes_saved"));				
+//				}	
 	            aForm.setAction(MbfCompanyAction.ACTION_SAVE);				
 				destination = mapping.findForward("view");
 				
 				break;
 				
-			default:
-				req.setAttribute("company_mngCompanyList", mbfCompanyList);
+			default:		
+				destination = mapping.findForward("view");
 				destination = mapping.findForward("list");
 				break;
 			}
@@ -200,6 +224,9 @@ public class MbfSettingSystemAction extends StrutsActionBase {
         	saveMessages(req, messages);
         }
 
+		req.setAttribute("backupTypeList", getBackupTypeList());				
+		req.setAttribute("logUserTypeList", getLogTypeList());
+		
 		return destination;
 	}
 		

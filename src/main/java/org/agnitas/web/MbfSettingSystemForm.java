@@ -39,7 +39,11 @@ public class MbfSettingSystemForm extends StrutsFormBase {
 	private int id;
 	private String sendEmail;
 	private String replyEmail;
-	private String backupType;
+	private int backupType;
+	private String priceAnEmail;
+	private int intPriceAnEmail;
+	private int logUserType;
+	
 	private String backupTime;
 	private String autoImportTime;
 	private int deleted;
@@ -128,14 +132,14 @@ public class MbfSettingSystemForm extends StrutsFormBase {
 	/**
 	 * @return the backupType
 	 */
-	public String getBackupType() {
+	public int getBackupType() {
 		return backupType;
 	}
 
 	/**
 	 * @param backupType the backupType to set
 	 */
-	public void setBackupType(String backupType) {
+	public void setBackupType(int backupType) {
 		this.backupType = backupType;
 	}
 
@@ -179,6 +183,48 @@ public class MbfSettingSystemForm extends StrutsFormBase {
 	 */
 	public void setAutoImportTime(String autoImportTime) {
 		this.autoImportTime = autoImportTime;
+	}
+
+	/**
+	 * @return the priceAnEmail
+	 */
+	public String getPriceAnEmail() {
+		return priceAnEmail;
+	}
+
+	/**
+	 * @param priceAnEmail the priceAnEmail to set
+	 */
+	public void setPriceAnEmail(String priceAnEmail) {
+		this.priceAnEmail = priceAnEmail;
+	}
+
+	/**
+	 * @return the logUserType
+	 */
+	public int getLogUserType() {
+		return logUserType;
+	}
+
+	/**
+	 * @param logUserType the logUserType to set
+	 */
+	public void setLogUserType(int logUserType) {
+		this.logUserType = logUserType;
+	}
+
+	/**
+	 * @return the intPriceAnEmail
+	 */
+	public int getIntPriceAnEmail() {
+		return intPriceAnEmail;
+	}
+
+	/**
+	 * @param intPriceAnEmail the intPriceAnEmail to set
+	 */
+	public void setIntPriceAnEmail(int intPriceAnEmail) {
+		this.intPriceAnEmail = intPriceAnEmail;
 	}
 
 }

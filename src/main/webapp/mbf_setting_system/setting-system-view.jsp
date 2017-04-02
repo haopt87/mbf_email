@@ -2,12 +2,13 @@
 <%-- <%@ page language="java" contentType="text/html; charset=utf-8"  errorPage="/error.jsp" %> --%>
 
 <%-- checked --%>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-         import="org.agnitas.beans.Admin"
-         buffer="32kb"  errorPage="/error.jsp" %>
+<%@ page language="java" contentType="text/html; charset=utf-8" 
+         import="org.agnitas.beans.Admin" 
+         buffer="32kb"  errorPage="/error.jsp" %> 
          
 
 <%@ page import="org.agnitas.util.AgnUtils" %>
+
 <%@ taglib uri="/WEB-INF/agnitas-taglib.tld" prefix="agn" %>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
@@ -22,8 +23,9 @@
 
 <script type="text/javascript">
 	function submitAction(actionId) {
+		
 		document.getElementsByName("action")[0].value = actionId;
-		document.exportreportForm.submit();
+		document.mbfSettingSystemForm.submit();
 	}
 	
 	var prevX = -1;
@@ -54,16 +56,20 @@
         );
     }
 
+    function parametersChanged() {
+        document.getElementsByName('userActivityLogForm')[0].numberOfRowsChanged.value = true;
+    }
     
 </script>
 
 <c:set var="ACTION_VIEW" value="2" />
 
-<html:form action="/exportreport" focus="sendEmail">
+<html:form action="/setting_system_view" focus="sendEmail">
 	<html:hidden property="id"/>
     <html:hidden property="action"/>
     <html:hidden property="previousAction" value="${ACTION_VIEW}"/>
-
+    
+	<label id="displayError" style="color: red;"></label>
 
     <div class="contentbox_left_column">
          <div class="recipient_detail_form_item">
@@ -76,29 +82,41 @@
              <html:text styleId="empfaenger_detail_title2" styleClass="empfaenger_detail_input_text" property="replyEmail"/> <br/>
          </div>
          <br/>
+         
          <div class="recipient_detail_form_item">
-             <label for="empfaenger_detail_title3">Thiết lập sao lưu tự đông hoặc thủ công:</label> 
-             <html:text styleId="empfaenger_detail_title3" styleClass="empfaenger_detail_input_text" property="backupType"/> <br/>
-         </div>
+	    	<label for="mailing_name">Kiểu back-up dữ liệu:</label>
+	        <html:select styleId="backupType" property="backupType" size="1">
+		    	<c:forEach var="item" items="${backupTypeList}">
+		        <html:option value="${item.id}">
+		        	${item.name}
+		        </html:option>
+		        </c:forEach>
+			</html:select>
+	    </div>
+	             
          <br/>
          <div class="recipient_detail_form_item">
-             <label for="empfaenger_detail_title4">Thiết lập lịch sao lưu dữ liệu:</label> 
-             <html:text styleId="empfaenger_detail_title4" styleClass="empfaenger_detail_input_text" property="backupTime"/> <br/>
+             <label for="empfaenger_detail_title4">Thiết lập giá cho một email :</label> 
+             <html:text styleId="empfaenger_detail_title4" styleClass="empfaenger_detail_input_text" property="priceAnEmail"/> <br/>
          </div>
-         
          
          <div class="recipient_detail_form_item">
-         	<label for="empfaenger_detail_title4">Thời gian tự động backup:</label>            
-			<input type="text" id="autoImportTimeInput" name="autoImportTime" value="${autoImportTime}" class="datepicker"
-         		style="width:85px;"/>
-         </div>
+	    	<label for="mailing_name">Cấu hình lưu vết hoạt động người dùng:</label>
+	        <html:select styleId="logUserType" property="logUserType" size="1">
+		    	<c:forEach var="item" items="${logUserTypeList}">
+		        <html:option value="${item.id}">
+		        	${item.name}
+		        </html:option>
+		        </c:forEach>
+			</html:select>
+	    </div>  
          
          <div class="grey_box_right_column"></div>
      </div>
      <script type="text/javascript">
 		function submitAction(actionId) {
 			document.getElementsByName("action")[0].value = actionId;
-			document.exportreportForm.submit();
+			document.mbfSettingSystemForm.submit();
 		}
 	</script>
         

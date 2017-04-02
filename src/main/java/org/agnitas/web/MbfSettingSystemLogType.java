@@ -20,36 +20,60 @@
  * Contributor(s): AGNITAS AG. 
  ********************************************************************************/
 
-package org.agnitas.dao;
+package org.agnitas.web;
 
-import java.util.List;
-
-import org.agnitas.beans.impl.MbfSettingSystemImpl;
-import org.agnitas.web.ExportreportDataDetail;
-import org.agnitas.web.ExportreportMailingBackendLogTbl;
-import org.agnitas.web.ExportreportUser;
-import org.agnitas.web.MbfSettingSystemForm;
+import org.agnitas.web.forms.StrutsFormBase;
+import org.apache.log4j.Logger;
 
 /**
  *
- * @author mhe
+ * @author mobifone
  */
-public interface MbfSettingSystemDao {
+public class MbfSettingSystemLogType extends StrutsFormBase {
 
-	MbfSettingSystemImpl getMbfSettingSystemImpl(int id);
+	/** The logger. */
+	private static final transient Logger logger = Logger.getLogger(MbfSettingSystemLogType.class);
 
-	void saveMbfSettingSystemImpl(MbfSettingSystemImpl entity);
-	void saveMbfSettingSystemImplAFrom(MbfSettingSystemForm entity);
+	private static final long serialVersionUID = 0L;
 
-	void deleteMbfSettingSystemImpl(int id);
+	private int id;
+	private String name;
+	
+	public MbfSettingSystemLogType() {
+	}
+	public MbfSettingSystemLogType(int id, String name) {
+		this.id = id;
+		this.name = name;
+	}
 
-	List<MbfSettingSystemImpl> getMbfSettingSystemImpls();
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
 
-	ExportreportUser getExportreportUser(int id);
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 
-	List<ExportreportUser> getExportreportUsers();
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
 
-	List<ExportreportMailingBackendLogTbl> getExportreportMailingBackendLogTblById(int id);
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	
 
-	List<ExportreportDataDetail> getExportreportDataDetail(int mailing_id, int status_id);
 }
