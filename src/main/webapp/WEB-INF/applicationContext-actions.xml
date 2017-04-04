@@ -187,6 +187,8 @@
 		<property name="executorService" ref="workerExecutorService" />
 		<property name="userActivityLogService" ref="UserActivityLogService" />
 		<property name="passwordCheck" ref="PasswordCheck" />
+		<property name="mbfSettingSystemDao" ref="MbfSettingSystemDao" />
+		
 	</bean>
 
 	<bean name="/selfservice" class="org.agnitas.web.UserSelfServiceAction">

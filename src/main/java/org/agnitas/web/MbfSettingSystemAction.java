@@ -184,19 +184,6 @@ public class MbfSettingSystemAction extends StrutsActionBase {
 				this.mbfSettingSystemDao.saveMbfSettingSystemImplAFrom(aForm);
 	               messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("default.changes_saved"));
 				 
-//				MbfSettingSystemImpl entity = this.mbfSettingSystemDao.getMbfSettingSystemImpl(aForm.getId());				
-//				if (entity == null) {
-//				} else {
-//					entity.setId(aForm.getId());
-//					entity.setSendEmail(aForm.getSendEmail());
-//					entity.setReplyEmail(aForm.getReplyEmail());
-//					entity.setBackupTime(aForm.getBackupTime());
-//					entity.setBackupType(aForm.getBackupType());
-//					entity.setPriceAnEmail(aForm.getIntPriceAnEmail());
-//					
-//					this.mbfSettingSystemDao.saveMbfSettingSystemImpl(entity);
-//		               messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("default.changes_saved"));				
-//				}	
 	            aForm.setAction(MbfCompanyAction.ACTION_SAVE);				
 				destination = mapping.findForward("view");
 				

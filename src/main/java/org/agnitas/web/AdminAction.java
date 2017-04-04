@@ -30,6 +30,7 @@ import org.agnitas.beans.impl.AdminImpl;
 import org.agnitas.beans.impl.DepartmentImpl;
 import org.agnitas.beans.impl.MbfCompanyImpl;
 import org.agnitas.beans.impl.MbfExportImpl;
+import org.agnitas.beans.impl.MbfSettingSystemImpl;
 import org.agnitas.beans.impl.PaginatedListImpl;
 import org.agnitas.dao.AdminDao;
 import org.agnitas.dao.AdminGroupDao;
@@ -38,6 +39,7 @@ import org.agnitas.dao.CompanyDao;
 import org.agnitas.dao.DepartmentDao;
 import org.agnitas.dao.MbfCompanyDao;
 import org.agnitas.dao.MbfExportDao;
+import org.agnitas.dao.MbfSettingSystemDao;
 import org.agnitas.emm.core.commons.password.PasswordCheck;
 import org.agnitas.emm.core.commons.password.PasswordCheckHandler;
 import org.agnitas.emm.core.commons.password.StrutsPasswordCheckHandler;
@@ -128,6 +130,10 @@ public class AdminAction extends StrutsActionBase {
 	
 	/** Password checker and error reporter. */
 	private PasswordCheck passwordCheck;
+	
+
+	//mbf add mbfSettingSystemDao
+	private MbfSettingSystemDao mbfSettingSystemDao;
 
 	// ---------------------------------------- Public Methods
 
@@ -402,10 +408,12 @@ public class AdminAction extends StrutsActionBase {
 
 		return destination;
 	}
-	
+
 	@SuppressWarnings("unused")
 	private void exportData(HttpServletRequest req,
 			HttpServletResponse res) throws IOException, ServletException {
+		
+		MbfSettingSystemImpl entityEdit = this.mbfSettingSystemDao.getMbfSettingSystemImpl(1);
 		
 		res.setContentType("text/plain");
 		String outFileName = "ExportBillByUser";
@@ -447,7 +455,7 @@ public class AdminAction extends StrutsActionBase {
 			content[2] = mbfExportImpl.getFullName();
 			content[3] = mbfExportImpl.getCampainName();
 			content[4] = mbfExportImpl.getTotalMailsOfCampain();
-			content[5] = "1000";
+			content[5] = entityEdit.getPrice_an_email();
 			content[6] = mbfExportImpl.getTotalMailsOfCampain() * 1000;
 			content[7] = mbfExportImpl.getCreationDate();		
 			
@@ -1201,5 +1209,19 @@ public class AdminAction extends StrutsActionBase {
 	 */
 	public void setMbfExportDao(MbfExportDao mbfExportDao) {
 		this.mbfExportDao = mbfExportDao;
+	}
+
+	/**
+	 * @return the mbfSettingSystemDao
+	 */
+	public MbfSettingSystemDao getMbfSettingSystemDao() {
+		return mbfSettingSystemDao;
+	}
+
+	/**
+	 * @param mbfSettingSystemDao the mbfSettingSystemDao to set
+	 */
+	public void setMbfSettingSystemDao(MbfSettingSystemDao mbfSettingSystemDao) {
+		this.mbfSettingSystemDao = mbfSettingSystemDao;
 	}
 }
