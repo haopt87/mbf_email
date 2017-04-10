@@ -176,127 +176,146 @@ public class MailingStatAction extends StrutsActionBase {
         }
 
         if (logger.isInfoEnabled()) logger.info("Action: " + aForm.getAction());
-
-        if(!allowed("stats.mailing", req)) {
-            errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("error.permissionDenied"));
-            saveErrors(req, errors);
-            return null;
-        }
-
-
-        try {
-            switch(aForm.getAction()) {
-
-                case ACTION_LIST:
-                	if ( aForm.getColumnwidthsList() == null) {
-                    	aForm.setColumnwidthsList(getInitializedColumnWidthList(2));
-                    }	
-                    destination=mapping.findForward("list");
-                    break;
-
-                case ACTION_MAILINGSTAT:
-                    if(aForm.isStatInProgress()==false) {
-                        if(aForm.isStatReady()) {
-                            destination=mapping.findForward("mailing_stat");
-                            aForm.setStatReady(false);
-                            loadMailingStatFormData(req);
-                            break;
-                        } else {
-                            // display splash in browser
-                            destination=mapping.findForward("splash");
-                            // get stats
-                            aForm.setStatInProgress(true);
-                            loadMailingStat(aForm, req);
-
-                            aForm.setStatInProgress(false);
-                            aForm.setStatReady(true);
-                            break;
-                        }
-
-                    }
-                    break;
-
-                case ACTION_WEEKSTAT:
-                    loadWeekStat(aForm, req);
-                    req.setAttribute("targets",targetDao.getTargets(AgnUtils.getCompanyID(req),true));
-                    destination=mapping.findForward("week_stat");
-                    break;
-
-                case ACTION_DAYSTAT:
-                    loadDayStat(aForm, req);
-                    req.setAttribute("targets",targetDao.getTargets(AgnUtils.getCompanyID(req),true));
-                    destination=mapping.findForward("day_stat");
-                    break;
-
-                case ACTION_CLEAN_QUESTION:
-                    destination=mapping.findForward("clean_question");
-                    break;
-
-                case ACTION_CLEAN:
-                    cleanAdminClicks(aForm, req);
-                    loadMailingStat(aForm, req);
+        
+        if (aForm.getAction() == ACTION_MAILINGSTAT) {
+        	if(aForm.isStatInProgress()==false) {
+                if(aForm.isStatReady()) {
                     destination=mapping.findForward("mailing_stat");
-                    break;
-
-                case ACTION_OPENEDSTAT:
-                    if(aForm.isStatInProgress()==false) {
-                        if(aForm.isStatReady()) {
-                            destination=mapping.findForward("opened_stat");
-                            aForm.setStatReady(false);
-                            break;
-                        } else {
-                            destination=mapping.findForward("splash");
-                            // get stats
-                            aForm.setStatInProgress(true);
-                            loadOpenedStat(aForm, req);
-                            aForm.setStatInProgress(false);
-                            aForm.setStatReady(true);
-                            break;
-                        }
-                    }
-                    break;
-
-                case ACTION_BOUNCESTAT:
-                    if(aForm.isStatInProgress()==false) {
-                        if(aForm.isStatReady()) {
-                            destination=mapping.findForward("bounce_stat");
-                            aForm.setStatReady(false);
-                            break;
-                        } else {
-                            destination=mapping.findForward("splash");
-//                            // get stats
-                            aForm.setStatInProgress(true);
-                            loadBounceStat(aForm, req);
-                            aForm.setStatInProgress(false);
-                            aForm.setStatReady(true);
-                            break;
-                        }
-                    }
-                    break;
-                case ACTION_BOUNCE:
-    				destination = mapping.findForward("bounce");
-                    loadBounceMailingFormData(req, aForm);
-    				break;
-    				
-                case ACTION_OPEN_TIME:
-                    loadOpenWeekStat(aForm, req);
-                    destination=mapping.findForward("open_week");
-                    break;
-
-                case ACTION_OPEN_DAYSTAT:
-                    loadOpenDayStat(aForm, req);
-                    destination=mapping.findForward("open_day");
-                    break;
-
-                default:
-                    aForm.setAction(MailingStatAction.ACTION_MAILINGSTAT);
+                    aForm.setStatReady(false);
+                    loadMailingStatFormData(req);
+                } else {
+                    // display splash in browser
+                    destination=mapping.findForward("splash");
+                    // get stats
+                    aForm.setStatInProgress(true);
                     loadMailingStat(aForm, req);
-                    destination=mapping.findForward("list");
+
+                    aForm.setStatInProgress(false);
+                    aForm.setStatReady(true);
+                }
             }
-        } catch (Exception e) {
-            logger.error("execute: "+e, e);
-            errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("error.exception", configService.getValue(ConfigService.Value.SupportEmergencyUrl)));
+        } else {
+	        if(!allowed("stats.mailing", req)) {
+	            errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("error.permissionDenied"));
+	            saveErrors(req, errors);
+	            return null;
+	        }
+	
+	        try {
+	            switch(aForm.getAction()) {
+	
+	                case ACTION_LIST:
+	                	if ( aForm.getColumnwidthsList() == null) {
+	                    	aForm.setColumnwidthsList(getInitializedColumnWidthList(2));
+	                    }	
+	                    destination=mapping.findForward("list");
+	                    break;
+	
+	                case ACTION_MAILINGSTAT:
+	                    if(aForm.isStatInProgress()==false) {
+	                        if(aForm.isStatReady()) {
+	                            destination=mapping.findForward("mailing_stat");
+	                            aForm.setStatReady(false);
+	                            loadMailingStatFormData(req);
+	                            break;
+	                        } else {
+	                            // display splash in browser
+	                            destination=mapping.findForward("splash");
+	                            // get stats
+	                            aForm.setStatInProgress(true);
+	                            loadMailingStat(aForm, req);
+	
+	                            aForm.setStatInProgress(false);
+	                            aForm.setStatReady(true);
+	                            break;
+	                        }	
+	                    }
+	                    break;
+	
+	                case ACTION_WEEKSTAT:
+	                    loadWeekStat(aForm, req);
+	                    req.setAttribute("targets",targetDao.getTargets(AgnUtils.getCompanyID(req),true));
+	                    destination=mapping.findForward("week_stat");
+	                    break;
+	
+	                case ACTION_DAYSTAT:
+	                    loadDayStat(aForm, req);
+	                    req.setAttribute("targets",targetDao.getTargets(AgnUtils.getCompanyID(req),true));
+	                    destination=mapping.findForward("day_stat");
+	                    break;
+	
+	                case ACTION_CLEAN_QUESTION:
+	                    destination=mapping.findForward("clean_question");
+	                    break;
+	
+	                case ACTION_CLEAN:
+	                    cleanAdminClicks(aForm, req);
+	                    loadMailingStat(aForm, req);
+	                    destination=mapping.findForward("mailing_stat");
+	                    break;
+	
+	                case ACTION_OPENEDSTAT:
+	                    if(aForm.isStatInProgress()==false) {
+	                        if(aForm.isStatReady()) {
+	                            destination=mapping.findForward("opened_stat");
+	                            aForm.setStatReady(false);
+	                            break;
+	                        } else {
+	                            destination=mapping.findForward("splash");
+	                            // get stats
+	                            aForm.setStatInProgress(true);
+	                            loadOpenedStat(aForm, req);
+	                            aForm.setStatInProgress(false);
+	                            aForm.setStatReady(true);
+	                            break;
+	                        }
+	                    }
+	                    break;
+	
+	                case ACTION_BOUNCESTAT:
+	                    if(aForm.isStatInProgress()==false) {
+	                        if(aForm.isStatReady()) {
+	                            destination=mapping.findForward("bounce_stat");
+	                            aForm.setStatReady(false);
+	                            break;
+	                        } else {
+	                            destination=mapping.findForward("splash");
+	//                            // get stats
+	                            aForm.setStatInProgress(true);
+	                            loadBounceStat(aForm, req);
+	                            aForm.setStatInProgress(false);
+	                            aForm.setStatReady(true);
+	                            break;
+	                        }
+	                    }
+	                    break;
+	                case ACTION_BOUNCE:
+	    				destination = mapping.findForward("bounce");
+	                    loadBounceMailingFormData(req, aForm);
+	    				break;
+	    				
+	                case ACTION_OPEN_TIME:
+	                    loadOpenWeekStat(aForm, req);
+	                    destination=mapping.findForward("open_week");
+	                    break;
+	
+	                case ACTION_OPEN_DAYSTAT:
+	                    loadOpenDayStat(aForm, req);
+	                    destination=mapping.findForward("open_day");
+	                    break;
+	
+	                default:
+	                    aForm.setAction(MailingStatAction.ACTION_MAILINGSTAT);
+	                    loadMailingStat(aForm, req);
+	                    destination=mapping.findForward("list");
+	            }
+	        } catch (Exception e) {
+	            logger.error("execute: "+e, e);
+	            errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("error.exception", configService.getValue(ConfigService.Value.SupportEmergencyUrl)));
+	        }
+
         }
+        
         
         if(destination != null &&  "list".equals(destination.getName())) {
         	try {
