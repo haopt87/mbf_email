@@ -456,7 +456,7 @@ public class AdminAction extends StrutsActionBase {
 			content[3] = mbfExportImpl.getCampainName();
 			content[4] = mbfExportImpl.getTotalMailsOfCampain();
 			content[5] = entityEdit.getPrice_an_email();
-			content[6] = mbfExportImpl.getTotalMailsOfCampain() * 1000;
+			content[6] = mbfExportImpl.getTotalMailsOfCampain() * entityEdit.getPrice_an_email();
 			content[7] = mbfExportImpl.getCreationDate();		
 			
 			data.put(count + "", content);

@@ -173,18 +173,6 @@ public class ExportCampaignAction extends StrutsActionBase {
 				} else {
 					MbfSettingSystemImpl entity = this.mbfSettingSystemDao.getMbfSettingSystemImpl(aForm.getId());
 					if (entity == null) {
-//						if (!companyChangedToExisting(aForm)) {
-//							entity = new MbfCompanyImpl();
-//							entity.setId(0);
-//							entity.setCompanyName(aForm.getCompanyName());
-//							entity.setDescription(aForm.getDescription());
-//							entity.setDeleted(0);
-//							this.mbfCompanyDao.saveMbfCompany(entity);
-//							aForm.setId(entity.getId());
-//			                messages.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("default.changes_saved"));
-//						}else {
-//	                        errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("error.mailinglist.duplicate", aForm.getCompanyName()));
-//	                    }
 					} else {
 						entity.setId(aForm.getId());
 						entity.setSendEmail(aForm.getSendEmail());
@@ -214,20 +202,11 @@ public class ExportCampaignAction extends StrutsActionBase {
 			case 22:
 				destination = mapping.findForward("view-over");
 				req.setAttribute("sessionId", req.getSession().getId());
-                //load company list
-//				List<ExportreportUser> userList = this.mbfSettingSystemDao.getExportreportUsers();  
-//                req.setAttribute("userList", userList);
-                
 				break;
 			case 32:
 				destination = mapping.findForward("view");
 				req.setAttribute("sessionId", req.getSession().getId());
-                //load company list
-//				List<ExportreportUser> userList = this.mbfSettingSystemDao.getExportreportUsers();  
-//                req.setAttribute("userList", userList);
-                
 				break;
-				
 			default:
 				req.setAttribute("company_mngCompanyList", mbfCompanyList);
 				destination = mapping.findForward("list");
