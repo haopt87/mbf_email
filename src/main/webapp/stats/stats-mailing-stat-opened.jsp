@@ -21,8 +21,13 @@
                 <td><span class="head3"><bean:message key="statistic.Opened_Mails"/><br><br></span></td>
                 <td align="right">
                     &nbsp;
-                    <html:link styleClass="blue_link" page='<%= new String(\"/file_download?key=\" + timekey) %>'><img
-                            src="${emmLayoutBase.imagesURL}/icon_save.gif" border="0"></html:link>
+<%--                     <html:link styleClass="blue_link" page='<%= new String(\"/file_download?key=\" + timekey) %>'><img --%>
+<%--                             src="${emmLayoutBase.imagesURL}/icon_save.gif" border="0"></html:link> --%>
+					
+					<div class="action_button download_button"><html:link
+                        page='<%= new String("/mailing_stat.do?action=" + 23 +"&mailingID=" + tmpMailingID) %>'><span><bean:message
+                        key="button.Download"/></span></html:link>
+                	</div>
                 </td>
             </tr>
         </table>

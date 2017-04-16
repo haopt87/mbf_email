@@ -50,11 +50,9 @@
 			document.getElementsByName("action")[0].value = actionId;
 			document.exportreportForm.submit();
 		}
-	</script>
-        
+	</script>        
 
     <div class="button_container">
-
         <input type="hidden" id="save" name="save" value=""/>
 		<agn:ShowByPermission token="targets.change">
         	<div class="action_button">
@@ -63,49 +61,5 @@
                     key="button.Save"/></span></a>
         	</div>
         </agn:ShowByPermission>	
-
-<%--         <c:if test="${not empty targetForm.targetID and targetForm.targetID != 0}"> --%>
-<!--             <input type="hidden" id="delete" name="delete" value=""/> -->
-<%-- 			<agn:ShowByPermission token="targets.delete"> --%>
-<!--             	<div class="action_button"> -->
-<!--                 	<a href="#" -->
-<%--                    		onclick="submitAction(${ACTION_CONFIRM_DELETE}); return false;"><span><bean:message --%>
-<%--                         key="button.Delete"/></span></a> --%>
-<!-- 	            </div> -->
-<%-- 			</agn:ShowByPermission> --%>
-<!--             <input type="hidden" id="copy" name="copy" value=""/> -->
-<%-- 			<agn:ShowByPermission token="targets.change"> --%>
-<!--             	<div class="action_button"> -->
-<!--                 	<a href="#" -->
-<%--                    		onclick="submitAction(${ACTION_CLONE}); return false;"><span><bean:message --%>
-<%--                         key="button.Copy"/></span></a> --%>
-<!-- 	            </div> -->
-<%-- 	        </agn:ShowByPermission> --%>
-<%--         </c:if> --%>
-
-<%--         <div class="action_button"><bean:message key="target.Target"/>:</div> --%>
     </div>
-
-<%--     <c:if test="${not empty targetForm.targetID and targetForm.targetID != 0}"> --%>
-<!--         <div class="button_container"> -->
-<%--             <div align=right><html:link styleClass="target_view_link" --%>
-<%--                                         page="/recipient_stats.do?action=2&mailinglistID=0&targetID=${targetForm.targetID}"><bean:message --%>
-<%--                     key="Statistics"/>...</html:link></div> --%>
-<%--             <agn:ShowByPermission token="targets.createml"> --%>
-<!--                 <br> -->
-
-<%--                 <div align=right><html:link styleClass="target_view_link" --%>
-<%--                                             page="/target.do?action=${ACTION_CREATE_ML}&targetID=${targetForm.targetID}"><bean:message --%>
-<%--                         key="target.createMList"/></html:link></div> --%>
-<%--             </agn:ShowByPermission> --%>
-
-<%--             <agn:ShowByPermission token="recipient.delete"> --%>
-<!--                 <br> -->
-
-<%--                 <div align=right><html:link styleClass="target_view_link" --%>
-<%--                                             page="/target.do?action=${ACTION_DELETE_RECIPIENTS_CONFIRM}&targetID=${targetForm.targetID}"><bean:message --%>
-<%--                         key="target.delete.recipients"/></html:link></div> --%>
-<%--             </agn:ShowByPermission> --%>
-<!--         </div> -->
-<%--     </c:if> --%>
 </html:form>

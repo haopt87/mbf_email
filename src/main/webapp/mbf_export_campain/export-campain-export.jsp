@@ -14,18 +14,6 @@
 	}
 </script>
 
-
-<%-- <c:set var="ACTION_VIEW" value="2" /> --%>
-<!-- <div class="export_stats_content"> -->
-<!--         <div class="target_view_link_container"> -->
-<!--         	Nhấn vào nút bên cạnh để tải về -->
-<%--             <div class="action_button download_button"><a href="/Openemm/exportreport.do;jsessionid=${sessionId}?action=13"><span>Tải về</span></a> --%>
-<!--             </div> -->
-<!--         </div> -->
-<!--         <br>         -->
-<!-- </div>  -->
-
-
 <html:form action="/exportreport" focus="sendEmail">
 	<html:hidden property="id"/>
     <html:hidden property="action"/>
@@ -59,13 +47,10 @@
 	
      <div class="button_container">
         <input type="hidden" id="save" name="save" value=""/>
-<%-- 		<agn:ShowByPermission token="targets.change"> --%>
         	<div class="action_button">
             	<a href="#"
                		onclick="submitAction(${13}); return false;"><span>Tải về</span></a>
         	</div>
-<%--         </agn:ShowByPermission> --%>
-	</div>
-    
+	</div>    
 </html:form>
 

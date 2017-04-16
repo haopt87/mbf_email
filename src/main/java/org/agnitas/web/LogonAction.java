@@ -22,11 +22,20 @@
 
 package org.agnitas.web;
 
+import java.io.IOException;
+import java.util.Date;
+import java.util.StringTokenizer;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
+
 import org.agnitas.beans.Admin;
 import org.agnitas.beans.AdminGroup;
 import org.agnitas.beans.Company;
 import org.agnitas.beans.FailedLoginData;
-import org.agnitas.beans.VersionObject;
 import org.agnitas.beans.impl.DepartmentImpl;
 import org.agnitas.beans.impl.MbfCompanyImpl;
 import org.agnitas.dao.AdminDao;
@@ -48,6 +57,7 @@ import org.agnitas.service.VersionControlService;
 import org.agnitas.util.AgnUtils;
 import org.agnitas.util.DbUtilities;
 import org.agnitas.util.UserActivityLogActions;
+import org.agnitas.util.web.MbfVerifyUtils;
 import org.agnitas.web.forms.LogonForm;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -59,16 +69,6 @@ import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.web.context.support.WebApplicationContextUtils;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.sql.DataSource;
-
-import java.io.IOException;
-import java.util.Date;
-import java.util.StringTokenizer;
 
 /**
  * Implementation of <strong>Action</strong> that validates a user logon.
@@ -230,6 +230,15 @@ public class LogonAction extends StrutsActionBase {
         	
             switch(aForm.getAction()) {
                 case ACTION_LOGON:
+                	
+                	String gRecaptchaResponse = req.getParameter("g-recaptcha-response");           		 
+                    System.out.println("gRecaptchaResponse=" + gRecaptchaResponse);
+                    // Verify CAPTCHA.
+                    boolean valid = MbfVerifyUtils.verify(gRecaptchaResponse);
+                    if (!valid) {
+                    	errors.add(ActionErrors.GLOBAL_MESSAGE, new ActionMessage("error.login"));                        
+                    }
+                    
                 	if(logon(aForm, req, errors)) {
                 		setLayout(aForm, req);
                 		destination=mapping.findForward(checkPassword(req));

@@ -32,6 +32,7 @@ import org.agnitas.beans.impl.PaginatedListImpl;
 import org.agnitas.emm.core.mailing.beans.LightweightMailing;
 import org.agnitas.emm.core.velocity.VelocityCheck;
 import org.agnitas.target.Target;
+import org.agnitas.web.ExportUserOpenEmail;
 import org.springframework.context.ApplicationContextAware;
 
 /**
@@ -462,4 +463,7 @@ public interface MailingDao extends ApplicationContextAware {
 	
 	// Yes, I know, that is a bad hack to remove a content block in MailingDAO.
 	public void deleteContent(int contentID);
+	
+
+    public List<ExportUserOpenEmail> getInfoCustomerOpenEmail(int mailingId);
 }

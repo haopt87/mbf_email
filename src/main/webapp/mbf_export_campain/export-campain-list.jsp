@@ -41,16 +41,7 @@
 		
         	<html:link styleClass="mailing_edit"
          		page="/exportreport.do?action=${ACTION_VIEW}&id=${exportreportTable.id}"> </html:link>
-         		
-<%-- 			<html:link styleClass="mailing_delete" --%>
-<%--         		page="/company_mng.do?action=${ACTION_DELETE}&&id=${company_mngCompany.id}&previousAction=${ACTION_LIST}" onclick="return confirm('Xóa company vĩnh viễn?')"> </html:link> --%>
-        		
-<%--         	<html:link styleClass="status_error" titleKey="settings.admin.disable" --%>
-<%--             	page="/company_mng.do?action=${18}&id=${company_mngCompany.id}" onclick="return confirm('Bạn muốn khóa công ty này? Tài khoản trong công ty sẽ bị khóa, các tài khoản sẽ không thể đăng nhập vào hệ thống?')"> </html:link> --%>
-                           
-<%--            	<html:link styleClass="status_ok" titleKey="settings.admin.ennable" --%>
-<%--            		page="/company_mng.do?action=${19}&id=${company_mngCompany.id}" onclick="return confirm('Bạn muốn kích hoạt lại công ty này?')"> </html:link> --%>
-                           
+         		 
 		</display:column>
     </display:table>
 

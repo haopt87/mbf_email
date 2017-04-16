@@ -134,21 +134,21 @@
                    requestURI="/mailingbase.do?action=${mailingBaseForm.action}&isTemplate=${mailingBaseForm.isTemplate}&__fromdisplaytag=true"
                    excludedParams="*" partialList="true" size="${mailinglist.fullListSize}" sort="external">
         <logic:equal name="mailingBaseForm" property="isTemplate" value="false">
-            <display:column headerClass="head_action" class="action" titleKey="action.Action">
-            	<c:choose>
-            		<c:when test="${mailing.hasActions}">
-		                <span class="ie7hack">
-			                <html:link page="/mailingbase.do?action=${ACTION_USED_ACTIONS}&mailingID=${mailing.mailingid}&previousAction=${ACTION_LIST}">
-    	                </span>
-        	            <img
-                            border="0" title="<bean:message key="action.action_link" />"
-                            src="${emmLayoutBase.imagesURL}/table_aktion_haken.png"></html:link>&nbsp;&nbsp;
-                	</c:when>
-                	<c:otherwise>
-		                &nbsp;&nbsp;
-                	</c:otherwise>
-                </c:choose>
-            </display:column>
+<%--             <display:column headerClass="head_action" class="action" titleKey="action.Action"> --%>
+<%--             	<c:choose> --%>
+<%--             		<c:when test="${mailing.hasActions}"> --%>
+<!-- 		                <span class="ie7hack"> -->
+<%-- 			                <html:link page="/mailingbase.do?action=${ACTION_USED_ACTIONS}&mailingID=${mailing.mailingid}&previousAction=${ACTION_LIST}"> --%>
+<!--     	                </span> -->
+<!--         	            <img -->
+<%--                             border="0" title="<bean:message key="action.action_link" />" --%>
+<%--                             src="${emmLayoutBase.imagesURL}/table_aktion_haken.png"></html:link>&nbsp;&nbsp; --%>
+<%--                 	</c:when> --%>
+<%--                 	<c:otherwise> --%>
+<!-- 		                &nbsp;&nbsp; -->
+<%--                 	</c:otherwise> --%>
+<%--                 </c:choose> --%>
+<%--             </display:column> --%>
             <display:column headerClass="head_mailing header" class="mailing" titleKey="Mailing" sortable="true"
                             sortProperty="shortname">
 				   		<span class="ie7hack">
@@ -156,7 +156,7 @@
                                        page="/mailingbase.do?action=${ACTION_VIEW}&mailingID=${mailing.mailingid}">${mailing.shortname} </html:link>
 				  	 	</span>
             </display:column>
-            <display:column headerClass="head_description_wide header" class="description" titleKey="default.description"
+            <display:column headerClass="head_description_wide header" class="mailing" titleKey="default.description"
                             sortable="true" sortProperty="description">
 				   		<span class="ie7hack">
 				   			<html:link
@@ -169,6 +169,18 @@
             </display:column>
             <display:column headerClass="senddate" class="senddate" titleKey="mailing.senddate"
                             format="{0,date,yyyy-MM-dd}" property="senddate" sortable="true"/>
+                            
+            <display:column headerClass="senddate" class="action" title="Tiến trình"
+                            sortable="false" sortProperty="mailinglist">
+                            
+            	<span class="ie7hack">
+				 	<html:link
+                    	page="/mailing_stat.do?action=7&mailingID=${mailing.mailingid}" style="text-decoration: underline !important;" target="_blank">
+                    	Xem 
+                    </html:link>
+		</span>
+            </display:column>
+                            
             <display:column class="edit">
             <html:link styleClass="mailing_edit" titleKey="mailing.MailingEdit"
                        page="/mailingbase.do?action=${ACTION_VIEW}&mailingID=${mailing.mailingid}"> </html:link>

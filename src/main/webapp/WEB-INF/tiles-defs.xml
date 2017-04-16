@@ -241,7 +241,7 @@
         <put name="messages" value="/messages-transitional.jsp" type="page"/>
     </definition>
     
-    
+	<!-- mbf -->
     <definition name="campaign_export_over" extends="base">    							
         <put name="body" value="/mbf_export_campain/over/export-over-campain-export.jsp" type="page"/>
         <put name="page-setup" value="/mbf_export_campain/over/export-over-campain-export-setup.jsp" type="page"/>
@@ -249,6 +249,8 @@
         <!-- This is for transitional phase only! For new pages, remove that "put" and use Struts messages and errors the correct way! -->
         <put name="messages" value="/messages-transitional.jsp" type="page"/>
     </definition>
+    
+    
 
     <definition name="stats_recipient_select" extends="base">
         <put name="body" value="/stats/recipient/stats-recipient-select.jsp" type="page"/>
@@ -745,8 +747,7 @@
 	
     <!-- ***************************************************************** -->
     <!-- ***************************************************************** -->
-	<!--MOBIFONE START-->
-	
+	<!--MOBIFONE START-->	
 	
     <definition name="department_mng_list" extends="base">
         <put name="body" value="department_mng/department-list.jsp" type="page"/>
@@ -759,8 +760,6 @@
         <put name="page-setup" value="department_mng/departments-view-setup.jsp" type="page"/>
     </definition>
     
-    
-    
     <definition name="company_mng_list" extends="base">
         <put name="body" value="company_mng/company-list.jsp" type="page"/>
         <put name="page-setup" value="company_mng/company-list-setup.jsp" type="page"/>
@@ -770,9 +769,7 @@
     <definition name="company_mng_view" extends="base">
         <put name="body" value="company_mng/company-view.jsp" type="page"/>
         <put name="page-setup" value="company_mng/company-view-setup.jsp" type="page"/>
-    </definition>
-    
-    
+    </definition>    
     
     <definition name="complainemail_mng_list" extends="base">
         <put name="body" value="complainemail_mng/complainemail-list.jsp" type="page"/>
@@ -784,26 +781,16 @@
         <put name="body" value="complainemail_mng/complainemail-view.jsp" type="page"/>
         <put name="page-setup" value="complainemail_mng/complainemail-view-setup.jsp" type="page"/>
     </definition>
-    
-    
+        
     <definition name="complainemail_export" extends="base">
         <put name="body" value="complainemail_mng/complainemail-export.jsp" type="page"/>
         <put name="page-setup" value="complainemail_mng/complainemail-export-setup.jsp" type="page"/>
-    </definition>
-    
-    
-    
+    </definition>    
     
     <definition name="mbf_export_by_user_id" extends="base">
         <put name="body" value="complainemail_mng/mbf_export_by_user_id.jsp" type="page"/>
         <put name="page-setup" value="complainemail_mng/mbf_export_by_user_id-setup.jsp" type="page"/>
-    </definition>
-    
-    
-    
-    
-    
-    
+    </definition>    
     
     <definition name="exportreport_list" extends="base">
         <put name="body" value="mbf_export_campain/export-campain-list.jsp" type="page"/>
@@ -814,14 +801,12 @@
     <definition name="exportreport_view" extends="base">
         <put name="body" value="mbf_export_campain/export-campain-view.jsp" type="page"/>
         <put name="page-setup" value="mbf_export_campain/export-campain-view-setup.jsp" type="page"/>
-    </definition>
-    
+    </definition>    
     
     <definition name="exportreport_export" extends="base">
         <put name="body" value="mbf_export_campain/export-campain-export.jsp" type="page"/>
         <put name="page-setup" value="mbf_export_campain/export-campain-export-setup.jsp" type="page"/>
-    </definition>
-    
+    </definition>    
     
     <definition name="over-exportreport_view" extends="base">
         <put name="body" value="mbf_export_campain/export-over-campain-view.jsp" type="page"/>

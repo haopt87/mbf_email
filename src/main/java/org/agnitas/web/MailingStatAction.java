@@ -22,15 +22,23 @@
 
 package org.agnitas.web;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
@@ -49,6 +57,10 @@ import org.agnitas.stat.MailingStat;
 import org.agnitas.target.Target;
 import org.agnitas.util.AgnUtils;
 import org.apache.log4j.Logger;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -303,7 +315,24 @@ public class MailingStatAction extends StrutsActionBase {
 	                    loadOpenDayStat(aForm, req);
 	                    destination=mapping.findForward("open_day");
 	                    break;
-	
+	                case 23:
+	                    exportDetail(req, res, aForm);
+//	                    if(aForm.isStatInProgress()==false) {
+//	                        if(aForm.isStatReady()) {
+//	                            destination=mapping.findForward("opened_stat");
+//	                            aForm.setStatReady(false);
+//	                            break;
+//	                        } else {
+//	                            destination=mapping.findForward("splash");
+//	                            // get stats
+//	                            aForm.setStatInProgress(true);
+//	                            loadOpenedStat(aForm, req);
+//	                            aForm.setStatInProgress(false);
+//	                            aForm.setStatReady(true);
+//	                            break;
+//	                        }
+//	                    }	                    
+	                    break;
 	                default:
 	                    aForm.setAction(MailingStatAction.ACTION_MAILINGSTAT);
 	                    loadMailingStat(aForm, req);
@@ -337,6 +366,114 @@ public class MailingStatAction extends StrutsActionBase {
         }
 
         return destination;
+    }
+    
+    private static final String CHARSET = "UTF-8";
+	public static final String EXPORT_FILE_DIRECTORY = AgnUtils.getTempDir() + File.separator + "RecipientExport";
+	
+	private void exportDetail(HttpServletRequest req,
+			HttpServletResponse res, MailingStatForm aForm) throws IOException, ServletException {
+
+		
+		res.setContentType("text/plain");
+		String outFileName = "CustomerShowEmail";
+		String outFile = "";		
+		res.setHeader("Content-Disposition", "attachment; filename=\"" + outFileName + ".xlsx\";");
+		res.setCharacterEncoding("");
+		
+		ActionMessages errors = new ActionMessages();
+		XSSFWorkbook workbook = new XSSFWorkbook();
+		// Create a blank sheet
+		XSSFSheet sheet = workbook.createSheet("Sheet0");
+		Map<String, Object[]> data = new TreeMap<String, Object[]>();
+		String[] rows = outFile.split("\r\n");
+		Object[] header = new Object[4];
+		header[0] = "Danh sách khách hàng đã xem chiến dịch: " + aForm.getMailingShortname();
+		header[1] = "";
+		header[2] = "";
+		header[3] = "";
+		data.put(0 + "", header);
+		
+		Object[] header1 = new Object[4];
+		header1[0] = "STT";
+		header1[1] = "Tên";
+		header1[2] = "Họ đệm";
+		header1[3] = "Email";
+		data.put(1 + "", header1);
+		
+		List<ExportUserOpenEmail> list = this.mailingDao.getInfoCustomerOpenEmail(aForm.getMailingID());		
+		
+		if (list != null && !list.isEmpty()) {
+			int count = 0;
+			for (ExportUserOpenEmail item : list) {
+				count++;
+				Object[] content = new Object[4];
+				content[0] = count;
+				content[1] = item.getFirstname();
+				content[2] = item.getLastname();
+				content[3] = item.getEmail();				
+				data.put((count + 1 ) + "", content);
+			}
+		}
+		
+		
+		// Iterate over data and write to sheet
+		Set<String> keyset = data.keySet();
+		int rownum = 0;
+		for (String key : keyset) {
+			Row row = sheet.createRow(rownum++);
+			Object[] objArr = data.get(key);
+			int cellnum = 0;
+			for (Object obj : objArr) {
+				Cell cell = row.createCell(cellnum++);
+				if (obj instanceof String){
+					cell.setCellValue((String) obj);
+				}	
+				else if (obj instanceof Integer){
+					cell.setCellValue((Integer) obj);
+				}	
+				else if (obj instanceof Date){
+					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+					String stDate = dateFormat.format(((Date) obj).getTime());
+					cell.setCellValue(stDate);	
+				}					
+			}
+		}		
+		
+		try {
+			// Write the workbook in file system
+			File fileOutput = new File(
+					EXPORT_FILE_DIRECTORY + File.separator + "ExportData_" + System.currentTimeMillis() + ".xlsx");
+			// System.out.println(fileOutput.getAbsolutePath());
+			FileOutputStream out1 = new FileOutputStream(fileOutput);
+			workbook.write(out1);
+			out1.close();
+			byte bytes[] = new byte[16384];
+			int len = 0;
+			if (fileOutput != null) {
+				FileInputStream instream = null;
+				try {
+					instream = new FileInputStream(fileOutput);
+					res.setContentType("application/zip");
+					res.setHeader("Content-Disposition", "attachment; filename=\"" + outFileName + ".xlsx\";");
+					res.setContentLength((int) fileOutput.length());
+					ServletOutputStream ostream = res.getOutputStream();
+					while ((len = instream.read(bytes)) != -1) {
+						ostream.write(bytes, 0, len);
+					}
+				} finally {
+					if (instream != null) {
+						instream.close();
+					}
+				}
+			} else {
+				errors.add("global", new ActionMessage("error.export.file_not_ready"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
     }
 
     protected void loadMailingStatFormData(HttpServletRequest req){

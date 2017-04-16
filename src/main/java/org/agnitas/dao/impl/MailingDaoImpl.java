@@ -24,6 +24,7 @@ package org.agnitas.dao.impl;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,18 +52,22 @@ import org.agnitas.beans.impl.MailinglistImpl;
 import org.agnitas.beans.impl.PaginatedListImpl;
 import org.agnitas.dao.MailingDao;
 import org.agnitas.dao.TrackableLinkDao;
+import org.agnitas.dao.impl.MbfSettingSystemDaoImpl.ExportreportUser_RowMapper;
 import org.agnitas.dao.impl.mapper.LightweightMailingRowMapper;
 import org.agnitas.emm.core.mailing.beans.LightweightMailing;
 import org.agnitas.emm.core.velocity.VelocityCheck;
 import org.agnitas.target.Target;
 import org.agnitas.util.AgnUtils;
 import org.agnitas.util.SafeString;
+import org.agnitas.web.ExportUserOpenEmail;
+import org.agnitas.web.ExportreportUser;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.dao.TransientDataAccessResourceException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.orm.hibernate3.HibernateTemplate;
@@ -1068,4 +1073,31 @@ public class MailingDaoImpl extends BaseDaoImpl implements MailingDao {
 
 		template.update("DELETE FROM dyn_content_tbl WHERE dyn_content_id=?", contentID);
 	}
+	
+
+
+	protected class ExportUserOpenEmail_RowMapper implements ParameterizedRowMapper<ExportUserOpenEmail> {
+		@Override
+		public ExportUserOpenEmail mapRow(ResultSet resultSet, int row) throws SQLException {
+			try {
+				ExportUserOpenEmail readTarget = new ExportUserOpenEmail();
+				readTarget.setFirstname(resultSet.getString("firstname"));
+				readTarget.setLastname(resultSet.getString("lastname"));
+				readTarget.setEmail(resultSet.getString("email"));
+				return readTarget;
+			} catch (Exception e) {
+				throw new SQLException("Cannot create Department item from ResultSet row", e);
+			}
+		}
+	}
+	
+	@Override
+    public List<ExportUserOpenEmail> getInfoCustomerOpenEmail(int mailingId) {
+		List<ExportUserOpenEmail> lists = select(logger,
+				" SELECT one.company_id, one.mailing_id, one.customer_id, one.open_count, cus.email, cus.firstname, cus.lastname "+
+				" FROM onepixel_log_tbl AS one, customer_1_tbl AS cus "+
+				" WHERE one.customer_id = cus.customer_id AND mailing_id = " + mailingId,
+				new ExportUserOpenEmail_RowMapper());
+		return lists;
+    }
 }

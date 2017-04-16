@@ -63,34 +63,6 @@ public class TextFileDownload extends HttpServlet {
 	@SuppressWarnings("unused")
 	public void doGet(HttpServletRequest req, HttpServletResponse response) 
                       throws IOException, ServletException {
-
-
-		// response.setContentType("text/plain");
-		// Hashtable map;
-		// map = (Hashtable)(req.getSession().getAttribute("map"));
-		//
-		// String outFileName = ""; // contains the Filename, build from the
-		// timestamp
-		// String outFile = ""; // contains the actual data.
-		//
-		// outFileName = (String) req.getParameter("key");
-		// outFile = (String)map.get(req.getParameter("key")); // get the key
-		// from the Hashmap.
-		//
-		// // build filepath (timestamp + .csv) and return it.
-		// response.setHeader("Content-Disposition", "attachment; filename=\"" +
-		// outFileName + ".csv\";");
-		// response.setCharacterEncoding(CHARSET);
-		//
-		// PrintWriter writer = response.getWriter();
-		// writer.print(outFile);	
-
-
-        
-		// Start create excel
-		// file==================================================
-		// Blank workbook
-
 		response.setContentType("text/plain");
 		Hashtable map;
 		map = (Hashtable) (req.getSession().getAttribute("map"));
@@ -101,16 +73,8 @@ public class TextFileDownload extends HttpServlet {
 
 		outFileName = (String) req.getParameter("key");
 		outFile = (String) map.get(req.getParameter("key")); // get the key from
-																// the Hashmap.
-
-		// build filepath (timestamp + .csv) and return it.
-		// response.setHeader("Content-Disposition", "attachment; filename=\"" +
-		// outFileName + ".csv\";");
 		response.setHeader("Content-Disposition", "attachment; filename=\"" + outFileName + ".xlsx\";");
-		response.setCharacterEncoding(CHARSET);
-		// PrintWriter writer = response.getWriter();
-		// writer.print(outFile);
-		
+		response.setCharacterEncoding(CHARSET);		
 		
 		ActionMessages errors = new ActionMessages();
 		XSSFWorkbook workbook = new XSSFWorkbook();
@@ -124,7 +88,6 @@ public class TextFileDownload extends HttpServlet {
 			String[] cells = items.split(";");
 			int lengthCell = cells.length;
 			Object[] content = new Object[lengthCell];
-			
 			for (int i = 0; i < content.length; i++) {
 				content[i] = cells[i].replaceAll("\"", "");
 			}
@@ -146,7 +109,6 @@ public class TextFileDownload extends HttpServlet {
 					cell.setCellValue((Integer) obj);
 			}
 		}		
-		
 		
 		try {
 			// Write the workbook in file system
@@ -177,13 +139,8 @@ public class TextFileDownload extends HttpServlet {
 			} else {
 				errors.add("global", new ActionMessage("error.export.file_not_ready"));
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		// End create excel
-		// file==================================================
-
 	}
 }

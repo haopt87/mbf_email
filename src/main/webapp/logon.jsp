@@ -25,6 +25,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 
+
 <html:html>
 <%
    VersionObject latestVersion = (VersionObject) request.getAttribute("latestVersion");
@@ -34,6 +35,11 @@
    }
 %>
 <head>
+<!-- reCAPTCHA Libary -->
+<!-- <script src='https://www.google.com/recaptcha/api.js?hl=en'></script> -->
+
+<script src='https://www.google.com/recaptcha/api.js?hl=vi'></script>
+ 
 <title><bean:message key="logon.title"/></title>
     <link type="text/css" rel="stylesheet" href="${emmLayoutBase.cssURL}/style.css">
     <link type="text/css" rel="stylesheet" href="${emmLayoutBase.cssURL}/structure.css">
@@ -92,7 +98,11 @@
                         <label><bean:message key="logon.password"/>:</label>
                         <html:password property="password" redisplay="false"/>
                     </div>
-
+                    
+                    <div class="loginbox_row loginbox_password_row">
+                    	<div class="g-recaptcha" data-sitekey="6LeGthwUAAAAAFcSnDXQs4bnmB4Nbz-YGAX7f0Qf"></div>
+					</div>					
+					
                     <div class="fake_logon_container">
                         <html:image src="button?msg=logon.login" border="0" property="submit" value="Login" styleClass="logon_fake_submit"/>
                     </div>

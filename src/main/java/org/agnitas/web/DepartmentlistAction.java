@@ -153,7 +153,7 @@ public class DepartmentlistAction extends StrutsActionBase {
 				destination = mapping.findForward("view");
 				break;
 			case ACTION_DELETE:
-				if (!this.adminDao.checkAccountByDepartment(aForm.getId())){
+				if (this.adminDao.checkAccountByDepartment(aForm.getId())){
 					errors.add(ActionMessages.GLOBAL_MESSAGE, new ActionMessage("error.user.exits.in.department"));					
 				} else {
 					//delete department
