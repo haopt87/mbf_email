@@ -27,7 +27,8 @@
                 </div>
 
                 <div class="grey_box_form_item stat_recipient_form_item">
-                    <label><bean:message key="target.Target"/>:</label>
+<%--                     <label><bean:message key="target.Target"/>:</label> --%>
+                    <label>Điều kiện lọc:</label>
                     <html:select property="targetID" size="1">
                         <html:option value="0"><bean:message key="statistic.All_Subscribers"/></html:option>
                         <c:forEach var="target" items="${targets}">
@@ -42,7 +43,8 @@
             <div class="button_grey_box_container">
                 <div class="action_button no_margin_right no_margin_bottom">
                     <a href="#" onclick="document.recipientStatForm.submit();">
-                        <span><bean:message key="button.Submit"/></span>
+<%--                         <span><bean:message key="button.Submit"/></span> --%>
+                        <span>Tìm kiếm</span>
                     </a>
                 </div>
             </div>
