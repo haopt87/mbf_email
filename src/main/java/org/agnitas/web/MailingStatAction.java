@@ -317,21 +317,6 @@ public class MailingStatAction extends StrutsActionBase {
 	                    break;
 	                case 23:
 	                    exportDetail(req, res, aForm);
-//	                    if(aForm.isStatInProgress()==false) {
-//	                        if(aForm.isStatReady()) {
-//	                            destination=mapping.findForward("opened_stat");
-//	                            aForm.setStatReady(false);
-//	                            break;
-//	                        } else {
-//	                            destination=mapping.findForward("splash");
-//	                            // get stats
-//	                            aForm.setStatInProgress(true);
-//	                            loadOpenedStat(aForm, req);
-//	                            aForm.setStatInProgress(false);
-//	                            aForm.setStatReady(true);
-//	                            break;
-//	                        }
-//	                    }	                    
 	                    break;
 	                default:
 	                    aForm.setAction(MailingStatAction.ACTION_MAILINGSTAT);
