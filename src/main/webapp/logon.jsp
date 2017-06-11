@@ -100,7 +100,7 @@
                     </div>
                     
                     <div class="loginbox_row loginbox_password_row">
-                    	<div class="g-recaptcha" data-sitekey="6LeGthwUAAAAAFcSnDXQs4bnmB4Nbz-YGAX7f0Qf"></div>
+                    	<div class="g-recaptcha" data-sitekey="6LcIqCQUAAAAAJB5Gw5gDhPDh7zuSpWadv1M4lLi"></div>
 					</div>					
 					
                     <div class="fake_logon_container">

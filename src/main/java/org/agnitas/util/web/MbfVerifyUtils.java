@@ -1,17 +1,57 @@
 package org.agnitas.util.web;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
+import java.util.Properties;
 
+//import javax.annotation.Resource;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 import javax.net.ssl.HttpsURLConnection;
 
+import org.springframework.core.io.Resource;
+
+import org.springframework.core.io.ClassPathResource;
+
+
 public class MbfVerifyUtils {
 
 	public static final String SITE_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
+
+	public static String readSecretKey() {
+		String result = "";
+		Properties prop = new Properties();
+		InputStream input = null;
+
+		try {
+			
+//			input = MbfVerifyUtils.class.getResourceAsStream("mbf.properties");
+			
+			Resource resource = new ClassPathResource("mbf.properties");
+			input = resource.getInputStream();
+			
+//			input = new FileInputStream("mbf.properties");
+			// load a properties file
+			prop.load(input);
+
+			// get the property value and print it out			
+			result = prop.getProperty("mbf.secretkey");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return result;
+	}
 
 	public static boolean verify(String gRecaptchaResponse) {
 		if (gRecaptchaResponse == null || gRecaptchaResponse.length() == 0) {
@@ -29,8 +69,10 @@ public class MbfVerifyUtils {
 			conn.setRequestProperty("User-Agent", "Mozilla/5.0");
 			conn.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 
-			// Data will be sent to the server.
-			String postParams = "secret=" + MbfConstant.SECRET_KEY + "&response=" + gRecaptchaResponse;
+			// Data will be sent to the server.			
+//			String postParams = "secret=" + MbfConstant.SECRET_KEY + "&response=" + gRecaptchaResponse;
+			String postParams = "secret=" + readSecretKey()+ "&response=" + gRecaptchaResponse;
+			
 
 			// Send Request
 			conn.setDoOutput(true);
